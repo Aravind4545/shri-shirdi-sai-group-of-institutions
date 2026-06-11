@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+.vite/
+**/.vite/
+dist/
+**/dist/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
