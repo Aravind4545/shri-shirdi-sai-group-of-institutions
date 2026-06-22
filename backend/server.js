@@ -57,5 +57,27 @@ app.use('/api/teacher', require('./routes/teacher'));
 app.use('/api/companion', require('./routes/companion'));
 app.use('/api/teacher-feedback', require('./routes/teacherFeedback'));
 
+// Simple ping endpoint to keep the server awake
+app.get('/api/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  
+  // Render Free Tier Keep-Alive Mechanism
+  // Pings itself every 30 seconds to prevent sleeping
+  const SERVER_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+  const PING_INTERVAL = 30 * 1000; // 30 seconds
+  
+  setInterval(async () => {
+    try {
+      // Using native fetch to ping itself
+      await fetch(`${SERVER_URL}/api/ping`);
+      // console.log(`[Keep-Alive] Successfully pinged ${SERVER_URL}`);
+    } catch (error) {
+      console.error(`[Keep-Alive] Ping failed:`, error.message);
+    }
+  }, PING_INTERVAL);
+});
