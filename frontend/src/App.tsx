@@ -56,6 +56,8 @@ import Settings from './pages/dashboard/Settings';
 import Messages from './pages/dashboard/Messages';
 import TeacherFeedbackForm from './pages/dashboard/TeacherFeedbackForm';
 import TeacherMessages from './pages/teacher/TeacherMessages';
+import TeacherStudyMaterials from './pages/teacher/TeacherStudyMaterials';
+import TeacherAnnouncements from './pages/teacher/TeacherAnnouncements';
 import CompetitionAnalysis from './pages/dashboard/CompetitionAnalysis';
 
 // Mock Test Imports
@@ -150,8 +152,8 @@ function App() {
           {/* Placeholders for others */}
           <Route path="tests" element={<div className="p-8 font-bold">Test Manager Coming Soon</div>} />
           <Route path="mocktests" element={<TeacherMockTests />} />
-          <Route path="materials" element={<div className="p-8 font-bold">Study Materials Coming Soon</div>} />
-          <Route path="announcements" element={<div className="p-8 font-bold">Announcements Coming Soon</div>} />
+          <Route path="materials" element={<TeacherStudyMaterials />} />
+          <Route path="announcements" element={<TeacherAnnouncements />} />
           <Route path="messages" element={<TeacherMessages />} />
           <Route path="complaints" element={<ComplaintBox />} />
           <Route path="behavior" element={<TeacherBehaviorFeedback />} />
@@ -176,6 +178,8 @@ function App() {
           <Route path="intelligence" element={<TeacherIntelligence />} />
           <Route path="leaderboard" element={<TeacherLeaderboard />} />
           <Route path="mocktests" element={<TeacherMockTests />} />
+          <Route path="materials" element={<TeacherStudyMaterials />} />
+          <Route path="announcements" element={<TeacherAnnouncements />} />
           <Route path="messages" element={<TeacherMessages />} />
           <Route path="complaints" element={<ComplaintBox />} />
           <Route path="behavior" element={<TeacherBehaviorFeedback />} />

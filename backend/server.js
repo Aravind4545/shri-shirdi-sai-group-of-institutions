@@ -22,7 +22,7 @@ app.use(morgan('combined', { stream: { write: message => logger.info(message.tri
 // Rate Limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 mins
-  max: 100, // Limit each IP to 100 requests per window
+  max: 10000, // Limit each IP to 10000 requests per window
   message: { msg: 'Too many requests from this IP, please try again later.' }
 });
 app.use('/api', limiter);
