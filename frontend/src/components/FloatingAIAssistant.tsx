@@ -18,7 +18,7 @@ const FloatingAIAssistant = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/ai/chat-history', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/chat-history', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -39,7 +39,7 @@ const FloatingAIAssistant = () => {
 
     try {
       // Hardcoded program to Lakshya for simulation if user is logged in
-      const res = await fetch('http://localhost:5001/api/ai/chat', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
         body: JSON.stringify({ message: userMsg.content, program: 'Lakshya' })

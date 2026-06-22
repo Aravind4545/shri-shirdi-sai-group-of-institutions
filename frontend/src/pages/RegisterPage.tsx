@@ -78,7 +78,7 @@ const RegisterPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5001/api/auth/register', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

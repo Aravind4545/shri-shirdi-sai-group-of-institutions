@@ -44,7 +44,7 @@ const UniversalLogin = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:5001/api/auth/login', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -73,7 +73,7 @@ const UniversalLogin = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5001/api/faceAuth/login', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/faceAuth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64 })

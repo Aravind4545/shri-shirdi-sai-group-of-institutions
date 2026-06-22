@@ -14,7 +14,7 @@ const TeacherBehaviorFeedback = () => {
 
   const fetchActiveRequestAndStudents = async () => {
     try {
-      const reqRes = await fetch('http://localhost:5001/api/behavior/requests/active', {
+      const reqRes = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/behavior/requests/active', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (reqRes.ok) {
@@ -22,7 +22,7 @@ const TeacherBehaviorFeedback = () => {
         setActiveRequest(reqData);
 
         if (reqData) {
-          const stdRes = await fetch('http://localhost:5001/api/behavior/students', {
+          const stdRes = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/behavior/students', {
             headers: { 'x-auth-token': localStorage.getItem('token') || '' }
           });
           if (stdRes.ok) {
@@ -34,7 +34,7 @@ const TeacherBehaviorFeedback = () => {
             setStudents(stdData && stdData.length > 0 ? stdData : fallback);
 
             // Fetch existing feedbacks for this request to pre-populate
-            const fbRes = await fetch(`http://localhost:5001/api/behavior/feedbacks/me/${reqData._id}`, {
+            const fbRes = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/behavior/feedbacks/me/${reqData._id}`, {
               headers: { 'x-auth-token': localStorage.getItem('token') || '' }
             });
             if (fbRes.ok) {
@@ -81,7 +81,7 @@ const TeacherBehaviorFeedback = () => {
     setSubmittingStatus(prev => ({ ...prev, [studentId]: 'loading' }));
 
     try {
-      const res = await fetch('http://localhost:5001/api/behavior/feedbacks', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/behavior/feedbacks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

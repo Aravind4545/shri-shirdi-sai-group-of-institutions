@@ -13,7 +13,7 @@ const FeePortal = () => {
 
   const fetchPayments = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/finance/my-payments', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/my-payments', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -28,7 +28,7 @@ const FeePortal = () => {
     try {
       // Simulating Payment Gateway
       setTimeout(async () => {
-        const res = await fetch('http://localhost:5001/api/finance/pay', {
+        const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/pay', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
           body: JSON.stringify({ amount, method: 'Credit Card', installmentId })

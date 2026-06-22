@@ -9,14 +9,14 @@ const DashboardHome = () => {
   const [announcements, setAnnouncements] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/dashboard/stats', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/stats', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(err => console.error(err));
 
-    fetch('http://localhost:5001/api/dashboard/announcements', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/announcements', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

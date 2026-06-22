@@ -7,7 +7,7 @@ const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/dashboard/announcements', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/announcements', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

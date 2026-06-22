@@ -12,7 +12,7 @@ const TestManagement = () => {
 
   const fetchTests = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/admin/tests', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/tests', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       const data = await res.json();
@@ -28,7 +28,7 @@ const TestManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Delete test?')) return;
     try {
-      await fetch(`http://localhost:5001/api/admin/tests/${id}`, {
+      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/tests/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
@@ -39,7 +39,7 @@ const TestManagement = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch('http://localhost:5001/api/admin/tests', {
+      await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/tests', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

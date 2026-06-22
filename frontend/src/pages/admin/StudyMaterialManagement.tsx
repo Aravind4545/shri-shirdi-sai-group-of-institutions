@@ -12,7 +12,7 @@ const StudyMaterialManagement = () => {
 
   const fetchMaterials = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/admin/materials', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       const data = await res.json();
@@ -29,7 +29,7 @@ const StudyMaterialManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Delete material?')) return;
     try {
-      await fetch(`http://localhost:5001/api/admin/materials/${id}`, {
+      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
@@ -40,7 +40,7 @@ const StudyMaterialManagement = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch('http://localhost:5001/api/admin/materials', {
+      await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('adminToken') || '' },
         body: JSON.stringify(formData)

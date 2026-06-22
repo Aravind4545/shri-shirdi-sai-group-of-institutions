@@ -36,7 +36,7 @@ const TeacherManagement = () => {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/teachers');
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers');
       const data = await res.json();
       setTeachers(data);
       setLoading(false);
@@ -86,7 +86,7 @@ const TeacherManagement = () => {
     setFormError('');
     try {
       const isEdit = !!selectedTeacher;
-      const url = isEdit ? `http://localhost:5001/api/teachers/${selectedTeacher._id}` : `http://localhost:5001/api/teachers`;
+      const url = isEdit ? `https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${selectedTeacher._id}` : `https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers`;
       const method = isEdit ? 'PUT' : 'POST';
       
       const payload = { ...formData };
@@ -115,7 +115,7 @@ const TeacherManagement = () => {
   const handleDeleteTeacher = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this teacher?')) return;
     try {
-      await fetch(`http://localhost:5001/api/teachers/${id}`, { method: 'DELETE' });
+      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${id}`, { method: 'DELETE' });
       fetchTeachers();
     } catch (err) {
       console.error(err);
@@ -125,7 +125,7 @@ const TeacherManagement = () => {
   const toggleTeacherStatus = async (id: string, currentStatus: string) => {
     try {
       const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
-      await fetch(`http://localhost:5001/api/teachers/${id}`, {
+      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
@@ -154,7 +154,7 @@ const TeacherManagement = () => {
     setFaceError('');
     try {
       // Use the email specifically for face auth mapping
-      const res = await fetch('http://localhost:5001/api/faceAuth/register', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/faceAuth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

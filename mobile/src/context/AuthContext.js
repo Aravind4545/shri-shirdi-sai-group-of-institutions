@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Note: Localhost does not work on physical phones. We use the actual computer's Wi-Fi IP address.
-  const API_URL = 'http://192.168.29.35:5001/api';
+  const API_URL = 'https://shri-shirdi-sai-group-of-institutions.onrender.com/api';
 
   const checkLoggedIn = async () => {
     try {

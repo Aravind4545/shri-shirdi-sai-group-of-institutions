@@ -37,7 +37,7 @@ const Settings = () => {
     setStatus({ type: '', msg: '' });
 
     try {
-      const res = await fetch('http://localhost:5001/api/user/profile', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/user/profile', {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Settings = () => {
     setCompanionStatus({ type: '', msg: '' });
 
     try {
-      const res = await fetch('http://localhost:5001/api/companion/config', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/companion/config', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/auth/me', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/me', {
       headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
     })
       .then(res => res.json())

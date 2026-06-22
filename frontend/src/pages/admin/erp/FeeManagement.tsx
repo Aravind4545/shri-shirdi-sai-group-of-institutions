@@ -20,14 +20,14 @@ const FeeManagement = () => {
 
   const fetchStructures = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/finance/structures');
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/structures');
       if (res.ok) setStructures(await res.json());
     } catch (err) { console.error(err); }
   };
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/admin/students', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/students', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       if (res.ok) {
@@ -49,7 +49,7 @@ const FeeManagement = () => {
     e.preventDefault();
     const totalFee = formData.baseTuitionFee + formData.studyMaterialFee + formData.labResourceFee + formData.examTrainingFee;
     try {
-      await fetch('http://localhost:5001/api/finance/structures', {
+      await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/structures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('adminToken') || '' },
         body: JSON.stringify({ ...formData, totalFee })

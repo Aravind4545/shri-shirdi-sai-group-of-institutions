@@ -12,7 +12,7 @@ const AdminAnalytics = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/analytics/admin/institution', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/analytics/admin/institution', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       let json = null;

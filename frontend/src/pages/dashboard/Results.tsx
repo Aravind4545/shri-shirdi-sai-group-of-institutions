@@ -7,7 +7,7 @@ const Results = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/dashboard/results', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/results', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

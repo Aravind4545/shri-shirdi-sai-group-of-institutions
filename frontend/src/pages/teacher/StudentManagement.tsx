@@ -10,7 +10,7 @@ const StudentManagement = () => {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/teacher/students', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher/students', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setStudents(await res.json());

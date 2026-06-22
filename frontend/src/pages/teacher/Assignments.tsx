@@ -23,7 +23,7 @@ const Assignments = () => {
 
   const fetchAssignments = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/assignments/teacher', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -53,7 +53,7 @@ const Assignments = () => {
     });
 
     try {
-      const res = await fetch('http://localhost:5001/api/assignments/create', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/create', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' },
         body: data

@@ -35,7 +35,7 @@ const Messages = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/messages/users', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/users', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -57,7 +57,7 @@ const Messages = () => {
   const fetchMessages = async () => {
     if (!activeUser) return;
     try {
-      const res = await fetch(`http://localhost:5001/api/messages/conversation/${activeUser._id}`, {
+      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/conversation/${activeUser._id}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setMessages(await res.json());
@@ -71,7 +71,7 @@ const Messages = () => {
     if (!newMessage.trim() || !activeUser) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/messages/send/${activeUser._id}`, {
+      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/send/${activeUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

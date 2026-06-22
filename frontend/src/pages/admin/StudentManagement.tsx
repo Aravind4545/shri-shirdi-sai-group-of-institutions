@@ -11,7 +11,7 @@ const StudentManagement = () => {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/admin/students', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/students', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       const data = await res.json();
@@ -22,7 +22,7 @@ const StudentManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this student?')) return;
     try {
-      await fetch(`http://localhost:5001/api/admin/students/${id}`, {
+      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/students/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });

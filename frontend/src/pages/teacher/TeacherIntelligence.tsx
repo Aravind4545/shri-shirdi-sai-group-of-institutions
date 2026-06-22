@@ -12,7 +12,7 @@ const TeacherIntelligence = () => {
 
   const fetchIntelligence = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/intelligence/teacher', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/intelligence/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setData(await res.json());
@@ -26,7 +26,7 @@ const TeacherIntelligence = () => {
   const handleDownload = async (format: 'pdf' | 'excel') => {
     setDownloading(true);
     try {
-      const res = await fetch(`http://localhost:5001/api/intelligence/report?type=teacher&format=${format}`, {
+      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/intelligence/report?type=teacher&format=${format}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       

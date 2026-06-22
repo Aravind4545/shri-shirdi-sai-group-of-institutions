@@ -18,7 +18,7 @@ const FinancialAnalytics = () => {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/admin/teachers', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/teachers', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       if (res.ok) {

@@ -7,7 +7,7 @@ const StudyMaterials = () => {
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/dashboard/materials', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/materials', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

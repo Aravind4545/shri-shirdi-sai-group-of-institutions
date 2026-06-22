@@ -14,7 +14,7 @@ const TeacherAnalytics = () => {
 
   const fetchRisks = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/ai/risk-predictions', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/risk-predictions', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setRisks(await res.json());
@@ -23,7 +23,7 @@ const TeacherAnalytics = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/analytics/teacher/batch', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/analytics/teacher/batch', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {

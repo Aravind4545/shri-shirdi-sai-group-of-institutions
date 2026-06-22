@@ -17,7 +17,7 @@ const AIHub = () => {
 
   const fetchRecommendations = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/ai/recommendations', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/recommendations', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setRecommendations(await res.json());
@@ -26,7 +26,7 @@ const AIHub = () => {
 
   const fetchPrediction = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/ai/predict-rank', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/predict-rank', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setPrediction(await res.json());
@@ -35,7 +35,7 @@ const AIHub = () => {
 
   const fetchPlan = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/ai/my-plan', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/my-plan', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setStudyPlan(await res.json());
@@ -46,7 +46,7 @@ const AIHub = () => {
     setLoadingPlan(true);
     try {
       // Simulate program fetching and generating plan
-      const res = await fetch('http://localhost:5001/api/ai/generate-plan', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/generate-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
         body: JSON.stringify({ program: 'Lakshya', planType: 'Daily' })

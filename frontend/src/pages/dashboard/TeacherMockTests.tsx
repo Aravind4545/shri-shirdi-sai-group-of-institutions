@@ -24,7 +24,7 @@ const TeacherMockTests = () => {
 
   const fetchTests = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/mocktests/teacher', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -40,7 +40,7 @@ const TeacherMockTests = () => {
   const fetchResults = async (testId: string) => {
     try {
       setSelectedTestId(testId);
-      const res = await fetch(`http://localhost:5001/api/mocktests/${testId}/results`, {
+      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/${testId}/results`, {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -69,7 +69,7 @@ const TeacherMockTests = () => {
     data.append('totalMarks', formData.totalMarks.toString());
 
     try {
-      const res = await fetch('http://localhost:5001/api/mocktests/upload', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/upload', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' },
         body: data

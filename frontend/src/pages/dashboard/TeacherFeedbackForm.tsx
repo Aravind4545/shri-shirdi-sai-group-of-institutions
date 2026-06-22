@@ -18,7 +18,7 @@ const TeacherFeedbackForm = () => {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/teacher-feedback/teachers', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher-feedback/teachers', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -40,7 +40,7 @@ const TeacherFeedbackForm = () => {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:5001/api/teacher-feedback', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher-feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

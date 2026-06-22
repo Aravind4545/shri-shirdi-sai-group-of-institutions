@@ -7,7 +7,7 @@ const Attendance = () => {
   const [attendance, setAttendance] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/dashboard/attendance', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/attendance', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

@@ -19,7 +19,7 @@ const DashboardLayout = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/auth/me', {
+      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/me', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {

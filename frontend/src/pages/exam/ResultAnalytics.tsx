@@ -5,7 +5,7 @@ const ResultAnalytics = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/exam/analytics', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/exam/analytics', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

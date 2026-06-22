@@ -5,7 +5,7 @@ const ReportsAnalytics = () => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/reports/dashboard', {
+    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/reports/dashboard', {
       headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
     })
       .then(res => res.json())
