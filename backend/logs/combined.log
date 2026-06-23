@@ -3848,3 +3848,200 @@
 {"level":"info","message":"::1 - - [22/Jun/2026:05:27:32 +0000] \"GET /api/dashboard/stats HTTP/1.1\" 200 81 \"http://localhost:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T05:27:32.544Z"}
 {"level":"info","message":"::1 - - [22/Jun/2026:05:27:32 +0000] \"GET /api/dashboard/announcements HTTP/1.1\" 304 - \"http://localhost:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T05:27:32.547Z"}
 {"level":"info","message":"::1 - - [22/Jun/2026:05:27:32 +0000] \"GET /api/companion/daily-interaction HTTP/1.1\" 304 - \"http://localhost:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T05:27:32.550Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:16:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:16:44.772Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:17:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:17:14.744Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:17:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:17:44.753Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:18:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:18:14.768Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:18:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:18:44.784Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:19:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:19:14.798Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:19:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:19:44.798Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:20:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:20:14.810Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:20:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:20:44.817Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:21:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:21:14.829Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:21:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:21:44.837Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:22:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:22:14.845Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:22:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:22:44.846Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:23:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:23:14.868Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:23:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:23:44.873Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:24:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:24:14.885Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:24:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:24:44.887Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:25:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:25:14.909Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:25:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:25:44.921Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:26:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:26:14.945Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:26:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:26:44.954Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:27:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:27:14.963Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:27:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:27:44.972Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:28:14 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:28:14.981Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:28:44 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:28:44.984Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:29:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:29:15.005Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:29:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:29:45.006Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:30:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:30:15.019Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:30:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:30:45.024Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:31:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:31:15.035Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:31:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:31:45.035Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:32:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:32:15.052Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:32:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:32:45.066Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:33:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:33:15.074Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:33:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:33:45.082Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:34:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:34:15.095Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:34:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:34:45.102Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:35:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:35:15.113Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:35:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:35:45.114Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:36:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:36:15.123Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:36:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:36:45.130Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:37:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:37:15.136Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:37:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:37:45.142Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:38:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:38:15.160Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:38:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:38:45.167Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:39:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:39:15.186Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:39:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:39:45.198Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:40:15 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:40:15.205Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:40:45 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:40:45.223Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:41:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:41:40.432Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:50:35 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:50:35.458Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:51:05 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:51:05.455Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:51:35 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:51:35.462Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:52:05 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:52:05.474Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:09:52:35 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T09:52:35.484Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:21:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:21:49.266Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:22:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:22:19.277Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:22:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:22:49.271Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:23:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:23:19.277Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:23:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:23:49.280Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:24:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:24:19.289Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:24:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:24:49.290Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:25:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:25:19.305Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:25:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:25:49.322Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:26:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:26:19.328Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:26:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:26:49.328Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:27:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:27:19.327Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:27:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:27:49.333Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:28:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:28:19.349Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:28:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:28:49.348Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:29:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:29:19.361Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:29:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:29:49.374Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:30:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:30:19.385Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:30:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:30:49.393Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:31:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:31:19.404Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:31:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:31:49.414Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:32:19 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:32:19.420Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:32:49 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:32:49.427Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:48:09 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:48:09.064Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:58:13 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:58:13.170Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:58:43 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:58:43.135Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:59:13 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:59:13.149Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:10:59:43 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T10:59:43.152Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:00:13 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:00:13.157Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:00:43 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:00:43.162Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:01:13 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:01:13.171Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:08:25 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:08:25.320Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:40:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:40:17.371Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:40:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:40:47.338Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:41:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:41:17.348Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:41:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:41:47.349Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:42:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:42:17.362Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:42:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:42:47.364Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:43:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:43:17.369Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:43:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:43:47.373Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:44:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:44:17.377Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:44:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:44:47.380Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:45:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:45:17.382Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:45:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:45:47.387Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:46:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:46:17.388Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:46:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:46:47.391Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:47:10 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:47:10.513Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:47:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:47:17.395Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:47:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:47:40.476Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:47:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:47:47.399Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:48:10 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:48:10.494Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:48:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:48:17.409Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:48:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:48:40.504Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:48:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:48:47.423Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:49:10 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:49:10.505Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:49:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:49:17.426Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:49:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:49:40.507Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:49:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:49:47.428Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:50:10 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:50:10.511Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:50:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:50:17.428Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:50:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:50:40.521Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:50:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:50:47.434Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:51:10 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:51:10.534Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:51:17 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:51:17.437Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:51:40 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:51:40.536Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:11:51:47 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T11:51:47.443Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:00:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:00:30.912Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:01:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:01:00.850Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:01:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:01:30.862Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:02:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:02:00.868Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:02:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:02:30.877Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:03:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:03:00.876Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:03:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:03:30.887Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"POST /api/auth/login HTTP/1.1\" 200 320 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.766Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/auth/me HTTP/1.1\" 200 598 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.852Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/auth/me HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.859Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/companion/config HTTP/1.1\" 200 607 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.946Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/dashboard/stats HTTP/1.1\" 200 81 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.965Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/dashboard/announcements HTTP/1.1\" 200 1623 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.970Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/companion/config HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.974Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/companion/daily-interaction HTTP/1.1\" 200 450 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.988Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:55 +0000] \"GET /api/dashboard/stats HTTP/1.1\" 200 81 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:55.999Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:56 +0000] \"GET /api/dashboard/announcements HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:56.002Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:03:56 +0000] \"GET /api/companion/daily-interaction HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:03:56.005Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:04:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:04:00.891Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:04:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:04:30.903Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:04:36 +0000] \"GET /api/assignments/student HTTP/1.1\" 200 2 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:04:36.709Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:04:36 +0000] \"GET /api/assignments/student HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:04:36.720Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:04:42 +0000] \"GET /api/dashboard/materials HTTP/1.1\" 200 243 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:04:42.160Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:04:42 +0000] \"GET /api/dashboard/materials HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:04:42.169Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:05:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:05:00.913Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:05:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:05:30.917Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:05:57 +0000] \"GET /api/dashboard/materials HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:05:57.925Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:05:57 +0000] \"GET /api/dashboard/materials HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:05:57.933Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:06:00 +0000] \"GET /api/dashboard/results HTTP/1.1\" 200 401 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:06:00.891Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:06:00 +0000] \"GET /api/dashboard/results HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:06:00.901Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:06:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:06:00.919Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:06:05 +0000] \"GET /api/analytics/student/overview HTTP/1.1\" 200 104 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:06:05.825Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:06:05 +0000] \"GET /api/analytics/student/overview HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:06:05.832Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:06:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:06:30.924Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:07:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:07:00.929Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:11 +0000] \"GET /api/intelligence/student HTTP/1.1\" 200 881 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:11.908Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:11 +0000] \"GET /api/intelligence/student HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:11.921Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/global HTTP/1.1\" 200 16811 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.458Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/me HTTP/1.1\" 200 1298 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.460Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/me HTTP/1.1\" 200 1298 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.620Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/global HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.632Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/global HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.774Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/program/Deekshya HTTP/1.1\" 200 5153 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.797Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:28 +0000] \"GET /api/leaderboard/global HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:28.904Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:29 +0000] \"GET /api/leaderboard/program/Deekshya HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:29.003Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:07:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:07:30.947Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:38 +0000] \"GET /api/teacher-feedback/teachers HTTP/1.1\" 200 565 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:38.081Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:07:38 +0000] \"GET /api/teacher-feedback/teachers HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:07:38.086Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:08:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:08:00.955Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:14 +0000] \"GET /api/messages/users HTTP/1.1\" 200 2437 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:14.483Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:14 +0000] \"GET /api/messages/users HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:14.529Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:24 +0000] \"GET /api/messages/users HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:24.413Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:29 +0000] \"GET /api/dashboard/announcements HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:29.848Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:29 +0000] \"GET /api/dashboard/announcements HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:29.856Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:08:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:08:30.969Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:34 +0000] \"GET /api/complaints/my HTTP/1.1\" 200 2 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:34.164Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:34 +0000] \"GET /api/complaints/my HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:34.172Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:41 +0000] \"GET /api/dashboard/attendance HTTP/1.1\" 200 1350 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:41.641Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:08:41 +0000] \"GET /api/dashboard/attendance HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:08:41.649Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:09:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:09:00.974Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:09:02 +0000] \"POST /api/auth/login HTTP/1.1\" 200 335 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:09:02.304Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:09:02 +0000] \"GET /api/auth/me HTTP/1.1\" 200 622 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:09:02.377Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:09:02 +0000] \"GET /api/auth/me HTTP/1.1\" 304 - \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:09:02.384Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:09:30 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:09:30.978Z"}
+{"level":"info","message":"::ffff:10.70.164.230 - - [22/Jun/2026:12:09:51 +0000] \"POST /api/auth/login HTTP/1.1\" 400 33 \"http://10.70.164.230:5175/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36\"","timestamp":"2026-06-22T12:09:51.454Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:10:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:10:00.989Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:10:31 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:10:31.002Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:11:01 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:11:01.010Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:11:31 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:11:31.015Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:12:01 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:12:01.025Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:12:31 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:12:31.029Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:13:01 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:13:01.037Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:13:31 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:13:31.037Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:12:29:00 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T12:29:00.559Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:13:19:18 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T13:19:18.805Z"}
+{"level":"info","message":"::1 - - [22/Jun/2026:13:19:48 +0000] \"GET /api/ping HTTP/1.1\" 200 4 \"-\" \"node\"","timestamp":"2026-06-22T13:19:48.791Z"}
