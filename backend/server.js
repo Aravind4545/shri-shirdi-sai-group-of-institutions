@@ -77,3 +77,6 @@ app.listen(PORT, () => {
     }
   }, PING_INTERVAL);
 });
+
+// Export the Express API for Vercel
+module.exports = app;
