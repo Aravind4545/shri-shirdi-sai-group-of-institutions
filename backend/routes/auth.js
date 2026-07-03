@@ -63,6 +63,7 @@ router.post('/register', [
 const formatUser = (user) => {
   if (!user) return user;
   const formatted = { ...user };
+  formatted._id = user.id; // Backward compatibility for frontend
   formatted.programInfo = {
     program: user.programInfo_program,
     stream: user.programInfo_stream,
