@@ -177,7 +177,7 @@ router.get('/:id/submissions', auth, async (req, res) => {
       where: { assignmentId: req.params.id },
       include: {
         studentId: {
-          select: { fullName: true, email: true, mobileNumber: true, programInfo: true }
+          select: { fullName: true, email: true, mobileNumber: true, programInfo_program: true, programInfo_stream: true }
         }
       },
       orderBy: { submissionDate: 'desc' }

@@ -49,7 +49,7 @@ router.get('/global', auth, async (req, res) => {
   try {
     await ensureRanks();
     const rankings = await prisma.ranking.findMany({
-      include: { student: { select: { fullName: true, profilePicture: true, programInfo: true } } },
+      include: { student: { select: { fullName: true, profilePicture: true, programInfo_program: true, programInfo_stream: true } } },
       orderBy: { overallScore: 'desc' },
       take: 50
     });
@@ -67,7 +67,7 @@ router.get('/program/:program', auth, async (req, res) => {
     await ensureRanks();
     const rankings = await prisma.ranking.findMany({
       where: { program: req.params.program },
-      include: { student: { select: { fullName: true, profilePicture: true, programInfo: true } } },
+      include: { student: { select: { fullName: true, profilePicture: true, programInfo_program: true, programInfo_stream: true } } },
       orderBy: { overallScore: 'desc' },
       take: 50
     });
@@ -85,7 +85,7 @@ router.get('/me', auth, async (req, res) => {
     await ensureRanks();
     const rank = await prisma.ranking.findFirst({
       where: { studentId: req.user.id },
-      include: { student: { select: { fullName: true, programInfo: true } } }
+      include: { student: { select: { fullName: true, programInfo_program: true, programInfo_stream: true } } }
     });
     const achievements = await prisma.achievement.findMany({
       where: { studentId: req.user.id },

@@ -14,25 +14,32 @@ router.get('/users', auth, async (req, res) => {
 
     if (currentUser.role === 'Student') {
       // Students can chat with other students in their program and teachers
+      const program = currentUser.programInfo_program;
       users = await prisma.user.findMany({
         where: {
           OR: [
-            { role: 'Student', programInfo: { is: { program: currentUser.programInfo?.program } }, id: { not: currentUser.id } },
-            { role: 'Teacher' }
+            { role: 'Student', programInfo_program: program, id: { not: currentUser.id } },
+            { role: 'Teacher', assignedProgram: program },
+            { role: 'Teacher', assignedProgram: 'All' }
           ]
         },
-        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo: true }
+        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo_program: true }
       });
     } else if (currentUser.role === 'Teacher') {
       // Teachers can chat with their students and other teachers
+      let studentFilter = { role: 'Student' };
+      if (currentUser.assignedProgram && currentUser.assignedProgram !== 'All') {
+        studentFilter.programInfo_program = currentUser.assignedProgram;
+      }
+      
       users = await prisma.user.findMany({
         where: {
           OR: [
-            { role: 'Student', programInfo: { is: { program: currentUser.assignedProgram } } },
+            studentFilter,
             { role: 'Teacher', id: { not: currentUser.id } }
           ]
         },
-        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo: true }
+        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo_program: true }
       });
     }
 

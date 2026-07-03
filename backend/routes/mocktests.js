@@ -321,7 +321,7 @@ router.get('/:id/results', auth, async (req, res) => {
       where: { testId: req.params.id },
       include: {
         student: {
-          select: { fullName: true, email: true, programInfo: true }
+          select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true }
         }
       }
     });

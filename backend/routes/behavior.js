@@ -68,7 +68,7 @@ router.get('/students', auth, async (req, res) => {
 
     const students = await prisma.user.findMany({
       where: query,
-      select: { fullName: true, email: true, programInfo: true }
+      select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true }
     });
     res.json(students);
   } catch (err) {
@@ -144,7 +144,7 @@ router.get('/feedbacks', auth, async (req, res) => {
       include: {
         request: true,
         teacher: { select: { fullName: true, email: true } },
-        student: { select: { fullName: true, email: true, programInfo: true } }
+        student: { select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true } }
       },
       orderBy: { createdAt: 'desc' }
     });

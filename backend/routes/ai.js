@@ -178,7 +178,7 @@ router.get('/risk-predictions', auth, async (req, res) => {
 
     let risks = await prisma.riskPrediction.findMany({
       where: query,
-      include: { student: { select: { fullName: true, email: true, programInfo: true } } }
+      include: { student: { select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true } } }
     });
     
     // Seed some mock data if empty for demo purposes
@@ -200,7 +200,7 @@ router.get('/risk-predictions', auth, async (req, res) => {
         }
         risks = await prisma.riskPrediction.findMany({
           where: query,
-          include: { student: { select: { fullName: true, email: true, programInfo: true } } }
+          include: { student: { select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true } } }
         });
     }
 

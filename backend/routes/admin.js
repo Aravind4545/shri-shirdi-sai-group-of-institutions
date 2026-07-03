@@ -48,7 +48,7 @@ router.get('/students', [auth, admin], async (req, res) => {
   try {
     const students = await prisma.user.findMany({
       where: { role: 'Student' },
-      select: { id: true, fullName: true, email: true, role: true, programInfo: true, isApproved: true, createdAt: true },
+      select: { id: true, fullName: true, email: true, role: true, programInfo_program: true, programInfo_stream: true, isApproved: true, createdAt: true },
       orderBy: { createdAt: 'desc' }
     });
     res.json(students);
@@ -60,7 +60,7 @@ router.put('/students/:id', [auth, admin], async (req, res) => {
     const user = await prisma.user.update({
       where: { id: req.params.id },
       data: req.body,
-      select: { id: true, fullName: true, email: true, role: true, programInfo: true, isApproved: true, createdAt: true }
+      select: { id: true, fullName: true, email: true, role: true, programInfo_program: true, programInfo_stream: true, isApproved: true, createdAt: true }
     });
     res.json(user);
   } catch (err) { res.status(500).send('Server Error'); }
@@ -179,7 +179,7 @@ router.get('/teacher-attendance', [auth, admin], async (req, res) => {
   try {
     const teachers = await prisma.user.findMany({ 
       where: { role: 'Teacher' },
-      select: { id: true, fullName: true, email: true, role: true, programInfo: true, isApproved: true, createdAt: true }
+      select: { id: true, fullName: true, email: true, role: true, programInfo_program: true, programInfo_stream: true, isApproved: true, createdAt: true }
     });
     const teacherIds = teachers.map(t => t.id);
     
@@ -207,7 +207,7 @@ router.get('/pending-approvals', [auth, admin], async (req, res) => {
   try {
     const pendingStudents = await prisma.user.findMany({ 
       where: { role: 'Student', isApproved: false },
-      select: { id: true, fullName: true, email: true, role: true, programInfo: true, isApproved: true, createdAt: true },
+      select: { id: true, fullName: true, email: true, role: true, programInfo_program: true, programInfo_stream: true, isApproved: true, createdAt: true },
       orderBy: { createdAt: 'desc' }
     });
     res.json(pendingStudents);

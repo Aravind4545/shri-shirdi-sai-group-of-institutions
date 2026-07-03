@@ -9,7 +9,7 @@ const teacher = require('../middleware/teacher');
 // @desc    Get dashboard stats filtered by assigned program
 router.get('/dashboard', auth, teacher, async (req, res) => {
   try {
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
+    const filter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? { role: 'Student' } : { role: 'Student', programInfo_program: req.user.assignedProgram };
     
     const totalStudents = await prisma.user.count({ where: filter });
     
@@ -28,7 +28,7 @@ router.get('/dashboard', auth, teacher, async (req, res) => {
 // @desc    Get all students belonging to the teacher's program
 router.get('/students', auth, teacher, async (req, res) => {
   try {
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
+    const filter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? { role: 'Student' } : { role: 'Student', programInfo_program: req.user.assignedProgram };
     const students = await prisma.user.findMany({ where: filter }).then(users => users.map(u => {
       const { password, ...rest } = u;
       return rest;
@@ -64,7 +64,7 @@ router.get('/attendance', auth, teacher, async (req, res) => {
     const queryDate = new Date(date);
     queryDate.setHours(0, 0, 0, 0);
 
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
+    const filter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? { role: 'Student' } : { role: 'Student', programInfo_program: req.user.assignedProgram };
     const students = await prisma.user.findMany({ where: filter, select: { id: true, _id: true } });
     const studentIds = students.map(s => s.id || s._id);
 
