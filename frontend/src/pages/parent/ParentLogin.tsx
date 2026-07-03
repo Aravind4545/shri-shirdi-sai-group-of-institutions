@@ -29,7 +29,7 @@ const ParentLogin = () => {
   };
 
   return (
-    <>
+    <div>
       <div className="min-h-screen bg-slate-100 flex flex-col font-sans">
         <div className="flex-grow flex items-center justify-center p-4">
           <div className="max-w-md w-full bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
@@ -69,7 +69,7 @@ const ParentLogin = () => {
         </div>
       </div>
       <GlobalFooter />
-    </>
+    </div>
   );
 };
 

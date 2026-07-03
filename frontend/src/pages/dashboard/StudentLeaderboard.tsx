@@ -29,7 +29,7 @@ const StudentLeaderboard = () => {
       const globalData = await globalRes.json();
       const meData = await meRes.json();
       
-      const pRes = await fetch('/api/leaderboard/program/${meData.rank?.program || 'IIT'}', { headers });
+      const pRes = await fetch(`/api/leaderboard/program/${meData.rank?.program || 'IIT'}`, { headers });
       const pData = await pRes.json();
 
       setGlobalRanks(globalData);
