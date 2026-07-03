@@ -59,6 +59,30 @@ router.post('/register', [
   }
 });
 
+// Helper to re-nest flattened Prisma fields for the frontend
+const formatUser = (user) => {
+  if (!user) return user;
+  const formatted = { ...user };
+  formatted.programInfo = {
+    program: user.programInfo_program,
+    stream: user.programInfo_stream,
+    exams: user.programInfo_exams
+  };
+  formatted.academicInfo = {
+    intermediateYear: user.academicInfo_intermediateYear,
+    collegeName: user.academicInfo_collegeName,
+    state: user.academicInfo_state
+  };
+  formatted.companionSettings = {
+    style: user.companionSettings_style,
+    companionName: user.companionSettings_companionName,
+    studentNickname: user.companionSettings_studentNickname,
+    isConfigured: user.companionSettings_isConfigured
+  };
+  delete formatted.password;
+  return formatted;
+};
+
 // @route   POST /api/auth/login
 // @desc    Authenticate user & get token
 router.post('/login', [
@@ -96,7 +120,7 @@ router.post('/login', [
     };
     jwt.sign(payload, process.env.JWT_SECRET || 'secret_key', { expiresIn: '5h' }, (err, token) => {
       if (err) throw err;
-      res.json({ token, user: { id: user.id, fullName: user.fullName, email: user.email, role: user.role } });
+      res.json({ token, user: formatUser(user) });
     });
   } catch (err) {
     console.error(err.message);
@@ -109,10 +133,7 @@ router.post('/login', [
 router.get('/me', authMiddleware, async (req, res) => {
   try {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
-    if (user) {
-      delete user.password;
-    }
-    res.json(user);
+    res.json(formatUser(user));
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
