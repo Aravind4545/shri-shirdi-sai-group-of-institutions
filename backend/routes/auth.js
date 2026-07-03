@@ -55,7 +55,7 @@ router.post('/register', [
     res.status(201).json({ msg: 'Registration successful. Waiting for Admin approval.' });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ msg: 'Database Error: ' + err.message });
   }
 });
 
@@ -100,7 +100,7 @@ router.post('/login', [
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ msg: 'Database Error: ' + err.message });
   }
 });
 
