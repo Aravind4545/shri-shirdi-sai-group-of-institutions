@@ -12,21 +12,26 @@ router.get('/config', auth, async (req, res) => {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
-    // Initialize if it doesn't exist
-    if (!user.companionSettings) {
+    // Check if configured using the flat field
+    if (user.companionSettings_isConfigured === null || user.companionSettings_isConfigured === undefined) {
       const updatedUser = await prisma.user.update({
         where: { id: user.id },
         data: {
-          companionSettings: {
-            style: 'Tech Visionary',
-            companionName: 'Jarvis',
-            studentNickname: 'Superstar',
-            isConfigured: false
-          }
+          companionSettings_style: 'Tech Visionary',
+          companionSettings_companionName: 'Jarvis',
+          companionSettings_studentNickname: 'Superstar',
+          companionSettings_isConfigured: false
         }
       });
-      user.companionSettings = updatedUser.companionSettings;
+      user = updatedUser;
     }
+    
+    user.companionSettings = {
+      style: user.companionSettings_style,
+      companionName: user.companionSettings_companionName,
+      studentNickname: user.companionSettings_studentNickname,
+      isConfigured: user.companionSettings_isConfigured
+    };
     
     delete user.password;
     res.json({ user });
@@ -46,19 +51,22 @@ router.post('/config', auth, async (req, res) => {
     let user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
-    const currentSettings = user.companionSettings || {};
-    
     user = await prisma.user.update({
       where: { id: user.id },
       data: {
-        companionSettings: {
-          style: style || currentSettings.style || 'Tech Visionary',
-          companionName: companionName || currentSettings.companionName || 'Jarvis',
-          studentNickname: studentNickname || currentSettings.studentNickname || 'Superstar',
-          isConfigured: true
-        }
+        companionSettings_style: style || user.companionSettings_style || 'Tech Visionary',
+        companionSettings_companionName: companionName || user.companionSettings_companionName || 'Jarvis',
+        companionSettings_studentNickname: studentNickname || user.companionSettings_studentNickname || 'Superstar',
+        companionSettings_isConfigured: true
       }
     });
+    
+    user.companionSettings = {
+      style: user.companionSettings_style,
+      companionName: user.companionSettings_companionName,
+      studentNickname: user.companionSettings_studentNickname,
+      isConfigured: user.companionSettings_isConfigured
+    };
     
     delete user.password;
     res.json({ user });
@@ -76,7 +84,11 @@ router.get('/daily-interaction', auth, async (req, res) => {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
-    const settings = user.companionSettings || { style: 'Tech Visionary', companionName: 'Jarvis', studentNickname: 'Superstar' };
+    const settings = {
+      style: user.companionSettings_style || 'Tech Visionary',
+      companionName: user.companionSettings_companionName || 'Jarvis',
+      studentNickname: user.companionSettings_studentNickname || 'Superstar'
+    };
     
     // In a full implementation, this would query the MockTestResult, Attendance, and Assignment models.
     // For this direct implementation, we use an intelligent mock generation engine based on the style.
