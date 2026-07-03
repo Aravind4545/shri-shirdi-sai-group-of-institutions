@@ -47,7 +47,7 @@ router.post('/register', async (req, res) => {
 
     // Check for duplicate face across all users
     const allUsers = await prisma.user.findMany({ 
-      where: { faceLoginEnabled: true, faceEmbedding: { not: null } },
+      where: { faceLoginEnabled: true, faceEmbedding: { isEmpty: false } },
       select: { faceEmbedding: true, fullName: true, email: true }
     });
     
@@ -110,7 +110,7 @@ router.post('/login', async (req, res) => {
       console.log('AI service unreachable. Using magical mock for Face Login.');
       
       // Magical Mock: Just find the FIRST user who has a registered face!
-      let mockQuery = { faceLoginEnabled: true, faceEmbedding: { not: null } };
+      let mockQuery = { faceLoginEnabled: true, faceEmbedding: { isEmpty: false } };
       if (email) mockQuery.email = email;
       
       const firstFaceUser = await prisma.user.findFirst({ where: mockQuery });
@@ -134,7 +134,7 @@ router.post('/login', async (req, res) => {
     // 3. Find Best Match
     // In production with millions of users, use a vector DB like Milvus/Pinecone.
     // For this prototype, fetch all users with faceLoginEnabled and calculate in-memory.
-    let usersQuery = { faceLoginEnabled: true, faceEmbedding: { not: null } };
+    let usersQuery = { faceLoginEnabled: true, faceEmbedding: { isEmpty: false } };
     if (email) {
       usersQuery.email = email;
     }
