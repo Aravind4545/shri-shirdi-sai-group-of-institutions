@@ -13,15 +13,31 @@ router.get('/dashboard', auth, teacher, async (req, res) => {
     
     const totalStudents = await prisma.user.count({ where: filter });
     
-    // Mocks for other stats, would query respective models in prod
+    const students = await prisma.user.findMany({ where: filter, select: { id: true } });
+    const studentIds = students.map(s => s.id);
+    
+    const totalAttendance = await prisma.attendance.count({ where: { studentId: { in: studentIds } } });
+    const presentAttendance = await prisma.attendance.count({ where: { studentId: { in: studentIds }, status: 'Present' } });
+    const attendancePercentage = totalAttendance === 0 ? 0 : Math.round((presentAttendance / totalAttendance) * 100);
+
+    const programFilter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? {} : { program: req.user.assignedProgram };
+    const testsConducted = await prisma.test.count({ where: programFilter });
+    const studyMaterialsUploaded = await prisma.material.count({ where: programFilter });
+    
+    const announcementsFilter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? {} : { targetProgram: req.user.assignedProgram };
+    const announcementsPosted = await prisma.announcement.count({ where: announcementsFilter });
+    
     res.json({
       totalStudents,
-      attendancePercentage: 88,
-      testsConducted: 12,
-      studyMaterialsUploaded: 45,
-      announcementsPosted: 8
+      attendancePercentage,
+      testsConducted,
+      studyMaterialsUploaded,
+      announcementsPosted
     });
-  } catch (err) { res.status(500).send('Server Error'); }
+  } catch (err) { 
+    console.error(err);
+    res.status(500).send('Server Error'); 
+  }
 });
 
 // @route   GET api/teacher/students
