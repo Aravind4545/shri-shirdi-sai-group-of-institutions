@@ -1,19 +1,20 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
-const Admission = require('../models/Admission');
-const Payment = require('../models/Payment');
-const Scholarship = require('../models/Scholarship');
+
+
+
 
 // Get high level dashboard analytics
 router.get('/dashboard', [auth, admin], async (req, res) => {
   try {
-    const totalAdmissions = await Admission.countDocuments();
-    const approvedAdmissions = await Admission.countDocuments({ status: 'Approved' });
-    const pendingAdmissions = await Admission.countDocuments({ status: 'Pending' });
+    const totalAdmissions = await prisma.admission.count();
+    const approvedAdmissions = await prisma.admission.count({ where: { status: 'Approved' } });
+    const pendingAdmissions = await prisma.admission.count({ where: { status: 'Pending' } });
 
-    const payments = await Payment.find();
+    const payments = await prisma.payment.findMany();
     let totalRevenue = 0;
     let pendingRevenue = 0;
     
@@ -22,7 +23,7 @@ router.get('/dashboard', [auth, admin], async (req, res) => {
       pendingRevenue += (p.totalAmountDue - p.totalAmountPaid);
     });
 
-    const scholarshipsGranted = await Scholarship.countDocuments({ status: 'Approved' });
+    const scholarshipsGranted = await prisma.scholarship.count({ where: { status: 'Approved' } });
 
     res.json({
       totalAdmissions,

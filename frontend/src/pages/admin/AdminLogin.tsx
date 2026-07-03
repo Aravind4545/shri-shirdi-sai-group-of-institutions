@@ -18,7 +18,7 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

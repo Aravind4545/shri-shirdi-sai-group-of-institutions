@@ -228,7 +228,7 @@ const AdminMockTests: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Mock Test Management</h1>
           <p className="text-sm text-slate-500 mt-0.5">
-            Create, schedule, and track mock tests across Lakshya, Deekshya &amp; DAFNE
+            Create, schedule, and track mock tests across IIT, NEET &amp; UPSC
           </p>
         </div>
         <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors">
@@ -319,7 +319,7 @@ const AdminMockTests: React.FC = () => {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number) => [`${value}%`, "Share"]}
+                formatter={(value: any) => [`${value}%`, "Share"]}
               />
               <Legend
                 iconType="circle"
@@ -397,9 +397,9 @@ const AdminMockTests: React.FC = () => {
               Program Breakdown
             </p>
             {[
-              { name: "Lakshya", count: 148, color: "bg-indigo-500" },
-              { name: "Deekshya", count: 122, color: "bg-cyan-500" },
-              { name: "DAFNE", count: 72, color: "bg-amber-500" },
+              { name: "IIT", count: 148, color: "bg-indigo-500" },
+              { name: "NEET", count: 122, color: "bg-cyan-500" },
+              { name: "UPSC", count: 72, color: "bg-amber-500" },
             ].map((p) => (
               <div key={p.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">

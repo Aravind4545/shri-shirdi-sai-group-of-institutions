@@ -1,27 +1,34 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const User = require('../models/User');
+
 
 // @route   GET api/companion/config
 // @desc    Get current companion config
 // @access  Private
 router.get('/config', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
     // Initialize if it doesn't exist
     if (!user.companionSettings) {
-      user.companionSettings = {
-        style: 'Tech Visionary',
-        companionName: 'Jarvis',
-        studentNickname: 'Superstar',
-        isConfigured: false
-      };
-      await user.save();
+      const updatedUser = await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          companionSettings: {
+            style: 'Tech Visionary',
+            companionName: 'Jarvis',
+            studentNickname: 'Superstar',
+            isConfigured: false
+          }
+        }
+      });
+      user.companionSettings = updatedUser.companionSettings;
     }
     
+    delete user.password;
     res.json({ user });
   } catch (err) {
     console.error(err.message);
@@ -36,17 +43,24 @@ router.post('/config', auth, async (req, res) => {
   try {
     const { style, companionName, studentNickname } = req.body;
     
-    let user = await User.findById(req.user.id);
+    let user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
-    user.companionSettings = {
-      style: style || user.companionSettings.style,
-      companionName: companionName || user.companionSettings.companionName,
-      studentNickname: studentNickname || user.companionSettings.studentNickname,
-      isConfigured: true
-    };
+    const currentSettings = user.companionSettings || {};
     
-    await user.save();
+    user = await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        companionSettings: {
+          style: style || currentSettings.style || 'Tech Visionary',
+          companionName: companionName || currentSettings.companionName || 'Jarvis',
+          studentNickname: studentNickname || currentSettings.studentNickname || 'Superstar',
+          isConfigured: true
+        }
+      }
+    });
+    
+    delete user.password;
     res.json({ user });
   } catch (err) {
     console.error(err.message);
@@ -59,7 +73,7 @@ router.post('/config', auth, async (req, res) => {
 // @access  Private
 router.get('/daily-interaction', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
     
     const settings = user.companionSettings || { style: 'Tech Visionary', companionName: 'Jarvis', studentNickname: 'Superstar' };

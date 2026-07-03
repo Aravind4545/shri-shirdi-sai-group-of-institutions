@@ -15,7 +15,7 @@ const AssignmentSubmission = () => {
 
   const fetchAssignment = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/student', {
+      const res = await fetch('/api/assignments/student', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -39,7 +39,7 @@ const AssignmentSubmission = () => {
     files.forEach(file => formData.append('files', file));
 
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/${id}/submit`, {
+      const res = await fetch('/api/assignments/${id}/submit', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' },
         body: formData
@@ -96,7 +96,7 @@ const AssignmentSubmission = () => {
                 <h3 className="text-lg font-bold text-slate-800 mb-4">Reference Materials</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {assignment.attachments.map((file: any, i: number) => (
-                    <a key={i} href={`https://shri-shirdi-sai-group-of-institutions.onrender.com${file.url}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 transition-colors group">
+                    <a key={i} href={`http://${window.location.hostname}:5001${file.url}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-blue-300 transition-colors group">
                       <div className="p-2 bg-blue-100 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
                         <FileText className="w-5 h-5" />
                       </div>

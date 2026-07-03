@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deekshya Medical Academy — NEET 2026 Test Series</title>
+<title>NEET Medical Academy — NEET 2026 Test Series</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -281,8 +281,8 @@ select{appearance:none;-webkit-appearance:none;}
 <div id="loginScreen">
   <div class="login-logo">
     <div class="login-logo-mark">DX</div>
-    <div class="login-brand"><span>Deekshya</span> Medical Academy</div>
-    <div class="login-tagline">Sri Shirdi Sai Group of Institutions · NEET 2026 Test Series</div>
+    <div class="login-brand"><span>NEET</span> Medical Academy</div>
+    <div class="login-tagline">Academic Companion Group of Institutions · NEET 2026 Test Series</div>
   </div>
   <div class="login-card">
     <h2>Student Login</h2>
@@ -321,10 +321,10 @@ select{appearance:none;-webkit-appearance:none;}
     </div>
     <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,214,0,0.1);border:1px solid rgba(255,214,0,0.25);border-radius:20px;padding:4px 12px;">
       <span style="background:#ffd600;color:#111;font-size:9px;font-weight:900;padding:2px 6px;border-radius:10px;letter-spacing:0.5px;">SSS</span>
-      <span style="font-size:0.75rem;color:var(--text2);">Sri Shirdi Sai Group of Institutions</span>
+      <span style="font-size:0.75rem;color:var(--text2);">Academic Companion Group of Institutions</span>
     </div>
   </div>
-  <div class="login-footer">Sri Shirdi Sai Group of Institutions<br>info@srishirdisaigroup.com · <strong>+91 95812 71119</strong></div>
+  <div class="login-footer">Academic Companion Group of Institutions<br>info@srishirdisaigroup.com · <strong>+91 95812 71119</strong></div>
 </div>
 
 <!-- ==================== HOME SCREEN ==================== -->
@@ -333,7 +333,7 @@ select{appearance:none;-webkit-appearance:none;}
     <div class="topbar-left">
       <div class="topbar-mark">DX</div>
       <div>
-        <div class="topbar-name">Deekshya Medical Academy</div>
+        <div class="topbar-name">NEET Medical Academy</div>
         <div class="topbar-sub">NEET 2026 Test Series</div>
       </div>
     </div>
@@ -346,7 +346,7 @@ select{appearance:none;-webkit-appearance:none;}
   <div class="home-hero">
     <div class="home-welcome">Welcome back 👋</div>
     <div class="home-title"><span id="heroName">Student</span>, let's <span class="hl">crack NEET</span></div>
-    <div class="home-meta">Deekshya Medical Academy · NEET 2026 · Batch: <span id="heroBatch"></span></div>
+    <div class="home-meta">NEET Medical Academy · NEET 2026 · Batch: <span id="heroBatch"></span></div>
   </div>
 
   <div class="home-content">
@@ -401,7 +401,7 @@ select{appearance:none;-webkit-appearance:none;}
       <div class="inst-logo-sm">DX</div>
       <div>
         <div class="inst-title-txt" id="instructTitle">Mock Test Instructions</div>
-        <div class="inst-sub-txt">Deekshya Medical Academy · NEET 2026</div>
+        <div class="inst-sub-txt">NEET Medical Academy · NEET 2026</div>
       </div>
     </div>
     <div class="inst-row"><span class="inst-icon">📊</span><div class="inst-text"><strong>Total: 180 questions · 720 marks</strong> — Physics (45), Chemistry (45), Biology (90)</div></div>
@@ -441,7 +441,7 @@ select{appearance:none;-webkit-appearance:none;}
         <div class="legend-item"><div class="legend-dot" style="background:rgba(206,147,216,0.2);border:1px solid rgba(206,147,216,0.4);"></div>Marked</div>
       </div>
       <div class="tip-box">
-        <div class="tip-label">⚡ Deekshya Medical Academy Tip</div>
+        <div class="tip-label">⚡ NEET Medical Academy Tip</div>
         <div class="tip-text" id="quickTip">Attempt Biology first for maximum marks. Most answers are direct NCERT.</div>
       </div>
     </div>
@@ -477,7 +477,7 @@ select{appearance:none;-webkit-appearance:none;}
   <div class="score-topbar">
     <div class="score-topbar-left">
       <div class="score-logo-sm">DX</div>
-      <div class="score-inst">Deekshya Medical Academy</div>
+      <div class="score-inst">NEET Medical Academy</div>
     </div>
   </div>
   <div class="score-card">
@@ -558,12 +558,12 @@ function doLogin() {
   const m = document.getElementById('inputMobile').value.trim();
   if (!n || !r || !b) { alert('Please fill Name, Roll Number, and Batch.'); return; }
   student = { name: n, roll: r, batch: b, mobile: m };
-  try { localStorage.setItem('deekshya_student', JSON.stringify(student)); } catch(e) {}
+  try { localStorage.setItem('neet_student', JSON.stringify(student)); } catch(e) {}
   showHome();
 }
 
 function doLogout() {
-  try { localStorage.removeItem('deekshya_student'); } catch(e) {}
+  try { localStorage.removeItem('neet_student'); } catch(e) {}
   student = { name: 'Student', roll: 'DXA-2026-001', batch: 'NEET 2026', mobile: '' };
   showHome();
 }
@@ -590,7 +590,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Skip login — go directly to home with default student context
   student = { name: 'Student', roll: 'DXA-2026-001', batch: 'NEET 2026', mobile: '' };
   try {
-    const saved = localStorage.getItem('deekshya_student');
+    const saved = localStorage.getItem('neet_student');
     if (saved) { student = JSON.parse(saved); }
   } catch(e) {}
   showHome();
@@ -3138,12 +3138,12 @@ function downloadPDF() {
   ov.innerHTML=`<div style="max-width:860px;margin:0 auto;background:#fff;min-height:100vh;">
     <div style="background:#c62828;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;">
       <div>
-        <div style="color:#fff;font-size:19px;font-weight:900;letter-spacing:-0.3px;">DEEKSHYA MEDICAL ACADEMY</div>
-        <div style="color:rgba(255,255,255,0.88);font-size:11px;margin-top:3px;">Sri Shirdi Sai Group of Institutions — NEET 2026 Test Series</div>
+        <div style="color:#fff;font-size:19px;font-weight:900;letter-spacing:-0.3px;">NEET MEDICAL ACADEMY</div>
+        <div style="color:rgba(255,255,255,0.88);font-size:11px;margin-top:3px;">Academic Companion Group of Institutions — NEET 2026 Test Series</div>
         <div style="color:rgba(255,255,255,0.72);font-size:9.5px;margin-top:2px;">Rajahmundry | info@srishirdisaigroup.com | +91 95812 71119</div>
         <div style="margin-top:5px;display:inline-flex;align-items:center;gap:4px;background:rgba(255,214,0,0.18);border:1px solid rgba(255,214,0,0.35);padding:3px 10px;border-radius:4px;">
           <span style="background:#ffd600;color:#111;font-size:8px;font-weight:900;padding:1px 5px;border-radius:2px;letter-spacing:0.5px;">SSSGI</span>
-          <span style="color:#fde68a;font-size:9px;font-weight:700;">Part of <span style="color:#ffd600;font-size:10px;font-weight:900;">Sri Shirdi Sai Group of Institutions</span></span>
+          <span style="color:#fde68a;font-size:9px;font-weight:700;">Part of <span style="color:#ffd600;font-size:10px;font-weight:900;">Academic Companion Group of Institutions</span></span>
         </div>
       </div>
       <div style="background:#fff;border-radius:8px;padding:10px 16px;text-align:center;">
@@ -3183,18 +3183,18 @@ function downloadPDF() {
       <div style="font-size:13px;color:#5d4037;font-style:italic;font-weight:700;margin-bottom:5px;">${score>=500?'"उत्साहो बलवान् राजन् नास्त्युत्साहात् परं बलम्"':score>=350?'"श्रद्धावान् लभते ज्ञानं तत्परः संयतेन्द्रियः"':score>=200?'"उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः"':'"अभ्यासयोगेन ततो मामिच्छाप्तुं धनञ्जय"'}</div>
       <div style="font-size:10.5px;color:#795548;margin-bottom:8px;">${score>=500?'Enthusiasm is the greatest strength — nothing can stop one who is truly motivated. You are doing brilliantly! 🏆':score>=350?'Only one who has faith and sincerity gains true knowledge. Your hard work will surely pay off! 💪':score>=200?'Goals are achieved through effort alone, not through wishful thinking. Push harder — NEET is yours! 🎯':'Excellence comes only through practice and dedication. Do not give up — you can do this! 🔥'}</div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-top:2px;">
-        <div style="font-size:9.5px;color:#8d6e63;font-weight:700;">Deekshya Medical Academy</div>
+        <div style="font-size:9.5px;color:#8d6e63;font-weight:700;">NEET Medical Academy</div>
         <div style="display:flex;align-items:center;gap:5px;">
           <span style="background:#ffd600;color:#111;font-size:8px;font-weight:900;padding:2px 7px;border-radius:3px;letter-spacing:0.5px;">SSS</span>
-          <span style="font-size:9px;color:#a1887f;font-weight:700;">Sri Shirdi Sai Group of Institutions</span>
+          <span style="font-size:9px;color:#a1887f;font-weight:700;">Academic Companion Group of Institutions</span>
         </div>
       </div>
     </div>
     <div style="background:linear-gradient(135deg,#c62828,#b71c1c);padding:12px 18px;text-align:center;">
-      <div style="color:#fff;font-size:11px;font-weight:700;margin-bottom:5px;">Deekshya Medical Academy | NEET 2026 | ${date}</div>
+      <div style="color:#fff;font-size:11px;font-weight:700;margin-bottom:5px;">NEET Medical Academy | NEET 2026 | ${date}</div>
       <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,214,0,0.4);border-radius:20px;padding:4px 14px;">
         <span style="background:#ffd600;color:#111;font-size:8px;font-weight:900;padding:1px 6px;border-radius:10px;letter-spacing:0.5px;">SSS</span>
-        <span style="color:#fde68a;font-size:10px;">Sri Shirdi Sai Group of Institutions</span>
+        <span style="color:#fde68a;font-size:10px;">Academic Companion Group of Institutions</span>
       </div>
     </div>
   </div>`;

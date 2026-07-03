@@ -9,7 +9,7 @@ const Tests = () => {
   const [tests, setTests] = useState([]);
 
   useEffect(() => {
-    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/tests', {
+    fetch('/api/dashboard/tests', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())

@@ -6,29 +6,29 @@ import { ArrowRight, Calculator, Activity, Landmark } from 'lucide-react';
 const Programs = () => {
   const programs = [
     {
-      id: 'lakshya',
-      title: 'Lakshya',
+      id: 'iit',
+      title: 'IIT',
       target: 'IIT & Engineering Aspirants',
       description: 'Specialized coaching for JEE Main, JEE Advanced, AP EAMCET, and TS EAMCET.',
-      path: '/lakshya',
+      path: '/iit',
       icon: <Calculator className="w-8 h-8 text-white" />,
       color: 'from-blue-500 to-brand-blue'
     },
     {
-      id: 'deekshya',
-      title: 'Deekshya',
+      id: 'neet',
+      title: 'NEET',
       target: 'Medical Aspirants',
       description: 'Focused coaching for NEET and Medical Entrance Examinations.',
-      path: '/deekshya',
+      path: '/neet',
       icon: <Activity className="w-8 h-8 text-white" />,
       color: 'from-emerald-400 to-emerald-600'
     },
     {
-      id: 'dafne',
-      title: 'DAFNE',
+      id: 'upsc',
+      title: 'UPSC',
       target: 'Civil Services Aspirants',
       description: 'Foundation programs for future Civil Servants and Government Officers.',
-      path: '/dafne',
+      path: '/upsc',
       icon: <Landmark className="w-8 h-8 text-white" />,
       color: 'from-brand-gold to-yellow-600'
     }

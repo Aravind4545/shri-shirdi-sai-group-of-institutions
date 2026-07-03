@@ -24,7 +24,7 @@ const TeacherStudyMaterials = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState<'PDF' | 'Video' | 'Note'>('PDF');
-  const [program, setProgram] = useState('Lakshya');
+  const [program, setProgram] = useState('IIT');
   const [stream, setStream] = useState('MPC');
   const [subject, setSubject] = useState('Physics');
   const [url, setUrl] = useState('');
@@ -37,7 +37,7 @@ const TeacherStudyMaterials = () => {
         title: 'JEE Advanced Limits & Continuity notes',
         description: 'Complete formulas, theory notes, and solved questions for limit & continuity.',
         type: 'PDF',
-        program: 'Lakshya',
+        program: 'IIT',
         stream: 'MPC',
         subject: 'Mathematics',
         url: 'https://example.com/math-limits.pdf',
@@ -48,7 +48,7 @@ const TeacherStudyMaterials = () => {
         title: 'Electrostatics Part 1 Lecture Video',
         description: 'Video explanation on Coulomb\'s Law and electric field lines with derivations.',
         type: 'Video',
-        program: 'Lakshya',
+        program: 'IIT',
         stream: 'MPC',
         subject: 'Physics',
         url: 'https://youtube.com/watch?v=mock_physics_1',
@@ -59,7 +59,7 @@ const TeacherStudyMaterials = () => {
         title: 'Organic Chemistry: Nomenclature guide',
         description: 'Basic nomenclature guidelines for alkanes, alkenes, alkynes, and functional groups.',
         type: 'Note',
-        program: 'Deekshya',
+        program: 'NEET',
         stream: 'BiPC',
         subject: 'Chemistry',
         url: 'https://example.com/chem-nomenclature.pdf',
@@ -70,7 +70,7 @@ const TeacherStudyMaterials = () => {
         title: 'UPSC Indian Polity Constitutional Framework',
         description: 'PDF notes covering historical background, drafting of the constitution and salient features.',
         type: 'PDF',
-        program: 'DAFNE',
+        program: 'UPSC',
         stream: 'MEC',
         subject: 'Civics',
         url: 'https://example.com/polity-constitutional-framework.pdf',
@@ -81,7 +81,7 @@ const TeacherStudyMaterials = () => {
         title: 'NEET Human Physiology: Digestion & Absorption',
         description: 'Complete hand-written class notes detailing the human digestive system mechanics.',
         type: 'PDF',
-        program: 'Deekshya',
+        program: 'NEET',
         stream: 'BiPC',
         subject: 'Biology',
         url: 'https://example.com/neet-biology-digestion.pdf',
@@ -92,7 +92,7 @@ const TeacherStudyMaterials = () => {
         title: 'Integration by Parts: Tricks & Shortcuts',
         description: 'Video tutorial sharing smart tips and shortcuts for solving integration by parts quickly.',
         type: 'Video',
-        program: 'Lakshya',
+        program: 'IIT',
         stream: 'MPC',
         subject: 'Mathematics',
         url: 'https://youtube.com/watch?v=mock_integration_tricks',
@@ -125,7 +125,7 @@ const TeacherStudyMaterials = () => {
     setDescription('');
     setUrl('');
     setType('PDF');
-    setProgram('Lakshya');
+    setProgram('IIT');
     setStream('MPC');
     setSubject('Physics');
     setShowModal(false);
@@ -250,9 +250,9 @@ const TeacherStudyMaterials = () => {
               className="px-3 py-2 border border-slate-300 rounded-xl text-xs font-bold text-slate-600 bg-slate-50 focus:outline-none focus:border-emerald-500"
             >
               <option value="All">All Programs</option>
-              <option value="Lakshya">Lakshya</option>
-              <option value="Deekshya">Deekshya</option>
-              <option value="DAFNE">DAFNE</option>
+              <option value="IIT">IIT</option>
+              <option value="NEET">NEET</option>
+              <option value="UPSC">UPSC</option>
             </select>
           </div>
         </div>
@@ -284,8 +284,8 @@ const TeacherStudyMaterials = () => {
                   }
 
                   let progBadge = 'bg-blue-50 text-blue-700 border-blue-100';
-                  if (m.program === 'Deekshya') progBadge = 'bg-emerald-50 text-emerald-700 border-emerald-100';
-                  if (m.program === 'DAFNE') progBadge = 'bg-amber-50 text-amber-700 border-amber-100';
+                  if (m.program === 'NEET') progBadge = 'bg-emerald-50 text-emerald-700 border-emerald-100';
+                  if (m.program === 'UPSC') progBadge = 'bg-amber-50 text-amber-700 border-amber-100';
 
                   return (
                     <tr key={m.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
@@ -427,9 +427,9 @@ const TeacherStudyMaterials = () => {
                     onChange={e => setProgram(e.target.value)}
                     className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-600 bg-white focus:outline-none focus:border-emerald-500"
                   >
-                    <option value="Lakshya">Lakshya</option>
-                    <option value="Deekshya">Deekshya</option>
-                    <option value="DAFNE">DAFNE</option>
+                    <option value="IIT">IIT</option>
+                    <option value="NEET">NEET</option>
+                    <option value="UPSC">UPSC</option>
                   </select>
                 </div>
 

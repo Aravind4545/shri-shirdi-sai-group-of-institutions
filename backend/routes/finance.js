@@ -1,11 +1,12 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
-const FeeStructure = require('../models/FeeStructure');
-const Payment = require('../models/Payment');
-const Scholarship = require('../models/Scholarship');
-const Admission = require('../models/Admission');
+
+
+
+
 
 // ==========================================
 // FEE STRUCTURE MANAGEMENT (ADMIN)
@@ -13,12 +14,11 @@ const Admission = require('../models/Admission');
 
 router.post('/structures', [auth, admin], async (req, res) => {
   try {
-    let fee = await FeeStructure.findOne({ program: req.body.program });
+    let fee = await prisma.feeStructure.findFirst({ where: { program: req.body.program } });
     if (fee) {
-      fee = await FeeStructure.findOneAndUpdate({ program: req.body.program }, req.body, { new: true });
+      fee = await prisma.feeStructure.update({ where: { id: fee.id }, data: req.body });
     } else {
-      fee = new FeeStructure(req.body);
-      await fee.save();
+      fee = await prisma.feeStructure.create({ data: req.body });
     }
     res.json(fee);
   } catch (err) { res.status(500).send('Server Error'); }
@@ -26,7 +26,7 @@ router.post('/structures', [auth, admin], async (req, res) => {
 
 router.get('/structures', async (req, res) => {
   try {
-    const fees = await FeeStructure.find();
+    const fees = await prisma.feeStructure.findMany();
     res.json(fees);
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -38,7 +38,10 @@ router.get('/structures', async (req, res) => {
 // Get my payments (Student)
 router.get('/my-payments', auth, async (req, res) => {
   try {
-    const payment = await Payment.findOne({ studentId: req.user.id }).populate('scholarshipApplied');
+    const payment = await prisma.payment.findFirst({
+      where: { studentId: req.user.id },
+      include: { scholarshipApplied: true }
+    });
     res.json(payment);
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -46,17 +49,17 @@ router.get('/my-payments', auth, async (req, res) => {
 // Generate Payment Record upon Admission Approval (Internal use or triggered by Admin)
 router.post('/generate-record/:admissionId', [auth, admin], async (req, res) => {
   try {
-    const admission = await Admission.findById(req.params.admissionId);
+    const admission = await prisma.admission.findUnique({ where: { id: req.params.admissionId } });
     if (!admission || admission.status !== 'Approved') return res.status(400).json({ msg: 'Invalid admission' });
 
-    const feeStruct = await FeeStructure.findOne({ program: admission.program });
+    const feeStruct = await prisma.feeStructure.findFirst({ where: { program: admission.program } });
     if (!feeStruct) return res.status(400).json({ msg: 'Fee structure not defined for program' });
 
-    let existingPayment = await Payment.findOne({ admissionId: admission._id });
+    let existingPayment = await prisma.payment.findFirst({ where: { admissionId: admission.id } });
     if (existingPayment) return res.status(400).json({ msg: 'Record exists' });
 
     // Handle Scholarships
-    const scholarship = await Scholarship.findOne({ studentId: admission.studentId, status: 'Approved' });
+    const scholarship = await prisma.scholarship.findFirst({ where: { studentId: admission.studentId, status: 'Approved' } });
     let totalDue = feeStruct.totalFee;
     
     if (scholarship) {
@@ -76,16 +79,14 @@ router.post('/generate-record/:admissionId', [auth, admin], async (req, res) => 
       installments.push({ amount: totalDue, dueDate: new Date() });
     }
 
-    const payment = new Payment({
+    const payment = await prisma.payment.create({ data: {
       studentId: admission.studentId,
-      admissionId: admission._id,
+      admissionId: admission.id,
       totalAmountDue: totalDue,
-      scholarshipApplied: scholarship ? scholarship._id : null,
+      scholarshipAppliedId: scholarship ? scholarship.id : null,
       paymentPlan: req.body.paymentPlan || 'One-time',
       installments
-    });
-
-    await payment.save();
+    } });
     res.json(payment);
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -94,7 +95,7 @@ router.post('/generate-record/:admissionId', [auth, admin], async (req, res) => 
 router.post('/pay', auth, async (req, res) => {
   try {
     const { amount, method, installmentId } = req.body;
-    let payment = await Payment.findOne({ studentId: req.user.id });
+    let payment = await prisma.payment.findFirst({ where: { studentId: req.user.id } });
     if (!payment) return res.status(404).json({ msg: 'Payment record not found' });
 
     // Mocking Payment Gateway Success
@@ -112,14 +113,21 @@ router.post('/pay', auth, async (req, res) => {
 
     // Update Installment Status
     if (installmentId) {
-      const inst = payment.installments.id(installmentId);
-      if (inst) {
-        inst.status = 'Paid';
-        inst.paidDate = new Date();
+      const instIndex = payment.installments.findIndex(i => i.id === installmentId || i._id === installmentId);
+      if (instIndex !== -1) {
+        payment.installments[instIndex].status = 'Paid';
+        payment.installments[instIndex].paidDate = new Date();
       }
     }
 
-    await payment.save();
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: {
+        transactions: payment.transactions,
+        totalAmountPaid: payment.totalAmountPaid,
+        installments: payment.installments
+      }
+    });
     res.json({ msg: 'Payment Successful', transactionId, receiptUrl: `/receipts/${transactionId}.pdf` });
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -127,7 +135,12 @@ router.post('/pay', auth, async (req, res) => {
 // Get all payments (Admin)
 router.get('/all-payments', [auth, admin], async (req, res) => {
   try {
-    const payments = await Payment.find().populate('studentId', 'fullName email').populate('scholarshipApplied');
+    const payments = await prisma.payment.findMany({
+      include: {
+        student: { select: { fullName: true, email: true } },
+        scholarshipApplied: true
+      }
+    });
     res.json(payments);
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -138,15 +151,19 @@ router.get('/all-payments', [auth, admin], async (req, res) => {
 
 router.post('/scholarships', [auth, admin], async (req, res) => {
   try {
-    const scholarship = new Scholarship({ ...req.body, approvedBy: req.user.id });
-    await scholarship.save();
+    const scholarship = await prisma.scholarship.create({ data: { ...req.body, approvedBy: req.user.id } });
     res.json(scholarship);
   } catch (err) { res.status(500).send('Server Error'); }
 });
 
 router.get('/scholarships', [auth, admin], async (req, res) => {
   try {
-    const scholarships = await Scholarship.find().populate('studentId', 'fullName email').populate('approvedBy', 'fullName');
+    const scholarships = await prisma.scholarship.findMany({
+      include: {
+        student: { select: { fullName: true, email: true } },
+        approver: { select: { fullName: true } }
+      }
+    });
     res.json(scholarships);
   } catch (err) { res.status(500).send('Server Error'); }
 });

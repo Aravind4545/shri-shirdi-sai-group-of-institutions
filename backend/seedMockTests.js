@@ -84,9 +84,9 @@ const seedData = async () => {
     }
 
     const testConfigs = [
-      { prefix: 'AP EAMCET / MSET Mock Test', exam: 'AP MSET', program: 'Lakshya', qCount: 160 },
-      { prefix: 'JEE Mains Mock Test', exam: 'JEE Mains', program: 'Lakshya', qCount: 75 },
-      { prefix: 'NEET Grand Mock Test', exam: 'NEET', program: 'Deekshya', qCount: 200 }
+      { prefix: 'AP EAMCET / MSET Mock Test', exam: 'AP MSET', program: 'IIT', qCount: 160 },
+      { prefix: 'JEE Mains Mock Test', exam: 'JEE Mains', program: 'IIT', qCount: 75 },
+      { prefix: 'NEET Grand Mock Test', exam: 'NEET', program: 'NEET', qCount: 200 }
     ];
 
     let createdCount = 0;

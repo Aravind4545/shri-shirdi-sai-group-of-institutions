@@ -1,16 +1,17 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const teacher = require('../middleware/teacher');
-const User = require('../models/User');
+
 
 // @route   GET api/teacher/dashboard
 // @desc    Get dashboard stats filtered by assigned program
 router.get('/dashboard', auth, teacher, async (req, res) => {
   try {
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', 'programInfo.program': req.user.assignedProgram };
+    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
     
-    const totalStudents = await User.countDocuments(filter);
+    const totalStudents = await prisma.user.count({ where: filter });
     
     // Mocks for other stats, would query respective models in prod
     res.json({
@@ -27,8 +28,11 @@ router.get('/dashboard', auth, teacher, async (req, res) => {
 // @desc    Get all students belonging to the teacher's program
 router.get('/students', auth, teacher, async (req, res) => {
   try {
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', 'programInfo.program': req.user.assignedProgram };
-    const students = await User.find(filter).select('-password');
+    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
+    const students = await prisma.user.findMany({ where: filter }).then(users => users.map(u => {
+      const { password, ...rest } = u;
+      return rest;
+    }));
     res.json(students);
   } catch (err) { res.status(500).send('Server Error'); }
 });
@@ -47,7 +51,7 @@ router.get('/analytics', auth, teacher, async (req, res) => {
   } catch (err) { res.status(500).send('Server Error'); }
 });
 
-const Attendance = require('../models/Attendance');
+
 
 // @route   GET api/teacher/attendance
 // @desc    Get attendance records for the teacher's students for a specific date
@@ -60,14 +64,14 @@ router.get('/attendance', auth, teacher, async (req, res) => {
     const queryDate = new Date(date);
     queryDate.setHours(0, 0, 0, 0);
 
-    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', 'programInfo.program': req.user.assignedProgram };
-    const students = await User.find(filter).select('_id');
-    const studentIds = students.map(s => s._id);
+    const filter = req.user.assignedProgram === 'All' ? { role: 'Student' } : { role: 'Student', programInfo: { is: { program: req.user.assignedProgram } } };
+    const students = await prisma.user.findMany({ where: filter, select: { id: true, _id: true } });
+    const studentIds = students.map(s => s.id || s._id);
 
-    const attendanceRecords = await Attendance.find({
-      studentId: { $in: studentIds },
-      date: { $gte: queryDate, $lt: new Date(queryDate.getTime() + 24 * 60 * 60 * 1000) }
-    });
+    const attendanceRecords = await prisma.attendance.findMany({ where: {
+      studentId: { in: studentIds },
+      date: { gte: queryDate, lt: new Date(queryDate.getTime() + 24 * 60 * 60 * 1000) }
+    } });
 
     res.json(attendanceRecords);
   } catch (err) { res.status(500).send('Server Error'); }
@@ -89,20 +93,22 @@ router.post('/attendance', auth, teacher, async (req, res) => {
       const { studentId, status } = record;
       
       // Upsert the attendance record
-      let existingRecord = await Attendance.findOne({
+      let existingRecord = await prisma.attendance.findFirst({ where: {
         studentId,
-        date: { $gte: queryDate, $lt: new Date(queryDate.getTime() + 24 * 60 * 60 * 1000) }
-      });
+        date: { gte: queryDate, lt: new Date(queryDate.getTime() + 24 * 60 * 60 * 1000) }
+      } });
 
       if (existingRecord) {
-        existingRecord.status = status;
-        await existingRecord.save();
+        await prisma.attendance.update({
+          where: { id: existingRecord.id || existingRecord._id },
+          data: { status }
+        });
       } else {
-        await Attendance.create({
+        await prisma.attendance.create({ data: {
           studentId,
           date: queryDate,
           status
-        });
+        } });
       }
     }
 

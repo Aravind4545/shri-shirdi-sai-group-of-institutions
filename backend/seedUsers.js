@@ -17,21 +17,21 @@ const seedUsers = async () => {
       {
         fullName: 'Dr. Kavita Sharma',
         mobileNumber: '9876543211',
-        email: 'teacher.deekshya@test.com',
+        email: 'teacher.neet@test.com',
         password: hashedPassword,
         gender: 'Female',
         role: 'Teacher',
-        assignedProgram: 'Deekshya',
+        assignedProgram: 'NEET',
         designation: 'Senior Botany Faculty'
       },
       {
         fullName: 'Prof. Anil Kumar',
         mobileNumber: '9876543212',
-        email: 'teacher.dafne@test.com',
+        email: 'teacher.upsc@test.com',
         password: hashedPassword,
         gender: 'Male',
         role: 'Teacher',
-        assignedProgram: 'DAFNE',
+        assignedProgram: 'UPSC',
         designation: 'UPSC Polity Faculty'
       },
       // HOD
@@ -49,22 +49,22 @@ const seedUsers = async () => {
       {
         fullName: 'Priya Reddy',
         mobileNumber: '9123456781',
-        email: 'student.deekshya@test.com',
+        email: 'student.neet@test.com',
         password: hashedPassword,
         gender: 'Female',
         role: 'Student',
-        programInfo: { program: 'Deekshya', stream: 'BiPC', exams: ['NEET'] },
-        academicInfo: { intermediateYear: '2nd Year', collegeName: 'Sri Shirdi Sai', state: 'AP' }
+        programInfo: { program: 'NEET', stream: 'BiPC', exams: ['NEET'] },
+        academicInfo: { intermediateYear: '2nd Year', collegeName: 'Academic Companion', state: 'AP' }
       },
       {
         fullName: 'Rahul Verma',
         mobileNumber: '9123456782',
-        email: 'student.dafne@test.com',
+        email: 'student.upsc@test.com',
         password: hashedPassword,
         gender: 'Male',
         role: 'Student',
-        programInfo: { program: 'DAFNE', stream: 'MEC', exams: ['UPSC'] },
-        academicInfo: { intermediateYear: '1st Year', collegeName: 'Sri Shirdi Sai', state: 'AP' }
+        programInfo: { program: 'UPSC', stream: 'MEC', exams: ['UPSC'] },
+        academicInfo: { intermediateYear: '1st Year', collegeName: 'Academic Companion', state: 'AP' }
       }
     ];
 

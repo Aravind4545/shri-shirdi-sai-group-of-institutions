@@ -13,7 +13,7 @@ const StudentMockTests = () => {
 
   const fetchTests = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/student', {
+      const res = await fetch('/api/mocktests/student', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {

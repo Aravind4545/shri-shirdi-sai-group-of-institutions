@@ -230,7 +230,7 @@ const QuestionBank: React.FC = () => {
               <h2 className="text-base font-semibold text-slate-700">Content Ingestion & Syllabus Alignment</h2>
             </div>
             <p className="text-xs text-slate-400 mb-4">
-              Standardized question database structured to support Lakshya (JEE), Deekshya (NEET), and DAFNE (Civil Services) curriculums.
+              Standardized question database structured to support IIT (JEE), NEET (NEET), and UPSC (Civil Services) curriculums.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-3 bg-slate-50 rounded-xl">

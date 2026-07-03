@@ -10,7 +10,7 @@ const admissionSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
   mobile: { type: String, required: true },
   email: { type: String, required: true },
-  program: { type: String, required: true }, // Lakshya, Deekshya, DAFNE
+  program: { type: String, required: true }, // IIT, NEET, UPSC
   stream: { type: String, required: true },
   examTargets: [{ type: String }],
   

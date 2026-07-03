@@ -101,8 +101,8 @@ const ParentLayout = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 bg-slate-50 min-h-screen pt-16 md:pt-0">
-        <div className="p-4 md:p-8">
+      <main className="flex-1 md:ml-64 bg-slate-50 min-h-screen pt-16 md:pt-0 flex flex-col">
+        <div className="flex-1 p-4 md:p-8 overflow-x-hidden min-w-0">
           <Outlet />
         </div>
         <GlobalFooter />

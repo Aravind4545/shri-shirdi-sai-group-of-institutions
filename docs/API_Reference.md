@@ -16,11 +16,11 @@
 
 ## AI Ecosystem
 `POST /api/ai/chat`
-- **Body**: `{ "message": "Physics doubt", "program": "Lakshya" }`
+- **Body**: `{ "message": "Physics doubt", "program": "IIT" }`
 - **Response**: AI Assistant Reply & Conversation History
 
 `POST /api/ai/generate-plan`
-- **Body**: `{ "program": "DAFNE", "planType": "Weekly" }`
+- **Body**: `{ "program": "UPSC", "planType": "Weekly" }`
 - **Response**: Study Plan JSON object.
 
 ## Teacher Portal

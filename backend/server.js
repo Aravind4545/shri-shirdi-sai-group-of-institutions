@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+
 const cors = require('cors');
 
 const app = express();
@@ -27,10 +27,6 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/shirdisai')
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));

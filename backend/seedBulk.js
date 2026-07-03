@@ -16,9 +16,9 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/shirdisai')
   .catch(err => console.error(err));
 
 const programs = [
-  { name: 'Lakshya', stream: 'MPC', exams: ['JEE'] },
-  { name: 'Deekshya', stream: 'BiPC', exams: ['NEET'] },
-  { name: 'DAFNE', stream: 'MEC', exams: ['UPSC'] }
+  { name: 'IIT', stream: 'MPC', exams: ['JEE'] },
+  { name: 'NEET', stream: 'BiPC', exams: ['NEET'] },
+  { name: 'UPSC', stream: 'MEC', exams: ['UPSC'] }
 ];
 
 const firstNames = ['Aarav', 'Vivaan', 'Aditya', 'Vihaan', 'Arjun', 'Sai', 'Ayaan', 'Krishna', 'Ishaan', 'Shaurya', 'Ananya', 'Diya', 'Avni', 'Aadya', 'Kiara', 'Navya', 'Myra', 'Prisha', 'Riya', 'Sara'];
@@ -53,7 +53,7 @@ const seedBulk = async () => {
           program: p.name, 
           stream: p.stream, 
           subject: 'Combined', 
-          totalMarks: p.name === 'Lakshya' ? 300 : (p.name === 'Deekshya' ? 720 : 100), 
+          totalMarks: p.name === 'IIT' ? 300 : (p.name === 'NEET' ? 720 : 100), 
           durationMinutes: 180 
         });
       }
@@ -74,7 +74,7 @@ const seedBulk = async () => {
           gender: Math.random() > 0.5 ? 'Male' : 'Female',
           role: 'Student',
           programInfo: { program: p.name, stream: p.stream, exams: p.exams },
-          academicInfo: { intermediateYear: '1st Year', collegeName: 'Sri Shirdi Sai', state: 'AP' }
+          academicInfo: { intermediateYear: '1st Year', collegeName: 'Academic Companion', state: 'AP' }
         });
         allStudents.push(student);
 
@@ -132,7 +132,7 @@ const seedBulk = async () => {
         await PerformanceInsight.create({
           studentId: student._id,
           subjectScores: [
-            { subject: p.name==='Lakshya'?'Physics':p.name==='Deekshya'?'Biology':'History', score: testScoreNormalized + (Math.random()*10 - 5), accuracy: 80, timeSpent: 120 }
+            { subject: p.name==='IIT'?'Physics':p.name==='NEET'?'Biology':'History', score: testScoreNormalized + (Math.random()*10 - 5), accuracy: 80, timeSpent: 120 }
           ],
           weakTopics: ['Thermodynamics', 'Organic Chemistry', 'Polity'],
           strongTopics: ['Mechanics', 'Cell Biology', 'Geography']

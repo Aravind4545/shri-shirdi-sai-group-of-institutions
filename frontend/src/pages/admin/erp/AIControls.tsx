@@ -80,7 +80,7 @@ const AIControls = () => {
             <div className="mt-6">
               <label className="block text-sm font-bold text-slate-700 mb-2">Assign to Program</label>
               <select className="w-full border border-slate-300 rounded-xl p-3 outline-none font-semibold">
-                <option>All Programs</option><option>Lakshya</option><option>Deekshya</option><option>DAFNE</option>
+                <option>All Programs</option><option>IIT</option><option>NEET</option><option>UPSC</option>
               </select>
             </div>
             <button className="w-full mt-6 bg-slate-800 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:bg-slate-900 transition-colors">Process & Vectorize</button>

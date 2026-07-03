@@ -1,3 +1,4 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -7,9 +8,9 @@ const path = require('path');
 const auth = require('../middleware/auth');
 const isTeacher = require('../middleware/teacher');
 const isAdmin = require('../middleware/admin');
-const MockTest = require('../models/MockTest');
-const MockTestResult = require('../models/MockTestResult');
-const User = require('../models/User');
+
+
+
 
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
@@ -110,17 +111,18 @@ router.post('/upload', auth, isTeacher, upload.single('pdf'), async (req, res) =
       return res.status(400).json({ msg: 'AI could not find any recognizable questions in this PDF.' });
     }
 
-    const newTest = new MockTest({
-      title,
-      teacherId: req.user.id,
-      targetProgram,
-      targetExam,
-      totalMarks: totalMarks || questions.length * 4,
-      durationMinutes: durationMinutes || 180,
-      questions
+    const test = await prisma.mockTest.create({
+      data: {
+        title,
+        teacherId: req.user.id,
+        targetProgram,
+        targetExam,
+        totalMarks: totalMarks || questions.length * 4,
+        durationMinutes: durationMinutes || 180,
+        questions
+      }
     });
 
-    const test = await newTest.save();
     res.json(test);
   } catch (err) {
     console.error(err.message);
@@ -133,7 +135,10 @@ router.post('/upload', auth, isTeacher, upload.single('pdf'), async (req, res) =
 // @access  Teacher
 router.get('/teacher', auth, isTeacher, async (req, res) => {
   try {
-    const tests = await MockTest.find({ teacherId: req.user.id }).sort({ createdAt: -1 });
+    const tests = await prisma.mockTest.findMany({
+      where: { teacherId: req.user.id },
+      orderBy: { createdAt: 'desc' }
+    });
     res.json(tests);
   } catch (err) {
     console.error(err.message);
@@ -147,31 +152,44 @@ router.get('/teacher', auth, isTeacher, async (req, res) => {
 router.get('/student', auth, async (req, res) => {
   try {
     // Get student's program
-    const student = await User.findById(req.user.id);
+    const student = await prisma.user.findUnique({ where: { id: req.user.id } });
     const program = student.programInfo?.program;
     const exams = student.programInfo?.exams || [];
     
     // Find tests for their program (or 'All')
     let query = { status: 'Published' };
     if (program) {
-      query.targetProgram = { $in: [program, 'All'] };
+      query.targetProgram = { in: [program, 'All'] };
     }
     // Also filter by specific exam if the student has exams enrolled
     if (exams.length > 0) {
-      query.targetExam = { $in: exams };
+      query.targetExam = { in: exams };
     }
 
-    const tests = await MockTest.find(query).sort({ createdAt: -1 }).select('-questions.correctOption'); // Hide answers
+    const tests = await prisma.mockTest.findMany({
+      where: query,
+      orderBy: { createdAt: 'desc' }
+    });
     
     // Get their submissions to mark completed tests
-    const results = await MockTestResult.find({ studentId: req.user.id });
+    const results = await prisma.mockTestResult.findMany({ where: { studentId: req.user.id } });
     const submittedTestIds = results.map(r => r.testId.toString());
 
     const testsWithStatus = tests.map(test => {
-      const isCompleted = submittedTestIds.includes(test._id.toString());
-      const result = results.find(r => r.testId.toString() === test._id.toString());
+      const isCompleted = submittedTestIds.includes(test.id ? test.id.toString() : (test._id ? test._id.toString() : ''));
+      const result = results.find(r => r.testId.toString() === (test.id ? test.id.toString() : (test._id ? test._id.toString() : '')));
+      
+      const modifiedTest = { ...test };
+      if (Array.isArray(modifiedTest.questions)) {
+        modifiedTest.questions = modifiedTest.questions.map(q => {
+          const newQ = { ...q };
+          delete newQ.correctOption;
+          return newQ;
+        });
+      }
+      
       return {
-        ...test.toObject(),
+        ...modifiedTest,
         isCompleted,
         score: isCompleted ? result.score : null
       };
@@ -189,8 +207,17 @@ router.get('/student', auth, async (req, res) => {
 // @access  Student
 router.get('/:id/take', auth, async (req, res) => {
   try {
-    const test = await MockTest.findById(req.params.id).select('-questions.correctOption');
+    const test = await prisma.mockTest.findUnique({ where: { id: req.params.id } });
     if (!test) return res.status(404).json({ msg: 'Test not found' });
+    
+    if (Array.isArray(test.questions)) {
+      test.questions = test.questions.map(q => {
+        const newQ = { ...q };
+        delete newQ.correctOption;
+        return newQ;
+      });
+    }
+
     res.json(test);
   } catch (err) {
     console.error(err.message);
@@ -204,7 +231,7 @@ router.get('/:id/take', auth, async (req, res) => {
 router.post('/:id/submit', auth, async (req, res) => {
   try {
     const { answers } = req.body; // Array of { questionId, selectedOption }
-    const test = await MockTest.findById(req.params.id);
+    const test = await prisma.mockTest.findUnique({ where: { id: req.params.id } });
     
     if (!test) return res.status(404).json({ msg: 'Test not found' });
 
@@ -216,64 +243,67 @@ router.post('/:id/submit', auth, async (req, res) => {
     const evaluatedAnswers = [];
     const topicAnalysisMap = {}; // "Subject|Topic" -> { total, correct, incorrect }
 
-    test.questions.forEach(q => {
-      const studentAns = answers.find(a => a.questionId.toString() === q._id.toString());
-      if (!studentAns || !studentAns.selectedOption) {
-        unattemptedCount++;
-        evaluatedAnswers.push({ questionId: q._id, selectedOption: null, isCorrect: false });
-      } else {
-        // Match option letter (e.g. "A) Option" -> "A")
-        const optLetterMatch = studentAns.selectedOption.match(/^([A-D])/i);
-        const optLetter = optLetterMatch ? optLetterMatch[1].toUpperCase() : studentAns.selectedOption;
-        
-        const isCorrect = q.correctOption && q.correctOption === optLetter;
-        if (isCorrect) {
-          correctCount++;
-          score += (q.marks || 4);
+    if (Array.isArray(test.questions)) {
+      test.questions.forEach(q => {
+        const qId = q.id || q._id;
+        const studentAns = answers.find(a => a.questionId.toString() === (qId ? qId.toString() : ''));
+        if (!studentAns || !studentAns.selectedOption) {
+          unattemptedCount++;
+          evaluatedAnswers.push({ questionId: qId, selectedOption: null, isCorrect: false });
         } else {
-          incorrectCount++;
-          score -= (q.negativeMarks || 1);
+          // Match option letter (e.g. "A) Option" -> "A")
+          const optLetterMatch = studentAns.selectedOption.match(/^([A-D])/i);
+          const optLetter = optLetterMatch ? optLetterMatch[1].toUpperCase() : studentAns.selectedOption;
+          
+          const isCorrect = q.correctOption && q.correctOption === optLetter;
+          if (isCorrect) {
+            correctCount++;
+            score += (q.marks || 4);
+          } else {
+            incorrectCount++;
+            score -= (q.negativeMarks || 1);
+          }
+          evaluatedAnswers.push({ questionId: qId, selectedOption: optLetter, isCorrect });
         }
-        evaluatedAnswers.push({ questionId: q._id, selectedOption: optLetter, isCorrect });
-      }
 
-      // Aggregate Topic Analysis
-      const subject = q.subject || 'General';
-      const topic = q.topic || 'Uncategorized';
-      const key = `${subject}|${topic}`;
-      
-      if (!topicAnalysisMap[key]) {
-        topicAnalysisMap[key] = { subject, topic, total: 0, correct: 0, incorrect: 0 };
-      }
-      
-      topicAnalysisMap[key].total++;
-      
-      const topicStudentAns = answers.find(a => a.questionId.toString() === q._id.toString());
-      if (topicStudentAns && topicStudentAns.selectedOption) {
-        const optLetterMatch = topicStudentAns.selectedOption.match(/^([A-D])/i);
-        const optLetter = optLetterMatch ? optLetterMatch[1].toUpperCase() : topicStudentAns.selectedOption;
-        const isCorrect = q.correctOption && q.correctOption === optLetter;
+        // Aggregate Topic Analysis
+        const subject = q.subject || 'General';
+        const topic = q.topic || 'Uncategorized';
+        const key = `${subject}|${topic}`;
         
-        if (isCorrect) topicAnalysisMap[key].correct++;
-        else topicAnalysisMap[key].incorrect++;
-      }
-    });
+        if (!topicAnalysisMap[key]) {
+          topicAnalysisMap[key] = { subject, topic, total: 0, correct: 0, incorrect: 0 };
+        }
+        
+        topicAnalysisMap[key].total++;
+        
+        const topicStudentAns = answers.find(a => a.questionId.toString() === (qId ? qId.toString() : ''));
+        if (topicStudentAns && topicStudentAns.selectedOption) {
+          const optLetterMatch = topicStudentAns.selectedOption.match(/^([A-D])/i);
+          const optLetter = optLetterMatch ? optLetterMatch[1].toUpperCase() : topicStudentAns.selectedOption;
+          const isCorrect = q.correctOption && q.correctOption === optLetter;
+          
+          if (isCorrect) topicAnalysisMap[key].correct++;
+          else topicAnalysisMap[key].incorrect++;
+        }
+      });
+    }
 
     const topicAnalysis = Object.values(topicAnalysisMap);
 
-    const newResult = new MockTestResult({
-      testId: test._id,
-      studentId: req.user.id,
-      score,
-      totalQuestions: test.questions.length,
-      correctAnswers: correctCount,
-      incorrectAnswers: incorrectCount,
-      unattempted: unattemptedCount,
-      answers: evaluatedAnswers,
-      topicAnalysis
+    const newResult = await prisma.mockTestResult.create({
+      data: {
+        testId: test.id || test._id,
+        studentId: req.user.id,
+        score,
+        totalQuestions: Array.isArray(test.questions) ? test.questions.length : 0,
+        correctAnswers: correctCount,
+        incorrectAnswers: incorrectCount,
+        unattempted: unattemptedCount,
+        answers: evaluatedAnswers,
+        topicAnalysis
+      }
     });
-
-    await newResult.save();
 
     res.json(newResult);
   } catch (err) {
@@ -287,7 +317,14 @@ router.post('/:id/submit', auth, async (req, res) => {
 // @access  Teacher/Admin
 router.get('/:id/results', auth, async (req, res) => {
   try {
-    const results = await MockTestResult.find({ testId: req.params.id }).populate('studentId', 'fullName email programInfo');
+    const results = await prisma.mockTestResult.findMany({
+      where: { testId: req.params.id },
+      include: {
+        student: {
+          select: { fullName: true, email: true, programInfo: true }
+        }
+      }
+    });
     res.json(results);
   } catch (err) {
     console.error(err.message);
@@ -300,9 +337,16 @@ router.get('/:id/results', auth, async (req, res) => {
 // @access  Admin
 router.get('/all-results', auth, isAdmin, async (req, res) => {
   try {
-    const results = await MockTestResult.find()
-      .populate('studentId', 'fullName')
-      .populate('testId', 'title targetProgram targetExam');
+    const results = await prisma.mockTestResult.findMany({
+      include: {
+        student: {
+          select: { fullName: true }
+        },
+        test: {
+          select: { title: true, targetProgram: true, targetExam: true }
+        }
+      }
+    });
     res.json(results);
   } catch (err) {
     console.error(err.message);

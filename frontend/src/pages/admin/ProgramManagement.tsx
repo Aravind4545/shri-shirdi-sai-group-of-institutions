@@ -30,8 +30,8 @@ import {
 
 const programs = [
   {
-    id: "lakshya",
-    name: "Lakshya",
+    id: "iit",
+    name: "IIT",
     subtitle: "Engineering Preparation",
     students: 450,
     batches: 9,
@@ -48,8 +48,8 @@ const programs = [
     gradientTo: "to-blue-700",
   },
   {
-    id: "deekshya",
-    name: "Deekshya",
+    id: "neet",
+    name: "NEET",
     subtitle: "Medical Preparation",
     students: 600,
     batches: 12,
@@ -66,8 +66,8 @@ const programs = [
     gradientTo: "to-emerald-700",
   },
   {
-    id: "dafne",
-    name: "DAFNE",
+    id: "upsc",
+    name: "UPSC",
     subtitle: "Civil Services Preparation",
     students: 200,
     batches: 5,
@@ -86,29 +86,29 @@ const programs = [
 ];
 
 const subjectScoresData = [
-  { subject: "Physics",   Lakshya: 78, Deekshya: 82, DAFNE: 55 },
-  { subject: "Chemistry", Lakshya: 74, Deekshya: 85, DAFNE: 58 },
-  { subject: "Math",      Lakshya: 80, Deekshya: 72, DAFNE: 70 },
-  { subject: "Biology",   Lakshya: 60, Deekshya: 88, DAFNE: 52 },
+  { subject: "Physics",   IIT: 78, NEET: 82, UPSC: 55 },
+  { subject: "Chemistry", IIT: 74, NEET: 85, UPSC: 58 },
+  { subject: "Math",      IIT: 80, NEET: 72, UPSC: 70 },
+  { subject: "Biology",   IIT: 60, NEET: 88, UPSC: 52 },
 ];
 
 const studentDistribution = [
-  { name: "Lakshya",  value: 450 },
-  { name: "Deekshya", value: 600 },
-  { name: "DAFNE",    value: 200 },
+  { name: "IIT",  value: 450 },
+  { name: "NEET", value: 600 },
+  { name: "UPSC",    value: 200 },
 ];
 
 const PIE_COLORS = ["#3b82f6", "#10b981", "#f59e0b"];
 
 const batchData = [
-  { id: 1,  name: "JEE-Alpha-2026",  program: "Lakshya",  students: 52, teacher: "Dr. Ramesh Iyer",     schedule: "Mon/Wed/Fri 7:00 AM", status: "Active" },
-  { id: 2,  name: "JEE-Beta-2026",   program: "Lakshya",  students: 50, teacher: "Prof. Sunil Verma",   schedule: "Tue/Thu/Sat 7:00 AM", status: "Active" },
-  { id: 3,  name: "NEET-Core-2026",  program: "Deekshya", students: 55, teacher: "Dr. Anita Sharma",    schedule: "Mon/Wed/Fri 8:00 AM", status: "Active" },
-  { id: 4,  name: "NEET-Plus-2026",  program: "Deekshya", students: 53, teacher: "Dr. Pradeep Rao",     schedule: "Tue/Thu/Sat 8:00 AM", status: "Active" },
-  { id: 5,  name: "NEET-Adv-2026",   program: "Deekshya", students: 48, teacher: "Prof. Meena Das",     schedule: "Mon/Wed/Fri 9:00 AM", status: "Inactive" },
-  { id: 6,  name: "UPSC-Elite-2026", program: "DAFNE",    students: 42, teacher: "Shri. Vijay Nair",    schedule: "Tue/Thu 6:30 AM",    status: "Active" },
-  { id: 7,  name: "UPSC-Std-2026",   program: "DAFNE",    students: 40, teacher: "Dr. Kavita Singh",    schedule: "Mon/Wed 6:30 AM",    status: "Active" },
-  { id: 8,  name: "JEE-Crash-2026",  program: "Lakshya",  students: 38, teacher: "Prof. Arjun Mehta",   schedule: "Daily 6:00 AM",       status: "Inactive" },
+  { id: 1,  name: "JEE-Alpha-2026",  program: "IIT",  students: 52, teacher: "Dr. Ramesh Iyer",     schedule: "Mon/Wed/Fri 7:00 AM", status: "Active" },
+  { id: 2,  name: "JEE-Beta-2026",   program: "IIT",  students: 50, teacher: "Prof. Sunil Verma",   schedule: "Tue/Thu/Sat 7:00 AM", status: "Active" },
+  { id: 3,  name: "NEET-Core-2026",  program: "NEET", students: 55, teacher: "Dr. Anita Sharma",    schedule: "Mon/Wed/Fri 8:00 AM", status: "Active" },
+  { id: 4,  name: "NEET-Plus-2026",  program: "NEET", students: 53, teacher: "Dr. Pradeep Rao",     schedule: "Tue/Thu/Sat 8:00 AM", status: "Active" },
+  { id: 5,  name: "NEET-Adv-2026",   program: "NEET", students: 48, teacher: "Prof. Meena Das",     schedule: "Mon/Wed/Fri 9:00 AM", status: "Inactive" },
+  { id: 6,  name: "UPSC-Elite-2026", program: "UPSC",    students: 42, teacher: "Shri. Vijay Nair",    schedule: "Tue/Thu 6:30 AM",    status: "Active" },
+  { id: 7,  name: "UPSC-Std-2026",   program: "UPSC",    students: 40, teacher: "Dr. Kavita Singh",    schedule: "Mon/Wed 6:30 AM",    status: "Active" },
+  { id: 8,  name: "JEE-Crash-2026",  program: "IIT",  students: 38, teacher: "Prof. Arjun Mehta",   schedule: "Daily 6:00 AM",       status: "Inactive" },
 ];
 
 const quickStats = [
@@ -135,9 +135,9 @@ const StatusBadge = ({ status }: { status: string }) => (
 
 const ProgramBadge = ({ program }: { program: string }) => {
   const map: Record<string, string> = {
-    Lakshya:  "bg-blue-50 text-blue-700",
-    Deekshya: "bg-emerald-50 text-emerald-700",
-    DAFNE:    "bg-amber-50 text-amber-700",
+    IIT:  "bg-blue-50 text-blue-700",
+    NEET: "bg-emerald-50 text-emerald-700",
+    UPSC:    "bg-amber-50 text-amber-700",
   };
   return (
     <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${map[program] ?? ""}`}>
@@ -202,7 +202,7 @@ const ProgramManagement: React.FC = () => {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Program Management</h1>
-          <p className="text-slate-500 mt-1 text-sm">Overview of Lakshya, Deekshya & DAFNE programs</p>
+          <p className="text-slate-500 mt-1 text-sm">Overview of IIT, NEET & UPSC programs</p>
         </div>
         <div className="flex items-center gap-2">
           {programs.map((p) => (
@@ -320,9 +320,9 @@ const ProgramManagement: React.FC = () => {
                 iconType="circle"
                 iconSize={8}
               />
-              <Bar dataKey="Lakshya"  fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Deekshya" fill="#10b981" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="DAFNE"    fill="#f59e0b" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="IIT"  fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="NEET" fill="#10b981" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="UPSC"    fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -400,9 +400,9 @@ const ProgramManagement: React.FC = () => {
                 className="appearance-none pl-3 pr-8 py-2 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-300 cursor-pointer"
               >
                 <option value="All">All Programs</option>
-                <option value="Lakshya">Lakshya</option>
-                <option value="Deekshya">Deekshya</option>
-                <option value="DAFNE">DAFNE</option>
+                <option value="IIT">IIT</option>
+                <option value="NEET">NEET</option>
+                <option value="UPSC">UPSC</option>
               </select>
               <ChevronDown size={13} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
             </div>

@@ -13,7 +13,7 @@ const AdminIntelligence = () => {
 
   const fetchIntelligence = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/intelligence/admin', {
+      const res = await fetch('/api/intelligence/admin', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -52,7 +52,7 @@ const AdminIntelligence = () => {
   const handleDownload = async (format: 'pdf' | 'excel') => {
     setDownloading(true);
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/intelligence/report?type=admin&format=${format}`, {
+      const res = await fetch('/api/intelligence/report?type=admin&format=${format}', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -195,7 +195,7 @@ const AdminIntelligence = () => {
             <div className="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex justify-between items-center">
               <div>
                 <p className="font-bold text-slate-800">High-Risk Student Alerts</p>
-                <p className="text-xs text-slate-500">4 students in Lakshya have critical attendance drops.</p>
+                <p className="text-xs text-slate-500">4 students in IIT have critical attendance drops.</p>
               </div>
               <span className="px-2 py-1 bg-rose-200 text-rose-800 rounded-lg text-xs font-bold">Action Needed</span>
             </div>

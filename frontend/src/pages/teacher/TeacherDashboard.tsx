@@ -13,7 +13,7 @@ const TeacherDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher/dashboard', {
+      const res = await fetch('/api/teacher/dashboard', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setStats(await res.json());

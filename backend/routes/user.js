@@ -1,8 +1,9 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User');
+
 const auth = require('../middleware/auth');
 
 // @route   GET /api/user/profile
@@ -10,7 +11,39 @@ const auth = require('../middleware/auth');
 // @access  Private
 router.get('/profile', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: {
+        id: true,
+        fullName: true,
+        mobileNumber: true,
+        email: true,
+        gender: true,
+        dateOfBirth: true,
+        academicInfo_intermediateYear: true,
+        academicInfo_collegeName: true,
+        academicInfo_state: true,
+        programInfo_program: true,
+        programInfo_stream: true,
+        programInfo_exams: true,
+        role: true,
+        isApproved: true,
+        profileImage: true,
+        faceLoginEnabled: true,
+        assignedProgram: true,
+        designation: true,
+        profilePhoto: true,
+        teacherId: true,
+        employeeId: true,
+        subject: true,
+        status: true,
+        companionSettings_style: true,
+        companionSettings_companionName: true,
+        companionSettings_studentNickname: true,
+        companionSettings_isConfigured: true,
+        createdAt: true
+      }
+    });
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -31,18 +64,24 @@ router.put('/profile', [auth, [
   const { fullName, mobileNumber, password } = req.body;
 
   try {
-    let user = await User.findById(req.user.id);
+    let user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ msg: 'User not found' });
 
-    user.fullName = fullName;
-    user.mobileNumber = mobileNumber;
+    const updateData = {
+      fullName,
+      mobileNumber
+    };
 
     if (password) {
       const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
+      updateData.password = await bcrypt.hash(password, salt);
     }
 
-    await user.save();
+    await prisma.user.update({
+      where: { id: req.user.id },
+      data: updateData
+    });
+    
     res.json({ msg: 'Profile updated successfully' });
   } catch (err) {
     console.error(err.message);

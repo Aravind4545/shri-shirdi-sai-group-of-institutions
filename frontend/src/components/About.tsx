@@ -36,7 +36,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold text-brand-dark mb-4"
           >
-            About Sri Shirdi Sai Institutions
+            About Academic Companion
           </motion.h2>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ const About = () => {
             transition={{ delay: 0.3 }}
             className="text-lg text-gray-600 max-w-3xl mx-auto"
           >
-            At Sri Shirdi Sai Institutions, we believe in nurturing potential and shaping destinies. 
+            At Academic Companion, we believe in nurturing potential and shaping destinies.
             With a strong commitment to holistic education, we provide an ecosystem where students 
             thrive academically and personally, preparing them to be the leaders of tomorrow.
           </motion.p>

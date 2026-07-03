@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const topicAnalyticsSchema = new mongoose.Schema({
   studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  program: { type: String, required: true }, // Lakshya, Deekshya, DAFNE
+  program: { type: String, required: true }, // IIT, NEET, UPSC
   subject: { type: String, required: true },
   chapter: { type: String, required: true },
   topic: { type: String, required: true },

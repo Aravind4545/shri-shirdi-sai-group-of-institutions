@@ -12,7 +12,7 @@ const StudentAnalytics = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/analytics/student/overview', {
+      const res = await fetch('/api/analytics/student/overview', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {

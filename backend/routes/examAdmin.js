@@ -1,10 +1,11 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
-const Question = require('../models/Question');
-const Test = require('../models/Test');
+
+
 
 // ==========================================
 // QUESTION BANK MANAGEMENT
@@ -18,7 +19,10 @@ router.get('/questions', [auth, admin], async (req, res) => {
     if (req.query.subject) filters.subject = req.query.subject;
     if (req.query.difficulty) filters.difficulty = req.query.difficulty;
 
-    const questions = await Question.find(filters).sort({ _id: -1 });
+    const questions = await prisma.question.findMany({
+      where: filters,
+      orderBy: { id: 'desc' }
+    });
     res.json(questions);
   } catch (err) {
     res.status(500).send('Server Error');
@@ -28,8 +32,7 @@ router.get('/questions', [auth, admin], async (req, res) => {
 // Create question
 router.post('/questions', [auth, admin], async (req, res) => {
   try {
-    const question = new Question(req.body);
-    await question.save();
+    const question = await prisma.question.create({ data: req.body });
     res.json(question);
   } catch (err) {
     res.status(500).send('Server Error');
@@ -39,7 +42,7 @@ router.post('/questions', [auth, admin], async (req, res) => {
 // Delete question
 router.delete('/questions/:id', [auth, admin], async (req, res) => {
   try {
-    await Question.findByIdAndDelete(req.params.id);
+    await prisma.question.delete({ where: { id: req.params.id } });
     res.json({ msg: 'Question deleted' });
   } catch (err) {
     res.status(500).send('Server Error');
@@ -53,8 +56,7 @@ router.delete('/questions/:id', [auth, admin], async (req, res) => {
 // Create a new test with questions
 router.post('/tests', [auth, admin], async (req, res) => {
   try {
-    const test = new Test(req.body);
-    await test.save();
+    const test = await prisma.test.create({ data: req.body });
     res.json(test);
   } catch (err) {
     res.status(500).send('Server Error');
@@ -64,15 +66,19 @@ router.post('/tests', [auth, admin], async (req, res) => {
 // Add questions to a test
 router.post('/tests/:id/questions', [auth, admin], async (req, res) => {
   try {
-    const test = await Test.findById(req.params.id);
+    const test = await prisma.test.findUnique({ where: { id: req.params.id } });
     if (!test) return res.status(404).json({ msg: 'Test not found' });
 
     // Expecting array of question IDs
     const { questionIds } = req.body;
-    test.questions.push(...questionIds);
-    await test.save();
+    const updatedQuestions = test.questions ? [...test.questions, ...questionIds] : questionIds;
+
+    const updatedTest = await prisma.test.update({
+      where: { id: req.params.id },
+      data: { questions: updatedQuestions }
+    });
     
-    res.json(test);
+    res.json(updatedTest);
   } catch (err) {
     res.status(500).send('Server Error');
   }

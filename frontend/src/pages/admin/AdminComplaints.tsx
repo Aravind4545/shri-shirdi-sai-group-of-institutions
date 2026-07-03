@@ -27,9 +27,9 @@ const allComplaints: Complaint[] = [
   { id: 'CMP-005', studentName: 'Karan Mehta',      category: 'Academic',        description: 'Study material for NEET mock tests not provided as promised.',    priority: 'High',   status: 'Escalated', filedDate: '2026-05-30' },
   { id: 'CMP-006', studentName: 'Ananya Iyer',      category: 'Infrastructure',  description: 'Library air conditioning not working for over two weeks.',        priority: 'Low',    status: 'Resolved',  filedDate: '2026-05-15' },
   { id: 'CMP-007', studentName: 'Vikram Patel',     category: 'Other',           description: 'WiFi connectivity issues in academic block during peak hours.',   priority: 'Medium', status: 'Resolved',  filedDate: '2026-05-10' },
-  { id: 'CMP-008', studentName: 'Divya Menon',      category: 'Teacher',         description: 'Chemistry teacher using outdated syllabus content for Lakshya.', priority: 'High',   status: 'Escalated', filedDate: '2026-06-05' },
+  { id: 'CMP-008', studentName: 'Divya Menon',      category: 'Teacher',         description: 'Chemistry teacher using outdated syllabus content for IIT.', priority: 'High',   status: 'Escalated', filedDate: '2026-06-05' },
   { id: 'CMP-009', studentName: 'Aditya Singh',     category: 'Hostel',          description: 'Room allocation changed without prior notice or consent.',        priority: 'Low',    status: 'Open',      filedDate: '2026-06-07' },
-  { id: 'CMP-010', studentName: 'Meera Reddy',      category: 'Academic',        description: 'Mock test schedule conflicts with mandatory Deekshya sessions.',  priority: 'Medium', status: 'Resolved',  filedDate: '2026-05-22' },
+  { id: 'CMP-010', studentName: 'Meera Reddy',      category: 'Academic',        description: 'Mock test schedule conflicts with mandatory NEET sessions.',  priority: 'Medium', status: 'Resolved',  filedDate: '2026-05-22' },
 ];
 
 // ─── Sub-components ──────────────────────────────────────────────────────────

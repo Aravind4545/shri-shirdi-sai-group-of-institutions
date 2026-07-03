@@ -5,14 +5,14 @@ const StudyMaterialManagement = () => {
   const [materials, setMaterials] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({
-    title: '', description: '', type: 'PDF', program: 'Lakshya', stream: 'MPC', subject: 'Mathematics', url: '#'
+    title: '', description: '', type: 'PDF', program: 'IIT', stream: 'MPC', subject: 'Mathematics', url: '#'
   });
 
   useEffect(() => { fetchMaterials(); }, []);
 
   const fetchMaterials = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials', {
+      const res = await fetch('/api/admin/materials', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       const data = await res.json();
@@ -29,7 +29,7 @@ const StudyMaterialManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Delete material?')) return;
     try {
-      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials/${id}`, {
+      await fetch('/api/admin/materials/${id}', {
         method: 'DELETE',
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
@@ -40,7 +40,7 @@ const StudyMaterialManagement = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/materials', {
+      await fetch('/api/admin/materials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('adminToken') || '' },
         body: JSON.stringify(formData)
@@ -71,7 +71,7 @@ const StudyMaterialManagement = () => {
             <div className="md:col-span-2"><label className="block text-sm font-bold text-slate-700">Description</label><input type="text" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full border rounded-xl p-2" /></div>
             <div><label className="block text-sm font-bold text-slate-700">Program</label>
               <select value={formData.program} onChange={e => setFormData({...formData, program: e.target.value})} className="w-full border rounded-xl p-2">
-                <option>Lakshya</option><option>Deekshya</option><option>DAFNE</option><option>All</option>
+                <option>IIT</option><option>NEET</option><option>UPSC</option><option>All</option>
               </select>
             </div>
             <div><label className="block text-sm font-bold text-slate-700">Stream</label><input type="text" value={formData.stream} onChange={e => setFormData({...formData, stream: e.target.value})} className="w-full border rounded-xl p-2" /></div>

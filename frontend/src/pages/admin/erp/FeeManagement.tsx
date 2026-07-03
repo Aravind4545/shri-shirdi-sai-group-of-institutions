@@ -8,7 +8,7 @@ const FeeManagement = () => {
   const [filterProgram, setFilterProgram] = useState('All');
   
   const [formData, setFormData] = useState({
-    program: 'Lakshya', baseTuitionFee: 50000, studyMaterialFee: 10000, labResourceFee: 0, examTrainingFee: 5000
+    program: 'IIT', baseTuitionFee: 50000, studyMaterialFee: 10000, labResourceFee: 0, examTrainingFee: 5000
   });
 
   useEffect(() => { 
@@ -20,21 +20,21 @@ const FeeManagement = () => {
 
   const fetchStructures = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/structures');
+      const res = await fetch('/api/finance/structures');
       if (res.ok) setStructures(await res.json());
     } catch (err) { console.error(err); }
   };
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/admin/students', {
+      const res = await fetch('/api/admin/students', {
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
       if (res.ok) {
         const data = await res.json();
         // Decorate with dummy fee data for tracking
         const decorated = data.map((s: any) => {
-          const total = s.programInfo?.program === 'Lakshya' ? 65000 : s.programInfo?.program === 'Deekshya' ? 75000 : 45000;
+          const total = s.programInfo?.program === 'IIT' ? 65000 : s.programInfo?.program === 'NEET' ? 75000 : 45000;
           const paid = Math.floor(Math.random() * total);
           const due = total - paid;
           const status = due === 0 ? 'Paid' : (paid > 0 ? 'Partial' : 'Unpaid');
@@ -49,7 +49,7 @@ const FeeManagement = () => {
     e.preventDefault();
     const totalFee = formData.baseTuitionFee + formData.studyMaterialFee + formData.labResourceFee + formData.examTrainingFee;
     try {
-      await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/finance/structures', {
+      await fetch('/api/finance/structures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('adminToken') || '' },
         body: JSON.stringify({ ...formData, totalFee })
@@ -107,7 +107,7 @@ const FeeManagement = () => {
       {activeTab === 'structure' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in">
           <div className="lg:col-span-1 space-y-4">
-            {['Lakshya', 'Deekshya', 'DAFNE'].map(prog => (
+            {['IIT', 'NEET', 'UPSC'].map(prog => (
               <button
                 key={prog}
                 onClick={() => selectProgram(prog)}
@@ -171,9 +171,9 @@ const FeeManagement = () => {
                   className="appearance-none bg-white border border-slate-200 text-slate-700 py-2.5 pl-4 pr-10 rounded-xl focus:outline-none focus:border-emerald-500 font-bold text-sm cursor-pointer"
                 >
                   <option value="All">All Programs</option>
-                  <option value="Lakshya">Lakshya</option>
-                  <option value="Deekshya">Deekshya</option>
-                  <option value="DAFNE">DAFNE</option>
+                  <option value="IIT">IIT</option>
+                  <option value="NEET">NEET</option>
+                  <option value="UPSC">UPSC</option>
                 </select>
                 <ChevronDown className="w-4 h-4 text-slate-500 absolute right-3 top-3 pointer-events-none" />
               </div>

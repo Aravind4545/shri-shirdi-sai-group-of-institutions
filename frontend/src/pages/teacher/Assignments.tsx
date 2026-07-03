@@ -10,7 +10,7 @@ const Assignments = () => {
     title: '',
     description: '',
     instructions: '',
-    program: 'Lakshya',
+    program: 'IIT',
     stream: 'MPC',
     dueDate: '',
     maxMarks: 100
@@ -23,7 +23,7 @@ const Assignments = () => {
 
   const fetchAssignments = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/teacher', {
+      const res = await fetch('/api/assignments/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -53,7 +53,7 @@ const Assignments = () => {
     });
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/create', {
+      const res = await fetch('/api/assignments/create', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' },
         body: data
@@ -61,7 +61,7 @@ const Assignments = () => {
       if (res.ok) {
         setShowModal(false);
         setFormData({
-          title: '', description: '', instructions: '', program: 'Lakshya', stream: 'MPC', dueDate: '', maxMarks: 100
+          title: '', description: '', instructions: '', program: 'IIT', stream: 'MPC', dueDate: '', maxMarks: 100
         });
         setFiles([]);
         fetchAssignments();
@@ -146,9 +146,9 @@ const Assignments = () => {
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Program *</label>
                   <select value={formData.program} onChange={e => setFormData({...formData, program: e.target.value})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none">
-                    <option>Lakshya</option>
-                    <option>Deekshya</option>
-                    <option>DAFNE</option>
+                    <option>IIT</option>
+                    <option>NEET</option>
+                    <option>UPSC</option>
                   </select>
                 </div>
                 <div>

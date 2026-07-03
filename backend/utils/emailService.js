@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (options) => {
   const mailOptions = {
-    from: 'Sri Shirdi Sai Institutions <noreply@sssi.edu.in>',
+    from: 'Academic Companion Institutions <noreply@sssi.edu.in>',
     to: options.email,
     subject: options.subject,
     text: options.message,

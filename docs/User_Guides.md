@@ -2,7 +2,7 @@
 
 ## 1. Super Admin Guide
 - **Login URL**: `/admin/login`
-- **Permissions**: Full control over Lakshya, Deekshya, and DAFNE programs.
+- **Permissions**: Full control over IIT, NEET, and UPSC programs.
 - **Workflow**:
   1. Approve pending admissions in the **Admissions Management** tab.
   2. Configure tuition pricing in the **Fee Structures** tab.
@@ -11,7 +11,7 @@
 
 ## 2. Teacher Guide
 - **Login URL**: `/teacher/login`
-- **Permissions**: Isolated to their assigned program (e.g., A Deekshya teacher cannot see Lakshya students).
+- **Permissions**: Isolated to their assigned program (e.g., A NEET teacher cannot see IIT students).
 - **Workflow**:
   1. View your specific students under **My Students**.
   2. Identify weak topics affecting your batch under **Result Analytics**.

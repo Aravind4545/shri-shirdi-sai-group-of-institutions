@@ -19,7 +19,7 @@ const DashboardLayout = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/me', {
+      const res = await fetch('/api/auth/me', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -62,26 +62,26 @@ const DashboardLayout = () => {
   // Determine theme colors based on program
   let themeColor = 'bg-brand-blue';
   let textColor = 'text-brand-blue';
-  if (user.programInfo.program === 'Deekshya') { themeColor = 'bg-emerald-600'; textColor = 'text-emerald-600'; }
-  if (user.programInfo.program === 'DAFNE') { themeColor = 'bg-slate-900'; textColor = 'text-slate-900'; }
+  if (user.programInfo.program === 'NEET') { themeColor = 'bg-emerald-600'; textColor = 'text-emerald-600'; }
+  if (user.programInfo.program === 'UPSC') { themeColor = 'bg-slate-900'; textColor = 'text-slate-900'; }
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar - Desktop */}
       <aside className={`hidden md:flex flex-col w-64 bg-white border-r border-gray-200 fixed h-full z-10`}>
         <div className="p-6 border-b border-gray-100 flex items-center justify-center">
-          <h2 className={`text-2xl font-black ${textColor}`}>Sri Shirdi Sai</h2>
+          <h2 className={`text-2xl font-black ${textColor}`}>Academic Companion</h2>
         </div>
         <div className="flex-1 overflow-y-auto py-4">
           <nav className="space-y-1 px-3">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
               
-              if (item.name === 'Mock Tests' && user.programInfo.program === 'Deekshya') {
+              if (item.name === 'Mock Tests' && user.programInfo.program === 'NEET') {
                 return (
                   <a
                     key={item.name}
-                    href="/Deekshya_NEET2026.html"
+                    href="/NEET_NEET2026.html"
                     className={`flex items-center px-4 py-3 rounded-xl transition-colors text-gray-600 hover:bg-gray-50`}
                   >
                     {item.icon}
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
 
       {/* Mobile Header & Sidebar */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-20 flex justify-between items-center p-4">
-        <h2 className={`text-xl font-black ${textColor}`}>Sri Shirdi Sai</h2>
+        <h2 className={`text-xl font-black ${textColor}`}>Academic Companion</h2>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-600">
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -124,11 +124,11 @@ const DashboardLayout = () => {
         <div className="md:hidden fixed inset-0 z-10 bg-white pt-16 flex flex-col">
           <nav className="space-y-1 px-4 py-6 flex-1 overflow-y-auto">
             {menuItems.map((item) => {
-              if (item.name === 'Mock Tests' && user.programInfo.program === 'Deekshya') {
+              if (item.name === 'Mock Tests' && user.programInfo.program === 'NEET') {
                 return (
                   <a
                     key={item.name}
-                    href="/Deekshya_NEET2026.html"
+                    href="/NEET_NEET2026.html"
                     onClick={() => setSidebarOpen(false)}
                     className={`flex items-center px-4 py-4 rounded-xl transition-colors text-gray-600`}
                   >

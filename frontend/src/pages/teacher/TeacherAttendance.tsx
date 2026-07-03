@@ -21,7 +21,7 @@ const TeacherAttendance = () => {
     
     try {
       // Fetch assigned students
-      const stdRes = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher/students', {
+      const stdRes = await fetch('/api/teacher/students', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       const stdData = await stdRes.json();
@@ -37,7 +37,7 @@ const TeacherAttendance = () => {
       }
 
       // Fetch attendance for the specific date
-      const attRes = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher/attendance?date=${selectedDate}`, {
+      const attRes = await fetch('/api/teacher/attendance?date=${selectedDate}', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       const attData = await attRes.json();
@@ -86,7 +86,7 @@ const TeacherAttendance = () => {
     }
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teacher/attendance', {
+      const res = await fetch('/api/teacher/attendance', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

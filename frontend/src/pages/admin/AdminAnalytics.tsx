@@ -12,7 +12,7 @@ const AdminAnalytics = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/analytics/admin/institution', {
+      const res = await fetch('/api/analytics/admin/institution', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       let json = null;
@@ -26,14 +26,14 @@ const AdminAnalytics = () => {
         overallPassPercentage: 88,
         activePrograms: 3,
         programPerformance: [
-          { _id: 'Lakshya', avgAccuracy: 82 },
-          { _id: 'Deekshya', avgAccuracy: 90 },
-          { _id: 'DAFNE', avgAccuracy: 78 }
+          { _id: 'IIT', avgAccuracy: 82 },
+          { _id: 'NEET', avgAccuracy: 90 },
+          { _id: 'UPSC', avgAccuracy: 78 }
         ],
         studentDistribution: [
-          { name: 'Lakshya', value: 450 },
-          { name: 'Deekshya', value: 600 },
-          { name: 'DAFNE', value: 200 }
+          { name: 'IIT', value: 450 },
+          { name: 'NEET', value: 600 },
+          { name: 'UPSC', value: 200 }
         ],
         subjectPerformance: [
           { subject: 'Physics', score: 85 },
@@ -57,14 +57,14 @@ const AdminAnalytics = () => {
         overallPassPercentage: 88,
         activePrograms: 3,
         programPerformance: [
-          { _id: 'Lakshya', avgAccuracy: 82 },
-          { _id: 'Deekshya', avgAccuracy: 90 },
-          { _id: 'DAFNE', avgAccuracy: 78 }
+          { _id: 'IIT', avgAccuracy: 82 },
+          { _id: 'NEET', avgAccuracy: 90 },
+          { _id: 'UPSC', avgAccuracy: 78 }
         ],
         studentDistribution: [
-          { name: 'Lakshya', value: 450 },
-          { name: 'Deekshya', value: 600 },
-          { name: 'DAFNE', value: 200 }
+          { name: 'IIT', value: 450 },
+          { name: 'NEET', value: 600 },
+          { name: 'UPSC', value: 200 }
         ],
         subjectPerformance: [
           { subject: 'Physics', score: 85 },

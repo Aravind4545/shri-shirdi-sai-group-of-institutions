@@ -11,7 +11,7 @@ const AdminLeaderboard = () => {
 
   const fetchGlobalLeaderboard = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/leaderboard/global', {
+      const res = await fetch('/api/leaderboard/global', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setGlobalRanks(await res.json());
@@ -34,7 +34,7 @@ const AdminLeaderboard = () => {
             Global Institution Leaderboard
           </h1>
           <p className="text-blue-100 max-w-2xl">
-            Complete ranking of all students across Lakshya, Deekshya, and DAFNE programs.
+            Complete ranking of all students across IIT, NEET, and UPSC programs.
           </p>
         </div>
       </div>

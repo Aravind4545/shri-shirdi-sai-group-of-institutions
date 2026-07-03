@@ -15,7 +15,7 @@ const ExamInterface = () => {
     // Start Exam API call
     const startExam = async () => {
       try {
-        const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/exam/start/${testId}`, {
+        const res = await fetch('/api/exam/start/${testId}', {
           method: 'POST',
           headers: { 'x-auth-token': localStorage.getItem('token') || '' }
         });
@@ -51,7 +51,7 @@ const ExamInterface = () => {
   const logViolation = async (type: string, details: string) => {
     if (!session) return;
     try {
-      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/exam/violation/${session._id}`, {
+      await fetch('/api/exam/violation/${session._id}', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
         body: JSON.stringify({ type, details })
@@ -62,7 +62,7 @@ const ExamInterface = () => {
   const saveProgress = async (qId: string, options: string[], status: string) => {
     if (!session) return;
     try {
-      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/exam/progress/${session._id}`, {
+      await fetch('/api/exam/progress/${session._id}', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
         body: JSON.stringify({ questionId: qId, selectedOptions: options, status, timeSpentSeconds: 10 }) // mock time spent
@@ -81,7 +81,7 @@ const ExamInterface = () => {
   const submitExam = async () => {
     setSubmitting(true);
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/exam/submit/${session._id}`, {
+      const res = await fetch('/api/exam/submit/${session._id}', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });

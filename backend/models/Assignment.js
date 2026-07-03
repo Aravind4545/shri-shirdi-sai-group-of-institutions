@@ -14,7 +14,7 @@ const assignmentSchema = new mongoose.Schema({
   program: {
     type: String,
     required: true,
-    enum: ['Lakshya', 'Deekshya', 'DAFNE', 'All']
+    enum: ['IIT', 'NEET', 'UPSC', 'All']
   },
   stream: {
     type: String,

@@ -1,16 +1,17 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const upload = require('../middleware/upload');
-const Assignment = require('../models/Assignment');
-const AssignmentSubmission = require('../models/AssignmentSubmission');
-const User = require('../models/User');
+
+
+
 
 // @route   POST /api/assignments/create
 // @desc    Create an assignment (Teacher/Admin only)
 router.post('/create', auth, upload.array('files', 5), async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!['Teacher', 'Admin', 'SuperAdmin'].includes(user.role)) {
       return res.status(403).json({ msg: 'Unauthorized to create assignments' });
     }
@@ -23,19 +24,20 @@ router.post('/create', auth, upload.array('files', 5), async (req, res) => {
       fileType: file.mimetype
     })) : [];
 
-    const assignment = new Assignment({
-      title,
-      description,
-      instructions,
-      program: program || user.programInfo.program,
-      stream: stream || user.programInfo.stream,
-      dueDate,
-      maxMarks: maxMarks || 100,
-      teacherId: req.user.id,
-      attachments
+    const assignment = await prisma.assignment.create({
+      data: {
+        title,
+        description,
+        instructions,
+        program: program || user.programInfo.program,
+        stream: stream || user.programInfo.stream,
+        dueDate,
+        maxMarks: maxMarks || 100,
+        teacherId: req.user.id,
+        attachments
+      }
     });
 
-    await assignment.save();
     res.json(assignment);
   } catch (err) {
     console.error(err.message);
@@ -47,14 +49,17 @@ router.post('/create', auth, upload.array('files', 5), async (req, res) => {
 // @desc    Get assignments created by the teacher
 router.get('/teacher', auth, async (req, res) => {
   try {
-    const assignments = await Assignment.find({ teacherId: req.user.id }).sort({ createdAt: -1 });
+    const assignments = await prisma.assignment.findMany({
+      where: { teacherId: req.user.id },
+      orderBy: { createdAt: 'desc' }
+    });
     
     // Get stats for each assignment
     const assignmentsWithStats = await Promise.all(assignments.map(async (assignment) => {
-      const submissions = await AssignmentSubmission.find({ assignmentId: assignment._id });
+      const submissions = await prisma.assignmentSubmission.findMany({ where: { assignmentId: assignment.id } });
       const pendingEvals = submissions.filter(s => s.status === 'Submitted' || s.status === 'Late').length;
       return {
-        ...assignment.toObject(),
+        ...assignment,
         totalSubmissions: submissions.length,
         pendingEvals
       };
@@ -71,17 +76,21 @@ router.get('/teacher', auth, async (req, res) => {
 // @desc    Get assignments for a student's program
 router.get('/student', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
-    const assignments = await Assignment.find({ 
-      program: user.programInfo.program,
-      status: 'Active' 
-    }).populate('teacherId', 'fullName').sort({ dueDate: 1 });
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const assignments = await prisma.assignment.findMany({ 
+      where: { 
+        program: user.programInfo.program,
+        status: 'Active' 
+      },
+      include: { teacherId: { select: { fullName: true } } },
+      orderBy: { dueDate: 'asc' }
+    });
 
-    const submissions = await AssignmentSubmission.find({ studentId: req.user.id });
+    const submissions = await prisma.assignmentSubmission.findMany({ where: { studentId: req.user.id } });
 
     // Map submissions to assignments
     const assignmentsWithStatus = assignments.map(assignment => {
-      const submission = submissions.find(s => s.assignmentId.toString() === assignment._id.toString());
+      const submission = submissions.find(s => s.assignmentId.toString() === assignment.id.toString());
       
       let status = 'Pending';
       if (submission) {
@@ -91,7 +100,7 @@ router.get('/student', auth, async (req, res) => {
       }
 
       return {
-        ...assignment.toObject(),
+        ...assignment,
         submissionStatus: status,
         submissionDetails: submission || null
       };
@@ -108,7 +117,7 @@ router.get('/student', auth, async (req, res) => {
 // @desc    Submit an assignment (Student)
 router.post('/:id/submit', auth, upload.array('files', 5), async (req, res) => {
   try {
-    const assignment = await Assignment.findById(req.params.id);
+    const assignment = await prisma.assignment.findUnique({ where: { id: req.params.id } });
     if (!assignment) {
       return res.status(404).json({ msg: 'Assignment not found' });
     }
@@ -121,26 +130,31 @@ router.post('/:id/submit', auth, upload.array('files', 5), async (req, res) => {
       fileType: file.mimetype
     })) : [];
 
-    let submission = await AssignmentSubmission.findOne({ 
+    let submission = await prisma.assignmentSubmission.findFirst({ where: { 
       assignmentId: req.params.id, 
       studentId: req.user.id 
-    });
+    } });
 
     if (submission) {
       // Update existing submission
-      submission.files = files.length > 0 ? files : submission.files;
-      submission.status = isLate ? 'Late' : 'Submitted';
-      submission.submissionDate = Date.now();
-      await submission.save();
+      submission = await prisma.assignmentSubmission.update({
+        where: { id: submission.id },
+        data: {
+          files: files.length > 0 ? files : submission.files,
+          status: isLate ? 'Late' : 'Submitted',
+          submissionDate: new Date()
+        }
+      });
     } else {
       // Create new submission
-      submission = new AssignmentSubmission({
-        assignmentId: req.params.id,
-        studentId: req.user.id,
-        status: isLate ? 'Late' : 'Submitted',
-        files
+      submission = await prisma.assignmentSubmission.create({
+        data: {
+          assignmentId: req.params.id,
+          studentId: req.user.id,
+          status: isLate ? 'Late' : 'Submitted',
+          files
+        }
       });
-      await submission.save();
     }
 
     res.json(submission);
@@ -154,14 +168,20 @@ router.post('/:id/submit', auth, upload.array('files', 5), async (req, res) => {
 // @desc    Get all submissions for an assignment (Teacher)
 router.get('/:id/submissions', auth, async (req, res) => {
   try {
-    const assignment = await Assignment.findById(req.params.id);
+    const assignment = await prisma.assignment.findUnique({ where: { id: req.params.id } });
     if (assignment.teacherId.toString() !== req.user.id) {
       return res.status(403).json({ msg: 'Not authorized to view these submissions' });
     }
 
-    const submissions = await AssignmentSubmission.find({ assignmentId: req.params.id })
-      .populate('studentId', 'fullName email mobileNumber programInfo')
-      .sort({ submissionDate: -1 });
+    const submissions = await prisma.assignmentSubmission.findMany({ 
+      where: { assignmentId: req.params.id },
+      include: {
+        studentId: {
+          select: { fullName: true, email: true, mobileNumber: true, programInfo: true }
+        }
+      },
+      orderBy: { submissionDate: 'desc' }
+    });
 
     res.json(submissions);
   } catch (err) {
@@ -176,15 +196,19 @@ router.post('/:id/grade/:submissionId', auth, async (req, res) => {
   try {
     const { marks, feedback } = req.body;
     
-    const submission = await AssignmentSubmission.findById(req.params.submissionId);
+    let submission = await prisma.assignmentSubmission.findUnique({ where: { id: req.params.submissionId } });
     if (!submission) {
       return res.status(404).json({ msg: 'Submission not found' });
     }
 
-    submission.marksAwarded = marks;
-    submission.feedback = feedback;
-    submission.status = 'Graded';
-    await submission.save();
+    submission = await prisma.assignmentSubmission.update({
+      where: { id: submission.id },
+      data: {
+        marksAwarded: marks,
+        feedback: feedback,
+        status: 'Graded'
+      }
+    });
 
     res.json(submission);
   } catch (err) {

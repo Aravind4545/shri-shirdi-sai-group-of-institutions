@@ -5,7 +5,7 @@ import { ArrowLeft, CheckCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 
-const DeekshyaRegisterPage = () => {
+const IITRegisterPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
@@ -27,7 +27,7 @@ const DeekshyaRegisterPage = () => {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const availableExams = ['NEET', 'AP EAMCET', 'TS EAMCET'];
+  const availableExams = ['JEE Main', 'JEE Advanced', 'AP EAMCET', 'TS EAMCET'];
 
   const handleExamToggle = (exam: string) => {
     setFormData(prev => {
@@ -78,7 +78,7 @@ const DeekshyaRegisterPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -90,8 +90,8 @@ const DeekshyaRegisterPage = () => {
           dateOfBirth: formData.dateOfBirth,
           academicInfo: formData.academicInfo,
           programInfo: {
-            program: 'Deekshya',
-            stream: 'BiPC',
+            program: 'IIT',
+            stream: 'MPC',
             exams: formData.exams
           }
         })
@@ -120,16 +120,16 @@ const DeekshyaRegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-emerald-50/50">
+    <div className="min-h-screen flex flex-col bg-brand-light">
       <Navbar />
       <main className="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 flex justify-center">
-        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl w-full max-w-4xl border border-emerald-100">
+        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl w-full max-w-4xl border border-gray-100">
           <div className="mb-8">
-            <Link to="/deekshya" className="inline-flex items-center text-emerald-600 hover:text-emerald-800 transition-colors font-medium mb-6">
-              <ArrowLeft className="mr-2 w-5 h-5" /> Back to Deekshya Program
+            <Link to="/iit" className="inline-flex items-center text-brand-blue hover:text-blue-800 transition-colors font-medium mb-6">
+              <ArrowLeft className="mr-2 w-5 h-5" /> Back to IIT Program
             </Link>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Student Registration</h1>
-            <p className="text-gray-500">Program: <span className="font-bold text-emerald-600">Deekshya</span> | Stream: <span className="font-bold text-emerald-600">BiPC</span></p>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-brand-dark mb-2">Student Registration</h1>
+            <p className="text-gray-500">Program: <span className="font-bold text-brand-gold">IIT</span> | Stream: <span className="font-bold text-brand-gold">MPC</span></p>
           </div>
 
           {error && (
@@ -151,24 +151,24 @@ const DeekshyaRegisterPage = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information */}
             <div>
-              <h3 className="text-xl font-bold text-emerald-800 border-b border-emerald-100 pb-2 mb-6">Personal Information</h3>
+              <h3 className="text-xl font-bold text-brand-blue border-b border-gray-100 pb-2 mb-6">Personal Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
-                  <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" />
+                  <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Mobile Number *</label>
-                  <input required type="tel" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" />
+                  <input required type="tel" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" />
+                  <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Gender *</label>
-                    <select required name="gender" value={formData.gender} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                    <select required name="gender" value={formData.gender} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all">
                       <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -177,27 +177,27 @@ const DeekshyaRegisterPage = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Date of Birth *</label>
-                    <input required type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" />
+                    <input required type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Password *</label>
-                  <input required type="password" name="password" value={formData.password} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" />
+                  <input required type="password" name="password" value={formData.password} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Confirm Password *</label>
-                  <input required type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" />
+                  <input required type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
                 </div>
               </div>
             </div>
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-xl font-bold text-emerald-800 border-b border-emerald-100 pb-2 mb-6">Academic Information</h3>
+              <h3 className="text-xl font-bold text-brand-blue border-b border-gray-100 pb-2 mb-6">Academic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Intermediate Year *</label>
-                  <select required name="academic_intermediateYear" value={formData.academicInfo.intermediateYear} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                  <select required name="academic_intermediateYear" value={formData.academicInfo.intermediateYear} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all">
                     <option value="">Select</option>
                     <option value="1st Year">1st Year (Class 11)</option>
                     <option value="2nd Year">2nd Year (Class 12)</option>
@@ -205,44 +205,44 @@ const DeekshyaRegisterPage = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">College Name *</label>
-                  <input required type="text" name="academic_collegeName" value={formData.academicInfo.collegeName} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" />
+                  <input required type="text" name="academic_collegeName" value={formData.academicInfo.collegeName} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">State *</label>
-                  <input required type="text" name="academic_state" value={formData.academicInfo.state} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition-all" />
+                  <input required type="text" name="academic_state" value={formData.academicInfo.state} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-blue outline-none transition-all" />
                 </div>
               </div>
             </div>
 
             {/* Exam Selection */}
             <div>
-              <h3 className="text-xl font-bold text-emerald-800 border-b border-emerald-100 pb-2 mb-6">Exam Selection</h3>
+              <h3 className="text-xl font-bold text-brand-blue border-b border-gray-100 pb-2 mb-6">Exam Selection</h3>
               <p className="text-sm text-gray-500 mb-4">Select the examinations you are targeting (Multiple Allowed):</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {availableExams.map(exam => {
                   const isSelected = formData.exams.includes(exam);
                   return (
                     <div 
                       key={exam}
                       onClick={() => handleExamToggle(exam)}
-                      className={`cursor-pointer border-2 rounded-xl p-4 flex items-center transition-all ${isSelected ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200 hover:border-emerald-400 hover:bg-emerald-50/30'}`}
+                      className={`cursor-pointer border-2 rounded-xl p-4 flex items-center transition-all ${isSelected ? 'border-brand-gold bg-yellow-50' : 'border-gray-200 hover:border-brand-blue hover:bg-gray-50'}`}
                     >
-                      <div className={`w-5 h-5 rounded-full border-2 mr-3 flex items-center justify-center ${isSelected ? 'border-emerald-500 bg-emerald-500' : 'border-gray-300'}`}>
+                      <div className={`w-5 h-5 rounded-full border-2 mr-3 flex items-center justify-center ${isSelected ? 'border-brand-gold bg-brand-gold' : 'border-gray-300'}`}>
                         {isSelected && <CheckCircle className="w-3 h-3 text-white" />}
                       </div>
-                      <span className={`font-semibold ${isSelected ? 'text-gray-900' : 'text-gray-600'}`}>{exam}</span>
+                      <span className={`font-semibold ${isSelected ? 'text-brand-dark' : 'text-gray-600'}`}>{exam}</span>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-emerald-100 flex flex-col md:flex-row items-center justify-between">
-              <p className="text-gray-500 text-sm mb-4 md:mb-0">Already have an account? <Link to="/deekshya/login" className="text-emerald-600 font-bold hover:underline">Log in</Link></p>
+            <div className="pt-6 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between">
+              <p className="text-gray-500 text-sm mb-4 md:mb-0">Already have an account? <Link to="/iit/login" className="text-brand-blue font-bold hover:underline">Log in</Link></p>
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full md:w-auto px-10 py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-colors shadow-lg disabled:opacity-50"
+                className="w-full md:w-auto px-10 py-4 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-800 transition-colors shadow-lg disabled:opacity-50"
               >
                 {loading ? 'Registering...' : 'Submit Registration'}
               </button>
@@ -255,7 +255,7 @@ const DeekshyaRegisterPage = () => {
 );
 };
 
-export default DeekshyaRegisterPage;
+export default IITRegisterPage;
 
 
 

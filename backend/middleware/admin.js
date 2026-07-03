@@ -1,8 +1,9 @@
-const User = require('../models/User');
+const prisma = require('../prisma/client');
+
 
 module.exports = async function(req, res, next) {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (user && user.role === 'Admin') {
       next();
     } else {

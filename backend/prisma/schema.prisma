@@ -1,0 +1,505 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AcademicHealth {
+  id                            String    @id @default(uuid()) @map("_id")
+  studentId                     String?
+  healthScore                   Float?
+  components_attendanceScore    Float?
+  components_testScore          Float?
+  components_assignmentScore    Float?
+  components_studyActivityScore Float?
+  status                        String?
+  calculatedAt                  DateTime?
+}
+
+model AcademicReport {
+  id          String    @id @default(uuid()) @map("_id")
+  generatedBy String?
+  reportType  String?
+  format      String?
+  fileUrl     String?
+  createdAt   DateTime?
+}
+
+model Achievement {
+  id          String    @id @default(uuid()) @map("_id")
+  studentId   String?
+  badgeName   String
+  description String?
+  icon        String?
+  earnedAt    DateTime?
+  category    String?
+}
+
+model Admission {
+  id                            String    @id @default(uuid()) @map("_id")
+  studentId                     String?
+  status                        String?
+  applicationDate               DateTime?
+  assignedStudentId             String?
+  fullName                      String
+  mobile                        String
+  email                         String
+  program                       String
+  stream                        String
+  examTargets                   String[]
+  parentName                    String
+  parentMobile                  String
+  address                       String
+  aadhaarNumber                 String
+  previousSchool                String?
+  previousMarks                 String?
+  documents_passportPhoto       String?
+  documents_aadhaarProof        String?
+  documents_marksMemo           String?
+  documents_transferCertificate String?
+  reviewerNotes                 String?
+}
+
+model AIConversation {
+  id           String    @id @default(uuid()) @map("_id")
+  studentId    String?
+  program      String?
+  messages     String[]
+  attachments  String[]
+  topicContext String?
+  updatedAt    DateTime?
+}
+
+model AIRecommendation {
+  id              String    @id @default(uuid()) @map("_id")
+  studentId       String?
+  weakTopics      String[]
+  strongTopics    String[]
+  recommendations String[]
+  learningPath    String?
+  generatedAt     DateTime?
+}
+
+model Announcement {
+  id            String    @id @default(uuid()) @map("_id")
+  title         String
+  content       String
+  targetProgram String?
+  priority      String?
+  date          DateTime?
+}
+
+model Assignment {
+  id           String    @id @default(uuid()) @map("_id")
+  title        String
+  description  String?
+  instructions String?
+  program      String
+  stream       String?
+  subject      String?
+  chapter      String?
+  topic        String?
+  dueDate      DateTime
+  maxMarks     Float
+  teacherId    String?
+  attachments  String[]
+  status       String?
+  createdAt    DateTime?
+  updatedAt    DateTime?
+}
+
+model AssignmentSubmission {
+  id             String    @id @default(uuid()) @map("_id")
+  assignmentId   String?
+  studentId      String?
+  submissionDate DateTime?
+  status         String?
+  files          String[]
+  marksAwarded   Float?
+  feedback       String?
+  createdAt      DateTime?
+  updatedAt      DateTime?
+}
+
+model Attendance {
+  id        String   @id @default(uuid()) @map("_id")
+  studentId String?
+  date      DateTime
+  status    String
+}
+
+model BehaviorFeedback {
+  id        String    @id @default(uuid()) @map("_id")
+  request   String?
+  teacher   String?
+  student   String?
+  rating    String
+  comments  String
+  createdAt DateTime?
+}
+
+model BehaviorRequest {
+  id        String    @id @default(uuid()) @map("_id")
+  period    String
+  status    String?
+  createdAt DateTime?
+}
+
+model CMSContent {
+  id        String    @id @default(uuid()) @map("_id")
+  page      String
+  section   String
+  content   Json
+  updatedAt DateTime?
+}
+
+model Complaint {
+  id          String    @id @default(uuid()) @map("_id")
+  user        String?
+  type        String
+  title       String
+  description String
+  status      String?
+  createdAt   DateTime?
+}
+
+model CurrentAffairs {
+  id          String    @id @default(uuid()) @map("_id")
+  title       String
+  content     String
+  category    String?
+  date        DateTime?
+  tags        String[]
+  isImportant Boolean?
+}
+
+model ExamSession {
+  id         String    @id @default(uuid()) @map("_id")
+  studentId  String?
+  testId     String?
+  startTime  DateTime?
+  endTime    DateTime?
+  status     String?
+  responses  String[]
+  violations String[]
+}
+
+model FaceAuditLog {
+  id             String    @id @default(uuid()) @map("_id")
+  userId         String?
+  emailAttempted String
+  ipAddress      String?
+  matchScore     Float
+  livenessScore  Float
+  status         String
+  attemptTime    DateTime?
+}
+
+model FeeStructure {
+  id                  String    @id @default(uuid()) @map("_id")
+  program             String
+  baseTuitionFee      Float
+  studyMaterialFee    Float?
+  labResourceFee      Float?
+  examTrainingFee     Float?
+  totalFee            Float
+  installmentsAllowed Boolean?
+  updatedAt           DateTime?
+}
+
+model KnowledgeBase {
+  id              String    @id @default(uuid()) @map("_id")
+  title           String
+  content         String?
+  documentUrl     String?
+  program         String?
+  subject         String?
+  tags            String[]
+  vectorEmbedding String[]
+  uploadedBy      String?
+  uploadedAt      DateTime?
+}
+
+model Material {
+  id          String    @id @default(uuid()) @map("_id")
+  title       String
+  description String?
+  type        String
+  program     String
+  stream      String
+  subject     String
+  url         String
+  uploadedAt  DateTime?
+}
+
+model Message {
+  id        String    @id @default(uuid()) @map("_id")
+  sender    String?
+  receiver  String?
+  content   String
+  read      Boolean?
+  timestamp DateTime?
+}
+
+model MockInterview {
+  id                          String    @id @default(uuid()) @map("_id")
+  studentId                   String?
+  interviewType               String?
+  durationMinutes             Float?
+  transcript                  String[]
+  feedback_communicationScore Float?
+  feedback_confidenceScore    Float?
+  feedback_knowledgeScore     Float?
+  feedback_overallRemarks     String?
+  date                        DateTime?
+}
+
+model MockTest {
+  id              String    @id @default(uuid()) @map("_id")
+  title           String
+  teacherId       String?
+  targetProgram   String
+  targetExam      String
+  totalMarks      Float
+  durationMinutes Float
+  questions       String[]
+  status          String?
+  createdAt       DateTime?
+}
+
+model MockTestResult {
+  id               String    @id @default(uuid()) @map("_id")
+  testId           String?
+  studentId        String?
+  score            Float
+  totalQuestions   Float
+  correctAnswers   Float
+  incorrectAnswers Float
+  unattempted      Float
+  answers          String[]
+  topicAnalysis    String[]
+  submittedAt      DateTime?
+}
+
+model Payment {
+  id                 String    @id @default(uuid()) @map("_id")
+  studentId          String?
+  admissionId        String?
+  totalAmountDue     Float
+  totalAmountPaid    Float?
+  scholarshipApplied String?
+  paymentPlan        String?
+  installments       String[]
+  transactions       String[]
+  createdAt          DateTime?
+}
+
+model PerformanceInsight {
+  id                       String    @id @default(uuid()) @map("_id")
+  studentId                String?
+  performanceScore         Float?
+  growthScore              Float?
+  predictedRank            Float?
+  predictedPercentile      Float?
+  successProbability       Float?
+  readinessLevel           String?
+  weeklyGrowth             Float?
+  monthlyGrowth            Float?
+  learningConsistencyScore Float?
+  improvementScore         Float?
+  aiInsights               String[]
+  insightNotes             String?
+  calculatedAt             DateTime?
+}
+
+model Question {
+  id             String   @id @default(uuid()) @map("_id")
+  text           String
+  image          String?
+  type           String?
+  program        String
+  stream         String
+  subject        String
+  chapter        String?
+  topic          String?
+  difficulty     String?
+  marks          Float?
+  negativeMarks  Float?
+  options        String[]
+  correctAnswers String[]
+  explanation    String?
+}
+
+model RankHistory {
+  id            String    @id @default(uuid()) @map("_id")
+  studentId     String?
+  timestamp     DateTime?
+  globalRank    Float?
+  programRank   Float?
+  overallScore  Float?
+  weeklyGrowth  Float?
+  monthlyGrowth Float?
+}
+
+model Ranking {
+  id              String    @id @default(uuid()) @map("_id")
+  studentId       String?
+  program         String?
+  globalRank      Float?
+  programRank     Float?
+  overallScore    Float?
+  attendanceScore Float?
+  assignmentScore Float?
+  testScore       Float?
+  healthScore     Float?
+  subjectScores   String[]
+  lastUpdated     DateTime?
+}
+
+model RiskPrediction {
+  id                      String    @id @default(uuid()) @map("_id")
+  studentId               String?
+  program                 String?
+  riskLevel               String?
+  factors                 String[]
+  interventionSuggestions String[]
+  detectedAt              DateTime?
+  resolved                Boolean?
+}
+
+model Scholarship {
+  id                 String    @id @default(uuid()) @map("_id")
+  studentId          String?
+  type               String
+  discountPercentage Float?
+  discountAmount     Float?
+  reason             String?
+  approvedBy         String?
+  status             String?
+  createdAt          DateTime?
+}
+
+model StudyPlan {
+  id          String    @id @default(uuid()) @map("_id")
+  studentId   String?
+  planType    String?
+  targetExams String[]
+  tasks       String[]
+  generatedAt DateTime?
+}
+
+model SubjectAnalytics {
+  id               String    @id @default(uuid()) @map("_id")
+  studentId        String?
+  program          String
+  subject          String
+  totalScore       Float?
+  averageAccuracy  Float?
+  rank             Float?
+  improvementTrend String[]
+  lastUpdated      DateTime?
+}
+
+model TeacherAttendance {
+  id        String   @id @default(uuid()) @map("_id")
+  teacherId String?
+  date      DateTime
+  status    String?
+}
+
+model TeacherFeedback {
+  id             String    @id @default(uuid()) @map("_id")
+  student        String?
+  teacher        String?
+  learningRating Float
+  classesRating  Float
+  doubtsRating   Float
+  comments       String?
+  createdAt      DateTime?
+}
+
+model Test {
+  id              String    @id @default(uuid()) @map("_id")
+  title           String
+  program         String
+  stream          String
+  subject         String
+  totalMarks      Float
+  durationMinutes Float
+  questions       String[]
+  description     String?
+  negativeMarking Boolean?
+  startDate       DateTime?
+  endDate         DateTime?
+  createdAt       DateTime?
+}
+
+model TestResult {
+  id                 String    @id @default(uuid()) @map("_id")
+  studentId          String?
+  testId             String?
+  score              Float
+  correctAnswers     Float?
+  wrongAnswers       Float?
+  unattempted        Float?
+  accuracyPercentage Float?
+  percentile         Float?
+  rank               Float?
+  weakAreas          String[]
+  strongAreas        String[]
+  aiRecommendations  String[]
+  responses          String[]
+  submittedAt        DateTime?
+}
+
+model TopicAnalytics {
+  id               String    @id @default(uuid()) @map("_id")
+  studentId        String?
+  program          String
+  subject          String
+  chapter          String
+  topic            String
+  totalAttempts    Float?
+  correctAttempts  Float?
+  wrongAttempts    Float?
+  accuracy         Float?
+  averageTimeTaken Float?
+  status           String?
+  lastPracticed    DateTime?
+}
+
+model User {
+  id                                String    @id @default(uuid()) @map("_id")
+  fullName                          String
+  mobileNumber                      String
+  email                             String
+  password                          String
+  gender                            String?
+  dateOfBirth                       DateTime?
+  academicInfo_intermediateYear     String?
+  academicInfo_collegeName          String?
+  academicInfo_state                String?
+  programInfo_program               String?
+  programInfo_stream                String?
+  programInfo_exams                 String[]
+  role                              String?
+  isApproved                        Boolean?
+  faceEmbedding                     String[]
+  profileImage                      String?
+  faceLoginEnabled                  Boolean?
+  assignedProgram                   String?
+  designation                       String?
+  profilePhoto                      String?
+  teacherId                         String?
+  employeeId                        String?
+  subject                           String?
+  status                            String?
+  companionSettings_style           String?
+  companionSettings_companionName   String?
+  companionSettings_studentNickname String?
+  companionSettings_isConfigured    Boolean?
+  createdAt                         DateTime?
+}

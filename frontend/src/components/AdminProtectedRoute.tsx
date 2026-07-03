@@ -11,7 +11,7 @@ const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/me', {
+    fetch('/api/auth/me', {
       headers: { 'x-auth-token': token }
     })
       .then(res => res.json())

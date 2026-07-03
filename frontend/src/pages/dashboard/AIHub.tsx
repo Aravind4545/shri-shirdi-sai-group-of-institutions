@@ -17,7 +17,7 @@ const AIHub = () => {
 
   const fetchRecommendations = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/recommendations', {
+      const res = await fetch('/api/ai/recommendations', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setRecommendations(await res.json());
@@ -26,7 +26,7 @@ const AIHub = () => {
 
   const fetchPrediction = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/predict-rank', {
+      const res = await fetch('/api/ai/predict-rank', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setPrediction(await res.json());
@@ -35,7 +35,7 @@ const AIHub = () => {
 
   const fetchPlan = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/my-plan', {
+      const res = await fetch('/api/ai/my-plan', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setStudyPlan(await res.json());
@@ -46,10 +46,10 @@ const AIHub = () => {
     setLoadingPlan(true);
     try {
       // Simulate program fetching and generating plan
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/ai/generate-plan', {
+      const res = await fetch('/api/ai/generate-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
-        body: JSON.stringify({ program: 'Lakshya', planType: 'Daily' })
+        body: JSON.stringify({ program: 'IIT', planType: 'Daily' })
       });
       if (res.ok) setStudyPlan(await res.json());
     } catch (err) { console.error(err); }
@@ -100,7 +100,7 @@ const AIHub = () => {
           </div>
 
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-bold text-slate-800 flex items-center mb-4"><Presentation className="w-5 h-5 mr-2 text-purple-500" /> DAFNE Features</h3>
+            <h3 className="text-lg font-bold text-slate-800 flex items-center mb-4"><Presentation className="w-5 h-5 mr-2 text-purple-500" /> UPSC Features</h3>
             <p className="text-sm text-slate-500 mb-4">Are you a Civil Services aspirant? Use the AI Mock Interview system to assess your communication skills.</p>
             <button className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition-colors shadow-sm">Start Mock Interview</button>
           </div>

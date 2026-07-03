@@ -4,7 +4,7 @@ const knowledgeBaseSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String }, // Extracted text for search
   documentUrl: { type: String }, // Original PDF link
-  program: { type: String }, // Lakshya, Deekshya, DAFNE
+  program: { type: String }, // IIT, NEET, UPSC
   subject: { type: String },
   tags: [{ type: String }],
   vectorEmbedding: [{ type: Number }], // Simulated vector embedding

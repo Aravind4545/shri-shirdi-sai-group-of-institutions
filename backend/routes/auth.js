@@ -1,9 +1,10 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User');
+
 
 // Middleware to verify token
 const authMiddleware = require('../middleware/auth');
@@ -29,30 +30,27 @@ router.post('/register', [
   const { fullName, email, password, mobileNumber, gender, dateOfBirth, academicInfo, programInfo } = req.body;
 
   try {
-    let user = await User.findOne({ email });
+    let user = await prisma.user.findFirst({ where: { email } });
     if (user) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    user = new User({
-      fullName,
-      email,
-      password,
-      mobileNumber,
-      gender,
-      dateOfBirth,
-      academicInfo,
-      programInfo
-    });
-
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    await user.save();
-
-    user.isApproved = false; // explicitly set
-
-    await user.save();
+    user = await prisma.user.create({
+      data: {
+        fullName,
+        email,
+        password: hashedPassword,
+        mobileNumber,
+        gender,
+        dateOfBirth,
+        academicInfo,
+        programInfo,
+        isApproved: false
+      }
+    });
 
     res.status(201).json({ msg: 'Registration successful. Waiting for Admin approval.' });
   } catch (err) {
@@ -75,7 +73,7 @@ router.post('/login', [
   const { email, password } = req.body;
 
   try {
-    let user = await User.findOne({ email });
+    let user = await prisma.user.findFirst({ where: { email } });
     if (!user) {
       return res.status(400).json({ message: 'Invalid Credentials' });
     }
@@ -110,7 +108,10 @@ router.post('/login', [
 // @desc    Get logged in user
 router.get('/me', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    if (user) {
+      delete user.password;
+    }
     res.json(user);
   } catch (err) {
     console.error(err.message);

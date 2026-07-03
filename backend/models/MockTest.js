@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const mockTestSchema = new mongoose.Schema({
   title: { type: String, required: true },
   teacherId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  targetProgram: { type: String, enum: ['Lakshya', 'Deekshya', 'DAFNE', 'All'], required: true },
+  targetProgram: { type: String, enum: ['IIT', 'NEET', 'UPSC', 'All'], required: true },
   targetExam: { type: String, required: true },
   totalMarks: { type: Number, required: true },
   durationMinutes: { type: Number, required: true, default: 180 },

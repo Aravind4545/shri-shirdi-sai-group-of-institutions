@@ -1,9 +1,10 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const BehaviorRequest = require('../models/BehaviorRequest');
-const BehaviorFeedback = require('../models/BehaviorFeedback');
-const User = require('../models/User');
+
+
+
 
 // @route   POST /api/behavior/requests
 // @desc    Admin creates a new behavior feedback request
@@ -20,10 +21,11 @@ router.post('/requests', auth, async (req, res) => {
     }
 
     // Close any previously active requests
-    await BehaviorRequest.updateMany({ status: 'Active' }, { status: 'Closed' });
+    await prisma.behaviorRequest.updateMany({ where: { status: 'Active' }, data: { status: 'Closed' } });
 
-    const newRequest = new BehaviorRequest({ period, status: 'Active' });
-    await newRequest.save();
+    const newRequest = await prisma.behaviorRequest.create({
+      data: { period, status: 'Active' }
+    });
 
     res.json(newRequest);
   } catch (err) {
@@ -37,7 +39,10 @@ router.post('/requests', auth, async (req, res) => {
 // @access  Teacher
 router.get('/requests/active', auth, async (req, res) => {
   try {
-    const activeRequest = await BehaviorRequest.findOne({ status: 'Active' }).sort({ createdAt: -1 });
+    const activeRequest = await prisma.behaviorRequest.findFirst({
+      where: { status: 'Active' },
+      orderBy: { createdAt: 'desc' }
+    });
     res.json(activeRequest || null);
   } catch (err) {
     console.error(err);
@@ -50,7 +55,7 @@ router.get('/requests/active', auth, async (req, res) => {
 // @access  Teacher
 router.get('/students', auth, async (req, res) => {
   try {
-    const teacher = await User.findById(req.user.id);
+    const teacher = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!teacher || teacher.role !== 'Teacher') {
       return res.status(403).json({ msg: 'Not authorized as teacher' });
     }
@@ -61,7 +66,10 @@ router.get('/students', auth, async (req, res) => {
       query['programInfo.program'] = teacher.assignedProgram;
     }
 
-    const students = await User.find(query).select('fullName email programInfo');
+    const students = await prisma.user.findMany({
+      where: query,
+      select: { fullName: true, email: true, programInfo: true }
+    });
     res.json(students);
   } catch (err) {
     console.error(err);
@@ -85,11 +93,20 @@ router.post('/feedbacks', auth, async (req, res) => {
     }
 
     // Update if exists, otherwise create
-    const feedback = await BehaviorFeedback.findOneAndUpdate(
-      { request: requestId, teacher: req.user.id, student: studentId },
-      { rating, comments, createdAt: Date.now() },
-      { new: true, upsert: true }
-    );
+    let feedback = await prisma.behaviorFeedback.findFirst({
+      where: { request: requestId, teacher: req.user.id, student: studentId }
+    });
+
+    if (feedback) {
+      feedback = await prisma.behaviorFeedback.update({
+        where: { id: feedback.id },
+        data: { rating, comments, createdAt: new Date() }
+      });
+    } else {
+      feedback = await prisma.behaviorFeedback.create({
+        data: { request: requestId, teacher: req.user.id, student: studentId, rating, comments, createdAt: new Date() }
+      });
+    }
 
     res.json(feedback);
   } catch (err) {
@@ -103,10 +120,10 @@ router.post('/feedbacks', auth, async (req, res) => {
 // @access  Teacher
 router.get('/feedbacks/me/:requestId', auth, async (req, res) => {
   try {
-    const feedbacks = await BehaviorFeedback.find({
+    const feedbacks = await prisma.behaviorFeedback.findMany({ where: {
       request: req.params.requestId,
       teacher: req.user.id
-    });
+    } });
     res.json(feedbacks);
   } catch (err) {
     console.error(err);
@@ -123,11 +140,14 @@ router.get('/feedbacks', auth, async (req, res) => {
       return res.status(403).json({ msg: 'Not authorized' });
     }
 
-    const feedbacks = await BehaviorFeedback.find()
-      .populate('request')
-      .populate('teacher', 'fullName email')
-      .populate('student', 'fullName email programInfo')
-      .sort({ createdAt: -1 });
+    const feedbacks = await prisma.behaviorFeedback.findMany({
+      include: {
+        request: true,
+        teacher: { select: { fullName: true, email: true } },
+        student: { select: { fullName: true, email: true, programInfo: true } }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
 
     res.json(feedbacks);
   } catch (err) {

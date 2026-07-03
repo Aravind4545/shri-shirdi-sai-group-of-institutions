@@ -14,7 +14,7 @@ const AuthSelector = () => {
           {isRegister ? 'Select Your Program to Register' : 'Select Your Portal to Login'}
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
-          Welcome to Sri Shirdi Sai Institutions
+          Welcome to Academic Companion
         </p>
       </div>
 
@@ -22,37 +22,37 @@ const AuthSelector = () => {
         <div className="bg-white py-8 px-4 shadow-xl sm:rounded-3xl sm:px-10 border border-slate-100">
           <div className="grid grid-cols-1 gap-4">
             
-            <Link to={isRegister ? '/lakshya/register' : '/lakshya/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-brand-blue hover:ring-1 hover:ring-brand-blue focus:outline-none transition-all">
+            <Link to={isRegister ? '/iit/register' : '/iit/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-brand-blue hover:ring-1 hover:ring-brand-blue focus:outline-none transition-all">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-blue-50 rounded-xl text-brand-blue">
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-slate-900">Lakshya (IIT/Engineering)</p>
+                  <p className="text-lg font-bold text-slate-900">IIT (IIT/Engineering)</p>
                   <p className="text-sm text-slate-500">Student Portal</p>
                 </div>
               </div>
             </Link>
 
-            <Link to={isRegister ? '/deekshya/register' : '/deekshya/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-emerald-500 hover:ring-1 hover:ring-emerald-500 focus:outline-none transition-all">
+            <Link to={isRegister ? '/neet/register' : '/neet/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-emerald-500 hover:ring-1 hover:ring-emerald-500 focus:outline-none transition-all">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-emerald-50 rounded-xl text-emerald-600">
                   <Stethoscope className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-slate-900">Deekshya (Medical/NEET)</p>
+                  <p className="text-lg font-bold text-slate-900">NEET (Medical/NEET)</p>
                   <p className="text-sm text-slate-500">Student Portal</p>
                 </div>
               </div>
             </Link>
 
-            <Link to={isRegister ? '/dafne/register' : '/dafne/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-slate-800 hover:ring-1 hover:ring-slate-800 focus:outline-none transition-all">
+            <Link to={isRegister ? '/upsc/register' : '/upsc/login'} className="relative block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-slate-800 hover:ring-1 hover:ring-slate-800 focus:outline-none transition-all">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-slate-100 rounded-xl text-slate-800">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-slate-900">DAFNE (Civil Services)</p>
+                  <p className="text-lg font-bold text-slate-900">UPSC (Civil Services)</p>
                   <p className="text-sm text-slate-500">Student Portal</p>
                 </div>
               </div>

@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import LakshyaPage from './pages/LakshyaPage';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import DeekshyaPage from './pages/DeekshyaPage';
-import DeekshyaRegisterPage from './pages/DeekshyaRegisterPage';
-import DeekshyaLoginPage from './pages/DeekshyaLoginPage';
-import DafnePage from './pages/DafnePage';
-import DafneRegisterPage from './pages/DafneRegisterPage';
-import DafneLoginPage from './pages/DafneLoginPage';
+import IITPage from './pages/IITPage';
+import IITRegisterPage from './pages/IITRegisterPage';
+import IITLoginPage from './pages/IITLoginPage';
+import NEETPage from './pages/NEETPage';
+import NEETRegisterPage from './pages/NEETRegisterPage';
+import NEETLoginPage from './pages/NEETLoginPage';
+import UPSCPage from './pages/UPSCPage';
+import UPSCRegisterPage from './pages/UPSCRegisterPage';
+import UPSCLoginPage from './pages/UPSCLoginPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import AuthSelector from './pages/AuthSelector';
 import UniversalLogin from './pages/UniversalLogin';
@@ -113,23 +113,23 @@ function App() {
         <Route path="/login" element={<UniversalLogin />} />
         <Route path="/register" element={<AuthSelector />} />
 
-        {/* Lakshya Program Routes */}
-        <Route path="/lakshya" element={<LakshyaPage />} />
-        <Route path="/lakshya/register" element={<RegisterPage />} />
-        <Route path="/lakshya/login" element={<LoginPage />} />
+        {/* IIT Program Routes */}
+        <Route path="/iit" element={<IITPage />} />
+        <Route path="/iit/register" element={<IITRegisterPage />} />
+        <Route path="/iit/login" element={<IITLoginPage />} />
         
-        {/* Deekshya Program Routes */}
-        <Route path="/deekshya" element={<DeekshyaPage />} />
-        <Route path="/deekshya/register" element={<DeekshyaRegisterPage />} />
-        <Route path="/deekshya/login" element={<DeekshyaLoginPage />} />
+        {/* NEET Program Routes */}
+        <Route path="/neet" element={<NEETPage />} />
+        <Route path="/neet/register" element={<NEETRegisterPage />} />
+        <Route path="/neet/login" element={<NEETLoginPage />} />
         
-        {/* DAFNE Program Routes */}
-        <Route path="/dafne" element={<DafnePage />} />
-        <Route path="/dafne/register" element={<DafneRegisterPage />} />
-        <Route path="/dafne/login" element={<DafneLoginPage />} />
+        {/* UPSC Program Routes */}
+        <Route path="/upsc" element={<UPSCPage />} />
+        <Route path="/upsc/register" element={<UPSCRegisterPage />} />
+        <Route path="/upsc/login" element={<UPSCLoginPage />} />
         
         {/* Other Programs */}
-        <Route path="/dafne-placeholder" element={<PlaceholderPage title="DAFNE" />} />
+        <Route path="/upsc-placeholder" element={<PlaceholderPage title="UPSC" />} />
         
         {/* Teacher Routes */}
         <Route path="/teacher/login" element={<TeacherLogin />} />
@@ -257,9 +257,9 @@ function App() {
         </Route>
 
         {/* Legacy redirect routes for the individual login success pages to point to unified dashboard */}
-        <Route path="/lakshya/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-        <Route path="/deekshya/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-        <Route path="/dafne/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+        <Route path="/iit/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+        <Route path="/neet/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+        <Route path="/upsc/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
 
         {/* Parent Routes */}
         <Route path="/parent" element={<ProtectedRoute><ParentLayout /></ProtectedRoute>}>

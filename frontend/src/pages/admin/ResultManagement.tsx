@@ -28,9 +28,9 @@ import {
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
 const programScores = [
-  { program: "Lakshya", avgScore: 82 },
-  { program: "Deekshya", avgScore: 79 },
-  { program: "DAFNE", avgScore: 76 },
+  { program: "IIT", avgScore: 82 },
+  { program: "NEET", avgScore: 79 },
+  { program: "UPSC", avgScore: 76 },
 ];
 
 const monthlyPassRate = [
@@ -290,9 +290,9 @@ const ResultManagement: React.FC = () => {
           </div>
           <div className="grid grid-cols-3 gap-3 mt-4">
             {[
-              { program: "Lakshya", a: "48%", b: "28%", c: "16%", pass: "92%" },
-              { program: "Deekshya", a: "32%", b: "34%", c: "22%", pass: "88%" },
-              { program: "DAFNE", a: "25%", b: "28%", c: "22%", pass: "81%" },
+              { program: "IIT", a: "48%", b: "28%", c: "16%", pass: "92%" },
+              { program: "NEET", a: "32%", b: "34%", c: "22%", pass: "88%" },
+              { program: "UPSC", a: "25%", b: "28%", c: "22%", pass: "81%" },
             ].map((prog) => (
               <div
                 key={prog.program}

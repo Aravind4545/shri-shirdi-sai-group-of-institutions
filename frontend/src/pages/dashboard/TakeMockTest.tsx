@@ -36,7 +36,7 @@ const TakeMockTest = () => {
 
   const fetchTest = async () => {
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/${id}/take`, {
+      const res = await fetch('/api/mocktests/${id}/take', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -82,7 +82,7 @@ const TakeMockTest = () => {
         answers: Object.entries(answers).map(([qId, opt]) => ({ questionId: qId, selectedOption: opt }))
       };
 
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/${id}/submit`, {
+      const res = await fetch('/api/mocktests/${id}/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

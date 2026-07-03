@@ -37,9 +37,9 @@ const conversations: Conversation[] = [
     messages: [
       { id: 1, text: "Good morning! Hope you're well.", time: "10:30 AM", sent: false },
       { id: 2, text: "Good morning Dr. Nair! Yes, all good. How can I help?", time: "10:31 AM", sent: true },
-      { id: 3, text: "I wanted to discuss the upcoming semester schedule for Lakshya batch.", time: "10:33 AM", sent: false },
+      { id: 3, text: "I wanted to discuss the upcoming semester schedule for IIT batch.", time: "10:33 AM", sent: false },
       { id: 4, text: "Sure, I'll pull up the timetable. Any specific concern?", time: "10:35 AM", sent: true },
-      { id: 5, text: "There's a clash between Physics lab and the DAFNE seminar on Friday.", time: "10:38 AM", sent: false },
+      { id: 5, text: "There's a clash between Physics lab and the UPSC seminar on Friday.", time: "10:38 AM", sent: false },
       { id: 6, text: "Can we reschedule the parent meeting?", time: "10:42 AM", sent: false },
     ],
   },
@@ -55,7 +55,7 @@ const conversations: Conversation[] = [
     messages: [
       { id: 1, text: "The mid-term exam papers for Math are ready for review.", time: "9:40 AM", sent: false },
       { id: 2, text: "Thank you Rajan. I'll review them today.", time: "9:45 AM", sent: true },
-      { id: 3, text: "Also, two students from Deekshya batch have requested extra sessions.", time: "9:50 AM", sent: false },
+      { id: 3, text: "Also, two students from NEET batch have requested extra sessions.", time: "9:50 AM", sent: false },
       { id: 4, text: "Approved. Please coordinate with the hostel warden for timing.", time: "9:52 AM", sent: true },
       { id: 5, text: "Exam papers have been submitted.", time: "9:55 AM", sent: false },
     ],
@@ -73,7 +73,7 @@ const conversations: Conversation[] = [
       { id: 1, text: "Hello, I wanted to inquire about Arjun's performance in recent tests.", time: "Yesterday 3:00 PM", sent: false },
       { id: 2, text: "Hello Mrs. Sharma! Arjun scored 88% in Physics and 91% in Chemistry this month.", time: "Yesterday 3:05 PM", sent: true },
       { id: 3, text: "That's great to hear! Is he on track for the entrance exam?", time: "Yesterday 3:07 PM", sent: false },
-      { id: 4, text: "Absolutely. His ranking is in the top 15 of the Lakshya batch.", time: "Yesterday 3:10 PM", sent: true },
+      { id: 4, text: "Absolutely. His ranking is in the top 15 of the IIT batch.", time: "Yesterday 3:10 PM", sent: true },
       { id: 5, text: "Thank you for the update on Arjun's progress.", time: "Yesterday 3:12 PM", sent: false },
     ],
   },
@@ -87,7 +87,7 @@ const conversations: Conversation[] = [
     time: "Yesterday",
     unread: 0,
     messages: [
-      { id: 1, text: "We need new microscopes for the Deekshya batch labs.", time: "Yesterday 11:00 AM", sent: false },
+      { id: 1, text: "We need new microscopes for the NEET batch labs.", time: "Yesterday 11:00 AM", sent: false },
       { id: 2, text: "I've noted the requirement. Please share the specifications.", time: "Yesterday 11:05 AM", sent: true },
       { id: 3, text: "Sharing the list now. We need 10 compound microscopes.", time: "Yesterday 11:10 AM", sent: false },
       { id: 4, text: "Forwarded to procurement. Expected delivery in 2 weeks.", time: "Yesterday 11:15 AM", sent: true },
@@ -151,7 +151,7 @@ const conversations: Conversation[] = [
     messages: [
       { id: 1, text: "All entries for the creative writing contest have been received.", time: "Sat 3:00 PM", sent: false },
       { id: 2, text: "Wonderful! How many entries did we get?", time: "Sat 3:05 PM", sent: true },
-      { id: 3, text: "47 entries across DAFNE, Lakshya and Deekshya batches!", time: "Sat 3:07 PM", sent: false },
+      { id: 3, text: "47 entries across UPSC, IIT and NEET batches!", time: "Sat 3:07 PM", sent: false },
       { id: 4, text: "That's great participation. Please arrange the judging panel.", time: "Sat 3:10 PM", sent: true },
       { id: 5, text: "Creative writing contest entries are in.", time: "Sat 3:00 PM", sent: false },
     ],

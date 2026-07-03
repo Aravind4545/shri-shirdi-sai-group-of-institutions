@@ -9,7 +9,7 @@ const ComplaintBox = () => {
 
   const fetchComplaints = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/complaints/my', {
+      const res = await fetch('/api/complaints/my', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -34,7 +34,7 @@ const ComplaintBox = () => {
     setMessage('');
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/complaints', {
+      const res = await fetch('/api/complaints', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

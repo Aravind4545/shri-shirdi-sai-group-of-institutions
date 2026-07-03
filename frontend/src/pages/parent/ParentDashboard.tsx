@@ -9,7 +9,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     // Fetch student data using the token (parents login with student credentials for now)
-    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/me', {
+    fetch('/api/auth/me', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())
@@ -64,7 +64,7 @@ const ParentDashboard = () => {
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Program & Stream</p>
                 <p className="text-sm font-bold text-slate-700 mt-0.5">
-                  {student.programInfo?.program || 'Lakshya'} ({student.programInfo?.stream || 'MPC'})
+                  {student.programInfo?.program || 'IIT'} ({student.programInfo?.stream || 'MPC'})
                 </p>
               </div>
             </div>

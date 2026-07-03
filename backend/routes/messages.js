@@ -1,51 +1,62 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const User = require('../models/User');
-const Message = require('../models/Message');
+
+
 
 // @route   GET /api/messages/users
 // @desc    Get list of users available to chat with
 router.get('/users', auth, async (req, res) => {
   try {
-    const currentUser = await User.findById(req.user.id);
+    const currentUser = await prisma.user.findUnique({ where: { id: req.user.id } });
     let users = [];
 
     if (currentUser.role === 'Student') {
       // Students can chat with other students in their program and teachers
-      users = await User.find({
-        $or: [
-          { role: 'Student', 'programInfo.program': currentUser.programInfo.program, _id: { $ne: currentUser._id } },
-          { role: 'Teacher' }
-        ]
-      }).select('fullName role profilePhoto programInfo');
+      users = await prisma.user.findMany({
+        where: {
+          OR: [
+            { role: 'Student', programInfo: { is: { program: currentUser.programInfo?.program } }, id: { not: currentUser.id } },
+            { role: 'Teacher' }
+          ]
+        },
+        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo: true }
+      });
     } else if (currentUser.role === 'Teacher') {
       // Teachers can chat with their students and other teachers
-      users = await User.find({
-        $or: [
-          { role: 'Student', 'programInfo.program': currentUser.assignedProgram },
-          { role: 'Teacher', _id: { $ne: currentUser._id } }
-        ]
-      }).select('fullName role profilePhoto programInfo');
+      users = await prisma.user.findMany({
+        where: {
+          OR: [
+            { role: 'Student', programInfo: { is: { program: currentUser.assignedProgram } } },
+            { role: 'Teacher', id: { not: currentUser.id } }
+          ]
+        },
+        select: { id: true, fullName: true, role: true, profilePhoto: true, programInfo: true }
+      });
     }
 
     // Attach unread message counts and last message
     const formattedUsers = await Promise.all(users.map(async (u) => {
-      const unreadCount = await Message.countDocuments({
-        sender: u._id,
-        receiver: currentUser._id,
+      const unreadCount = await prisma.message.count({ where: {
+        sender: u.id || u._id,
+        receiver: currentUser.id || currentUser._id,
         read: false
+      } });
+
+      const lastMessage = await prisma.message.findFirst({
+        where: {
+          OR: [
+            { sender: u.id || u._id, receiver: currentUser.id || currentUser._id },
+            { sender: currentUser.id || currentUser._id, receiver: u.id || u._id }
+          ]
+        },
+        orderBy: { timestamp: 'desc' }
       });
 
-      const lastMessage = await Message.findOne({
-        $or: [
-          { sender: u._id, receiver: currentUser._id },
-          { sender: currentUser._id, receiver: u._id }
-        ]
-      }).sort({ timestamp: -1 });
-
       return {
-        _id: u._id,
+        _id: u.id || u._id,
+        id: u.id || u._id,
         fullName: u.fullName,
         role: u.role,
         unreadCount,
@@ -72,18 +83,21 @@ router.get('/users', auth, async (req, res) => {
 // @desc    Get chat history with a specific user
 router.get('/conversation/:userId', auth, async (req, res) => {
   try {
-    const messages = await Message.find({
-      $or: [
-        { sender: req.user.id, receiver: req.params.userId },
-        { sender: req.params.userId, receiver: req.user.id }
-      ]
-    }).sort({ timestamp: 1 });
+    const messages = await prisma.message.findMany({
+      where: {
+        OR: [
+          { sender: req.user.id, receiver: req.params.userId },
+          { sender: req.params.userId, receiver: req.user.id }
+        ]
+      },
+      orderBy: { timestamp: 'asc' }
+    });
 
     // Mark messages as read
-    await Message.updateMany(
-      { sender: req.params.userId, receiver: req.user.id, read: false },
-      { $set: { read: true } }
-    );
+    await prisma.message.updateMany({
+      where: { sender: req.params.userId, receiver: req.user.id, read: false },
+      data: { read: true }
+    });
 
     res.json(messages);
   } catch (err) {
@@ -99,13 +113,14 @@ router.post('/send/:userId', auth, async (req, res) => {
     const { content } = req.body;
     if (!content) return res.status(400).json({ msg: 'Message content is required' });
 
-    const message = new Message({
-      sender: req.user.id,
-      receiver: req.params.userId,
-      content
+    const message = await prisma.message.create({
+      data: {
+        sender: req.user.id,
+        receiver: req.params.userId,
+        content
+      }
     });
 
-    await message.save();
     res.json(message);
   } catch (err) {
     console.error(err.message);

@@ -1,12 +1,7 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const User = require('../models/User');
-const AcademicHealth = require('../models/AcademicHealth');
-const PerformanceInsight = require('../models/PerformanceInsight');
-const TopicAnalytics = require('../models/TopicAnalytics');
-const SubjectAnalytics = require('../models/SubjectAnalytics');
-const RiskPrediction = require('../models/RiskPrediction');
 const PDFDocument = require('pdfkit');
 const XLSX = require('xlsx');
 
@@ -14,20 +9,19 @@ const XLSX = require('xlsx');
 // @desc    Get academic health and insights for the logged-in student
 router.get('/student', auth, async (req, res) => {
   try {
-    let health = await AcademicHealth.findOne({ studentId: req.user.id });
+    let health = await prisma.academicHealth.findFirst({ where: { studentId: req.user.id } });
     if (!health) {
-      health = new AcademicHealth({
+      health = await prisma.academicHealth.create({ data: {
         studentId: req.user.id,
         healthScore: 85,
         components: { attendanceScore: 90, testScore: 82, assignmentScore: 88, studyActivityScore: 75 },
         status: 'Good'
-      });
-      await health.save();
+      } });
     }
 
-    let insight = await PerformanceInsight.findOne({ studentId: req.user.id });
+    let insight = await prisma.performanceInsight.findFirst({ where: { studentId: req.user.id } });
     if (!insight) {
-      insight = new PerformanceInsight({
+      insight = await prisma.performanceInsight.create({ data: {
         studentId: req.user.id,
         performanceScore: 82,
         growthScore: 15,
@@ -45,15 +39,17 @@ router.get('/student', auth, async (req, res) => {
           'Physics is your strongest subject, but chemistry needs focus.',
           'Great consistency in completing assignments on time.'
         ]
-      });
-      await insight.save();
+      } });
     }
 
-    const topics = await TopicAnalytics.find({ studentId: req.user.id });
+    const topics = await prisma.topicAnalytics.findMany({ where: { studentId: req.user.id } });
     const strongTopics = topics.filter(t => t.status === 'Strong').map(t => t.topic);
     const weakTopics = topics.filter(t => t.status === 'Weak' || t.status === 'Critical').map(t => t.topic);
 
-    const subjects = await SubjectAnalytics.find({ studentId: req.user.id }).sort({ averageAccuracy: -1 });
+    const subjects = await prisma.subjectAnalytics.findMany({
+      where: { studentId: req.user.id },
+      orderBy: { averageAccuracy: 'desc' }
+    });
 
     res.json({
       health,
@@ -72,40 +68,12 @@ router.get('/student', auth, async (req, res) => {
 // @desc    Get intelligence overview for a teacher's batch
 router.get('/teacher', auth, async (req, res) => {
   try {
-    const teacher = await User.findById(req.user.id);
-    const students = await User.find({ role: 'Student', 'programInfo.program': teacher.programInfo.program });
+    const teacher = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const students = await prisma.user.findMany({ where: { role: 'Student', 'programInfo.program': teacher.programInfo.program } });
     
-    const risks = await RiskPrediction.find({ program: teacher.programInfo.program }).populate('studentId', 'fullName email');
-
-    res.json({
-      batchPerformance: 78,
-      assignmentCompletionRate: 85,
-      attendanceTrend: 92,
-      totalStudents: students.length,
-      atRiskCount: risks.length,
-      topPerformers: students.slice(0, 3).map(s => s.fullName),
-      risks
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-
-// @route   GET /api/intelligence/admin
-// @desc    Get institution-wide intelligence metrics
-router.get('/admin', auth, async (req, res) => {
-  try {
-    const totalStudents = await User.countDocuments({ role: 'Student' });
-    const programs = await SubjectAnalytics.aggregate([
-      { $group: { _id: "$program", avgScore: { $avg: "$averageAccuracy" } } }
-    ]);
-
-    res.json({
-      totalStudents,
-      activeStudents: Math.floor(totalStudents * 0.95),
-      overallAttendance: 91,
-      programPerformance: programs
+    const risks = await prisma.riskPrediction.findMany({
+      where: { program: teacher.programInfo.program },
+      include: { student: { select: { fullName: true, email: true } } }
     });
   } catch (err) {
     console.error(err.message);

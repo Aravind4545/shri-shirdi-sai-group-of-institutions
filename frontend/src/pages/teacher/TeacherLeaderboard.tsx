@@ -11,7 +11,7 @@ const TeacherLeaderboard = () => {
 
   const fetchTeacherLeaderboard = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/leaderboard/teacher', {
+      const res = await fetch('/api/leaderboard/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setRankings(await res.json());

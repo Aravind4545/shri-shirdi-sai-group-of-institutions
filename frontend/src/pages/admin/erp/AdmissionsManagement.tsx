@@ -32,7 +32,7 @@ interface Application {
   id: number;
   name: string;
   phone: string;
-  program: "Lakshya" | "Deekshya" | "DAFNE";
+  program: "IIT" | "NEET" | "UPSC";
   appliedDate: string;
   score: number;
   status: AppStatus;
@@ -50,9 +50,9 @@ const monthlyApplications = [
 ];
 
 const programDistribution = [
-  { name: "Lakshya", value: 45 },
-  { name: "Deekshya", value: 35 },
-  { name: "DAFNE", value: 20 },
+  { name: "IIT", value: 45 },
+  { name: "NEET", value: 35 },
+  { name: "UPSC", value: 20 },
 ];
 
 const approvalTrend = [
@@ -67,24 +67,24 @@ const approvalTrend = [
 const PIE_COLORS = ["#6366f1", "#10b981", "#f59e0b"];
 
 const PROGRAM_BADGE: Record<string, string> = {
-  Lakshya: "bg-indigo-100 text-indigo-700",
-  Deekshya: "bg-emerald-100 text-emerald-700",
-  DAFNE: "bg-amber-100 text-amber-700",
+  IIT: "bg-indigo-100 text-indigo-700",
+  NEET: "bg-emerald-100 text-emerald-700",
+  UPSC: "bg-amber-100 text-amber-700",
 };
 
 const initialApplications: Application[] = [
-  { id: 1, name: "Arjun Mehta", phone: "9876543210", program: "Lakshya", appliedDate: "10 Jun 2026", score: 182, status: "Approved" },
-  { id: 2, name: "Sneha Pillai", phone: "9823456701", program: "Deekshya", appliedDate: "09 Jun 2026", score: 174, status: "Pending" },
-  { id: 3, name: "Rahul Verma", phone: "9812345678", program: "DAFNE", appliedDate: "09 Jun 2026", score: 165, status: "Approved" },
-  { id: 4, name: "Priya Krishnan", phone: "9867543219", program: "Lakshya", appliedDate: "08 Jun 2026", score: 190, status: "Approved" },
-  { id: 5, name: "Kiran Bose", phone: "9898765432", program: "Deekshya", appliedDate: "08 Jun 2026", score: 148, status: "Rejected" },
-  { id: 6, name: "Ananya Sharma", phone: "9845671234", program: "DAFNE", appliedDate: "07 Jun 2026", score: 171, status: "Pending" },
-  { id: 7, name: "Vijay Nair", phone: "9834567890", program: "Lakshya", appliedDate: "07 Jun 2026", score: 159, status: "Pending" },
-  { id: 8, name: "Meera Joshi", phone: "9876501234", program: "Deekshya", appliedDate: "06 Jun 2026", score: 185, status: "Approved" },
-  { id: 9, name: "Suresh Reddy", phone: "9811234567", program: "Lakshya", appliedDate: "06 Jun 2026", score: 143, status: "Rejected" },
-  { id: 10, name: "Divya Nambiar", phone: "9856789012", program: "DAFNE", appliedDate: "05 Jun 2026", score: 168, status: "Pending" },
-  { id: 11, name: "Arun Kumar", phone: "9867890123", program: "Lakshya", appliedDate: "05 Jun 2026", score: 177, status: "Approved" },
-  { id: 12, name: "Lakshmi Iyer", phone: "9878901234", program: "Deekshya", appliedDate: "04 Jun 2026", score: 138, status: "Rejected" },
+  { id: 1, name: "Arjun Mehta", phone: "9876543210", program: "IIT", appliedDate: "10 Jun 2026", score: 182, status: "Approved" },
+  { id: 2, name: "Sneha Pillai", phone: "9823456701", program: "NEET", appliedDate: "09 Jun 2026", score: 174, status: "Pending" },
+  { id: 3, name: "Rahul Verma", phone: "9812345678", program: "UPSC", appliedDate: "09 Jun 2026", score: 165, status: "Approved" },
+  { id: 4, name: "Priya Krishnan", phone: "9867543219", program: "IIT", appliedDate: "08 Jun 2026", score: 190, status: "Approved" },
+  { id: 5, name: "Kiran Bose", phone: "9898765432", program: "NEET", appliedDate: "08 Jun 2026", score: 148, status: "Rejected" },
+  { id: 6, name: "Ananya Sharma", phone: "9845671234", program: "UPSC", appliedDate: "07 Jun 2026", score: 171, status: "Pending" },
+  { id: 7, name: "Vijay Nair", phone: "9834567890", program: "IIT", appliedDate: "07 Jun 2026", score: 159, status: "Pending" },
+  { id: 8, name: "Meera Joshi", phone: "9876501234", program: "NEET", appliedDate: "06 Jun 2026", score: 185, status: "Approved" },
+  { id: 9, name: "Suresh Reddy", phone: "9811234567", program: "IIT", appliedDate: "06 Jun 2026", score: 143, status: "Rejected" },
+  { id: 10, name: "Divya Nambiar", phone: "9856789012", program: "UPSC", appliedDate: "05 Jun 2026", score: 168, status: "Pending" },
+  { id: 11, name: "Arun Kumar", phone: "9867890123", program: "IIT", appliedDate: "05 Jun 2026", score: 177, status: "Approved" },
+  { id: 12, name: "Lakshmi Iyer", phone: "9878901234", program: "NEET", appliedDate: "04 Jun 2026", score: 138, status: "Rejected" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────

@@ -10,15 +10,15 @@ const CMSManagement = () => {
           <p className="text-sm text-slate-500">Edit main landing page hero, about, and highlights.</p>
         </div>
         <div className="p-6 border rounded-2xl hover:border-blue-500 cursor-pointer transition-colors">
-          <h3 className="font-bold text-lg mb-2">Lakshya Editor</h3>
+          <h3 className="font-bold text-lg mb-2">IIT Editor</h3>
           <p className="text-sm text-slate-500">Edit Engineering program details and features.</p>
         </div>
         <div className="p-6 border rounded-2xl hover:border-blue-500 cursor-pointer transition-colors">
-          <h3 className="font-bold text-lg mb-2">Deekshya Editor</h3>
+          <h3 className="font-bold text-lg mb-2">NEET Editor</h3>
           <p className="text-sm text-slate-500">Edit Medical program details and features.</p>
         </div>
         <div className="p-6 border rounded-2xl hover:border-blue-500 cursor-pointer transition-colors">
-          <h3 className="font-bold text-lg mb-2">DAFNE Editor</h3>
+          <h3 className="font-bold text-lg mb-2">UPSC Editor</h3>
           <p className="text-sm text-slate-500">Edit Civil Services program details and features.</p>
         </div>
       </div>

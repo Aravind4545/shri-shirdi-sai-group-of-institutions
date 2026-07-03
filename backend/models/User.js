@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   },
 
   programInfo: {
-    program: { type: String, default: 'Lakshya' },
+    program: { type: String, default: 'IIT' },
     stream: { type: String, default: 'MPC' },
     exams: [{ type: String }]
   },
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
   },
 
   // Teacher Specific Fields
-  assignedProgram: { type: String, enum: ['Lakshya', 'Deekshya', 'DAFNE', 'All'] },
+  assignedProgram: { type: String, enum: ['IIT', 'NEET', 'UPSC', 'All'] },
   designation: { type: String },
   profilePhoto: { type: String },
   teacherId: { type: String },

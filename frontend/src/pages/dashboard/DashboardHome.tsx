@@ -9,14 +9,14 @@ const DashboardHome = () => {
   const [announcements, setAnnouncements] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/stats', {
+    fetch('/api/dashboard/stats', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(err => console.error(err));
 
-    fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/dashboard/announcements', {
+    fetch('/api/dashboard/announcements', {
       headers: { 'x-auth-token': localStorage.getItem('token') || '' }
     })
       .then(res => res.json())
@@ -32,7 +32,7 @@ const DashboardHome = () => {
 
   const renderProgramSpecificSection = () => {
     const p = user.programInfo.program;
-    if (p === 'Lakshya') {
+    if (p === 'IIT') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
@@ -54,7 +54,7 @@ const DashboardHome = () => {
       );
     }
     
-    if (p === 'Deekshya') {
+    if (p === 'NEET') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
@@ -76,7 +76,7 @@ const DashboardHome = () => {
       );
     }
 
-    if (p === 'DAFNE') {
+    if (p === 'UPSC') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">

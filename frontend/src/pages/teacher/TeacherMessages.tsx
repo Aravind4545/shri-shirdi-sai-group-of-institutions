@@ -29,14 +29,14 @@ const TeacherMessages = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/users', {
+      const res = await fetch('/api/messages/users', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
         const data = await res.json();
         const baseData = data.length > 0 ? data : [
-          { _id: 'm1', fullName: 'John Doe', role: 'Teacher', programInfo: { program: 'Lakshya' } },
-          { _id: 'm2', fullName: 'Jane Smith', role: 'Student', programInfo: { program: 'Deekshya' } },
+          { _id: 'm1', fullName: 'John Doe', role: 'Teacher', programInfo: { program: 'IIT' } },
+          { _id: 'm2', fullName: 'Jane Smith', role: 'Student', programInfo: { program: 'NEET' } },
           { _id: 'm3', fullName: 'Admin User', role: 'Admin', programInfo: { program: 'System' } }
         ];
         setUsers(baseData);
@@ -51,7 +51,7 @@ const TeacherMessages = () => {
   const fetchMessages = async () => {
     if (!activeUser) return;
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/conversation/${activeUser._id}`, {
+      const res = await fetch('/api/messages/conversation/${activeUser._id}', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setMessages(await res.json());
@@ -65,7 +65,7 @@ const TeacherMessages = () => {
     if (!newMessage.trim() || !activeUser) return;
 
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/messages/send/${activeUser._id}`, {
+      const res = await fetch('/api/messages/send/${activeUser._id}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ const StudentIntelligence = () => {
 
   const fetchIntelligence = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/intelligence/student', {
+      const res = await fetch('/api/intelligence/student', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {

@@ -27,8 +27,8 @@ function replaceInDir(dir, searchUrls, replaceUrl) {
 
 const frontendDir = path.join(__dirname, 'frontend/src');
 const mobileDir = path.join(__dirname, 'mobile');
-const searchUrls = ['http://localhost:5001', 'http://192.168.29.35:5001', 'http://10.75.234.230:5001', 'http://10.70.164.230:5001'];
-const newUrl = 'https://shri-shirdi-sai-group-of-institutions.onrender.com';
+const searchUrls = ['https://shri-shirdi-sai-group-of-institutions.onrender.com'];
+const newUrl = 'http://localhost:5001';
 
 console.log('Replacing old API URLs with new Render URL...');
 replaceInDir(frontendDir, searchUrls, newUrl);

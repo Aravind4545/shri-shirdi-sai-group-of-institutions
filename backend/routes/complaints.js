@@ -1,6 +1,7 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
-const Complaint = require('../models/Complaint');
+
 const auth = require('../middleware/auth');
 
 // @route   POST /api/complaints
@@ -14,14 +15,15 @@ router.post('/', auth, async (req, res) => {
       return res.status(400).json({ msg: 'Please provide all required fields' });
     }
 
-    const newComplaint = new Complaint({
-      user: req.user.id,
-      type,
-      title,
-      description
+    const complaint = await prisma.complaint.create({
+      data: {
+        user: req.user.id,
+        type,
+        title,
+        description
+      }
     });
 
-    const complaint = await newComplaint.save();
     res.json(complaint);
   } catch (err) {
     console.error(err.message);
@@ -34,7 +36,10 @@ router.post('/', auth, async (req, res) => {
 // @access  Private
 router.get('/my', auth, async (req, res) => {
   try {
-    const complaints = await Complaint.find({ user: req.user.id }).sort({ createdAt: -1 });
+    const complaints = await prisma.complaint.findMany({
+      where: { user: req.user.id },
+      orderBy: { createdAt: 'desc' }
+    });
     res.json(complaints);
   } catch (err) {
     console.error(err.message);
@@ -51,9 +56,14 @@ router.get('/', auth, async (req, res) => {
       return res.status(403).json({ msg: 'Not authorized' });
     }
 
-    const complaints = await Complaint.find()
-      .populate('user', ['fullName', 'email', 'role'])
-      .sort({ createdAt: -1 });
+    const complaints = await prisma.complaint.findMany({
+      include: {
+        user: {
+          select: { fullName: true, email: true, role: true }
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
     res.json(complaints);
   } catch (err) {
     console.error(err.message);
@@ -72,11 +82,13 @@ router.put('/:id/status', auth, async (req, res) => {
 
     const { status } = req.body;
     
-    let complaint = await Complaint.findById(req.params.id);
+    let complaint = await prisma.complaint.findUnique({ where: { id: req.params.id } });
     if (!complaint) return res.status(404).json({ msg: 'Complaint not found' });
 
-    complaint.status = status;
-    await complaint.save();
+    complaint = await prisma.complaint.update({
+      where: { id: req.params.id },
+      data: { status }
+    });
 
     res.json(complaint);
   } catch (err) {

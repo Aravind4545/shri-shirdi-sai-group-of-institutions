@@ -17,9 +17,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Lakshya', path: '/lakshya' },
-    { name: 'Deekshya', path: '/deekshya' },
-    { name: 'DAFNE', path: '/dafne' },
+    { name: 'IIT', path: '/iit' },
+    { name: 'NEET', path: '/neet' },
+    { name: 'UPSC', path: '/upsc' },
   ];
 
   return (
@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center space-x-2">
             <BookOpen className={`h-8 w-8 ${scrolled ? 'text-brand-blue' : 'text-brand-blue'}`} />
             <span className={`font-bold text-xl tracking-tight ${scrolled ? 'text-brand-dark' : 'text-brand-dark'}`}>
-              Sri Shirdi Sai
+              Academic Companion
             </span>
           </Link>
 

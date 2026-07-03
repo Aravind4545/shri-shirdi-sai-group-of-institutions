@@ -5,7 +5,7 @@ interface AnnouncementItem {
   id: string;
   title: string;
   content: string;
-  targetProgram: 'All' | 'Lakshya' | 'Deekshya' | 'DAFNE';
+  targetProgram: 'All' | 'IIT' | 'NEET' | 'UPSC';
   priority: 'Low' | 'Medium' | 'High';
   date: string;
   status: 'Active' | 'Expired';
@@ -18,7 +18,7 @@ const TeacherAnnouncements = () => {
   // Form State
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [targetProgram, setTargetProgram] = useState<'All' | 'Lakshya' | 'Deekshya' | 'DAFNE'>('All');
+  const [targetProgram, setTargetProgram] = useState<'All' | 'IIT' | 'NEET' | 'UPSC'>('All');
   const [priority, setPriority] = useState<'Low' | 'Medium' | 'High'>('Low');
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const TeacherAnnouncements = () => {
         id: '1',
         title: 'Physics Weekly Mock Test Syllabus Update',
         content: 'The syllabus for the upcoming Weekly Mock Test 4 has been adjusted. Mechanics will now cover Circular Motion and Rotation only. Electrostatics is moved to next week.',
-        targetProgram: 'Lakshya',
+        targetProgram: 'IIT',
         priority: 'High',
         date: '2026-06-15',
         status: 'Active'
@@ -36,8 +36,8 @@ const TeacherAnnouncements = () => {
       {
         id: '2',
         title: 'Special Guest Lecture: NEET Strategy Session',
-        content: 'All Deekshya (Medical) program students are required to attend the NEET Strategy & Preparation workshop tomorrow at 2:00 PM in the Main Seminar Hall.',
-        targetProgram: 'Deekshya',
+        content: 'All NEET (Medical) program students are required to attend the NEET Strategy & Preparation workshop tomorrow at 2:00 PM in the Main Seminar Hall.',
+        targetProgram: 'NEET',
         priority: 'Medium',
         date: '2026-06-14',
         status: 'Active'
@@ -45,8 +45,8 @@ const TeacherAnnouncements = () => {
       {
         id: '3',
         title: 'Current Affairs Booklet: May Edition Released',
-        content: 'The Monthly Current Affairs magazine for DAFNE (UPSC) program has been uploaded to the Study Materials section. Please download and start reading.',
-        targetProgram: 'DAFNE',
+        content: 'The Monthly Current Affairs magazine for UPSC (UPSC) program has been uploaded to the Study Materials section. Please download and start reading.',
+        targetProgram: 'UPSC',
         priority: 'Low',
         date: '2026-06-12',
         status: 'Active'
@@ -54,7 +54,7 @@ const TeacherAnnouncements = () => {
       {
         id: '4',
         title: 'College Annual Sports Meet Notice',
-        content: 'Sri Shirdi Sai Institutions is conducting the Annual Sports Meet selection this Friday. Interested students can register their names with the sports coordinator.',
+        content: 'Academic Companion is conducting the Annual Sports Meet selection this Friday. Interested students can register their names with the sports coordinator.',
         targetProgram: 'All',
         priority: 'Low',
         date: '2026-06-10',
@@ -109,9 +109,9 @@ const TeacherAnnouncements = () => {
   const highPriorityCount = announcements.filter(a => a.priority === 'High').length;
   const targetSplit = {
     All: announcements.filter(a => a.targetProgram === 'All').length,
-    Lakshya: announcements.filter(a => a.targetProgram === 'Lakshya').length,
-    Deekshya: announcements.filter(a => a.targetProgram === 'Deekshya').length,
-    DAFNE: announcements.filter(a => a.targetProgram === 'DAFNE').length
+    IIT: announcements.filter(a => a.targetProgram === 'IIT').length,
+    NEET: announcements.filter(a => a.targetProgram === 'NEET').length,
+    UPSC: announcements.filter(a => a.targetProgram === 'UPSC').length
   };
 
   return (
@@ -166,7 +166,7 @@ const TeacherAnnouncements = () => {
           </div>
           <div>
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Audience Mix</p>
-            <p className="text-xxs font-black text-slate-600">L:{targetSplit.Lakshya} | D:{targetSplit.Deekshya} | DF:{targetSplit.DAFNE} | A:{targetSplit.All}</p>
+            <p className="text-xxs font-black text-slate-600">L:{targetSplit.IIT} | D:{targetSplit.NEET} | DF:{targetSplit.UPSC} | A:{targetSplit.All}</p>
           </div>
         </div>
       </div>
@@ -183,9 +183,9 @@ const TeacherAnnouncements = () => {
             }
 
             let programBadge = 'bg-slate-100 text-slate-800';
-            if (a.targetProgram === 'Lakshya') programBadge = 'bg-blue-50 text-blue-700 border border-blue-100';
-            if (a.targetProgram === 'Deekshya') programBadge = 'bg-emerald-50 text-emerald-700 border border-emerald-100';
-            if (a.targetProgram === 'DAFNE') programBadge = 'bg-amber-50 text-amber-700 border border-amber-100';
+            if (a.targetProgram === 'IIT') programBadge = 'bg-blue-50 text-blue-700 border border-blue-100';
+            if (a.targetProgram === 'NEET') programBadge = 'bg-emerald-50 text-emerald-700 border border-emerald-100';
+            if (a.targetProgram === 'UPSC') programBadge = 'bg-amber-50 text-amber-700 border border-amber-100';
 
             return (
               <div key={a.id} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:shadow-md transition-shadow">
@@ -281,9 +281,9 @@ const TeacherAnnouncements = () => {
                     className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-600 bg-white focus:outline-none focus:border-emerald-500"
                   >
                     <option value="All">All Programs</option>
-                    <option value="Lakshya">Lakshya Students</option>
-                    <option value="Deekshya">Deekshya Students</option>
-                    <option value="DAFNE">DAFNE Students</option>
+                    <option value="IIT">IIT Students</option>
+                    <option value="NEET">NEET Students</option>
+                    <option value="UPSC">UPSC Students</option>
                   </select>
                 </div>
 

@@ -15,7 +15,7 @@ const AssignmentGrading = () => {
 
   const fetchSubmissions = async () => {
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/${id}/submissions`, {
+      const res = await fetch('/api/assignments/${id}/submissions', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -31,7 +31,7 @@ const AssignmentGrading = () => {
 
   const submitGrade = async () => {
     try {
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/assignments/${id}/grade/${selectedSub._id}`, {
+      const res = await fetch('/api/assignments/${id}/grade/${selectedSub._id}', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const AssignmentGrading = () => {
                 <p className="text-sm text-slate-500 mb-2">Student Files:</p>
                 <div className="space-y-2">
                   {selectedSub.files?.map((f: any, i: number) => (
-                    <a key={i} href={`https://shri-shirdi-sai-group-of-institutions.onrender.com${f.url}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-emerald-600 hover:underline text-sm font-medium p-3 bg-emerald-50 rounded-xl">
+                    <a key={i} href={`http://${window.location.hostname}:5001${f.url}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-emerald-600 hover:underline text-sm font-medium p-3 bg-emerald-50 rounded-xl">
                       <Download className="w-4 h-4" />
                       {f.filename}
                     </a>

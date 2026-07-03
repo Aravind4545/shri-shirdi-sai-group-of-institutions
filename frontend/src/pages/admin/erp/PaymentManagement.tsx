@@ -44,16 +44,16 @@ const feeCategoryData = [
 const PIE_COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444"];
 
 const recentPayments = [
-  { id: 1,  name: "Rahul Sharma",       program: "Lakshya",  amount: 45000, date: "2026-06-08", status: "Paid" },
-  { id: 2,  name: "Priya Nair",         program: "Deekshya", amount: 42000, date: "2026-06-07", status: "Pending" },
-  { id: 3,  name: "Arjun Mehta",        program: "DAFNE",    amount: 38000, date: "2026-06-06", status: "Paid" },
-  { id: 4,  name: "Sneha Reddy",        program: "Deekshya", amount: 42000, date: "2026-06-05", status: "Overdue" },
-  { id: 5,  name: "Vikram Patel",       program: "Lakshya",  amount: 45000, date: "2026-06-04", status: "Paid" },
-  { id: 6,  name: "Anjali Singh",       program: "DAFNE",    amount: 38000, date: "2026-06-03", status: "Pending" },
-  { id: 7,  name: "Rohit Verma",        program: "Lakshya",  amount: 45000, date: "2026-06-02", status: "Paid" },
-  { id: 8,  name: "Meera Krishnan",     program: "Deekshya", amount: 42000, date: "2026-06-01", status: "Overdue" },
-  { id: 9,  name: "Kiran Joshi",        program: "DAFNE",    amount: 38000, date: "2026-05-31", status: "Paid" },
-  { id: 10, name: "Divya Subramaniam",  program: "Deekshya", amount: 42000, date: "2026-05-30", status: "Pending" },
+  { id: 1,  name: "Rahul Sharma",       program: "IIT",  amount: 45000, date: "2026-06-08", status: "Paid" },
+  { id: 2,  name: "Priya Nair",         program: "NEET", amount: 42000, date: "2026-06-07", status: "Pending" },
+  { id: 3,  name: "Arjun Mehta",        program: "UPSC",    amount: 38000, date: "2026-06-06", status: "Paid" },
+  { id: 4,  name: "Sneha Reddy",        program: "NEET", amount: 42000, date: "2026-06-05", status: "Overdue" },
+  { id: 5,  name: "Vikram Patel",       program: "IIT",  amount: 45000, date: "2026-06-04", status: "Paid" },
+  { id: 6,  name: "Anjali Singh",       program: "UPSC",    amount: 38000, date: "2026-06-03", status: "Pending" },
+  { id: 7,  name: "Rohit Verma",        program: "IIT",  amount: 45000, date: "2026-06-02", status: "Paid" },
+  { id: 8,  name: "Meera Krishnan",     program: "NEET", amount: 42000, date: "2026-06-01", status: "Overdue" },
+  { id: 9,  name: "Kiran Joshi",        program: "UPSC",    amount: 38000, date: "2026-05-31", status: "Paid" },
+  { id: 10, name: "Divya Subramaniam",  program: "NEET", amount: 42000, date: "2026-05-30", status: "Pending" },
 ];
 
 // ─── Helper Components ────────────────────────────────────────────────────────
@@ -309,9 +309,9 @@ const PaymentManagement: React.FC = () => {
                   <td className="py-3.5 pr-4">
                     <span
                       className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
-                        payment.program === "Lakshya"
+                        payment.program === "IIT"
                           ? "bg-blue-50 text-blue-700"
-                          : payment.program === "Deekshya"
+                          : payment.program === "NEET"
                           ? "bg-emerald-50 text-emerald-700"
                           : "bg-amber-50 text-amber-700"
                       }`}

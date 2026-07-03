@@ -1,8 +1,9 @@
+const prisma = require('../prisma/client');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const TeacherFeedback = require('../models/TeacherFeedback');
-const User = require('../models/User');
+
+
 
 // @route   POST api/teacher-feedback
 // @desc    Submit feedback on a teacher
@@ -11,16 +12,17 @@ router.post('/', auth, async (req, res) => {
   try {
     const { teacherId, learningRating, classesRating, doubtsRating, comments } = req.body;
 
-    const newFeedback = new TeacherFeedback({
-      student: req.user.id,
-      teacher: teacherId,
-      learningRating,
-      classesRating,
-      doubtsRating,
-      comments
+    const feedback = await prisma.teacherFeedback.create({
+      data: {
+        student: req.user.id,
+        teacher: teacherId,
+        learningRating,
+        classesRating,
+        doubtsRating,
+        comments
+      }
     });
 
-    const feedback = await newFeedback.save();
     res.json(feedback);
   } catch (err) {
     console.error(err.message);
@@ -33,10 +35,13 @@ router.post('/', auth, async (req, res) => {
 // @access  Private (Admin/Teacher)
 router.get('/', auth, async (req, res) => {
   try {
-    const feedback = await TeacherFeedback.find()
-      .populate('student', 'fullName email')
-      .populate('teacher', 'fullName designation')
-      .sort({ createdAt: -1 });
+    const feedback = await prisma.teacherFeedback.findMany({
+      include: {
+        student: { select: { fullName: true, email: true } },
+        teacher: { select: { fullName: true, designation: true } }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
     res.json(feedback);
   } catch (err) {
     console.error(err.message);
@@ -49,7 +54,10 @@ router.get('/', auth, async (req, res) => {
 // @access  Private
 router.get('/teachers', auth, async (req, res) => {
   try {
-    const teachers = await User.find({ role: 'Teacher' }).select('fullName _id designation profilePhoto');
+    const teachers = await prisma.user.findMany({
+      where: { role: 'Teacher' },
+      select: { fullName: true, id: true, designation: true, profilePhoto: true }
+    });
     res.json(teachers);
   } catch (err) {
     console.error(err.message);

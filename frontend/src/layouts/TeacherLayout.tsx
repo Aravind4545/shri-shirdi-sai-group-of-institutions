@@ -1,11 +1,13 @@
 import GlobalFooter from '../components/GlobalFooter';
+import { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, BookOpen, ClipboardList, 
-  Bell, FileEdit, LogOut, MessageSquare, BarChart3, BrainCircuit, Trophy, AlertTriangle, Activity, UserCheck
+  Bell, FileEdit, LogOut, MessageSquare, BarChart3, BrainCircuit, Trophy, AlertTriangle, Activity, UserCheck, Menu, X
 } from 'lucide-react';
 
 const TeacherLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,8 +35,8 @@ const TeacherLayout = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col hidden md:flex fixed h-full z-10">
+      {/* Sidebar Desktop */}
+      <aside className="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col fixed h-full z-10">
         <div className="p-6">
           <h2 className="text-xl font-bold text-white tracking-tight">SSSI <span className="text-emerald-500">Teacher</span></h2>
           <p className="text-xs text-slate-500 font-medium tracking-widest mt-1 uppercase">Portal</p>
@@ -68,9 +70,47 @@ const TeacherLayout = () => {
         </div>
       </aside>
 
+      {/* Mobile Header & Sidebar */}
+      <div className="md:hidden fixed top-0 left-0 w-full bg-slate-900 border-b border-slate-800 z-20 flex justify-between items-center p-4">
+        <h2 className="text-xl font-bold text-white tracking-tight">SSSI <span className="text-emerald-500">Teacher</span></h2>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-slate-300 hover:text-white">
+          {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {sidebarOpen && (
+        <div className="md:hidden fixed inset-0 z-10 bg-slate-900 pt-16 flex flex-col">
+          <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={() => setSidebarOpen(false)}
+                className={`flex items-center gap-3 px-4 py-4 rounded-xl transition-all duration-200 ${
+                  location.pathname === item.path 
+                    ? 'bg-emerald-600 text-white font-bold shadow-lg shadow-emerald-900/50' 
+                    : 'hover:bg-slate-800 text-slate-300 font-medium'
+                }`}
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            ))}
+            <button 
+              onClick={handleLogout}
+              className="flex items-center justify-center gap-3 px-4 py-4 mt-4 w-full rounded-xl hover:bg-rose-500 hover:text-white transition-colors text-red-400 bg-red-500/10 font-bold"
+            >
+              <LogOut className="w-5 h-5" />
+              Sign Out
+            </button>
+          </nav>
+        </div>
+      )}
+
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 flex flex-col min-h-screen">
-        <header className="bg-white border-b border-slate-200 h-16 flex items-center px-8 justify-between sticky top-0 z-10">
+      <main className="flex-1 md:ml-64 pt-16 md:pt-0 flex flex-col min-h-screen">
+        {/* Desktop Header */}
+        <header className="hidden md:flex bg-white border-b border-slate-200 h-16 items-center px-8 justify-between sticky top-0 z-10">
           <h1 className="text-lg font-bold text-slate-800">
             {menuItems.find(m => m.path === location.pathname)?.name || 'Teacher Portal'}
           </h1>
@@ -85,7 +125,7 @@ const TeacherLayout = () => {
           </div>
         </header>
         
-        <div className="flex-1 p-8 overflow-y-auto">
+        <div className="flex-1 p-4 md:p-8 overflow-x-hidden min-w-0">
           <Outlet />
         </div>
         <GlobalFooter />

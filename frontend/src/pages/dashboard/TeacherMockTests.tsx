@@ -9,7 +9,7 @@ const TeacherMockTests = () => {
 
   const [formData, setFormData] = useState({
     title: '',
-    targetProgram: 'Lakshya',
+    targetProgram: 'IIT',
     targetExam: 'JEE Main',
     durationMinutes: 180,
     totalMarks: 300
@@ -24,7 +24,7 @@ const TeacherMockTests = () => {
 
   const fetchTests = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/teacher', {
+      const res = await fetch('/api/mocktests/teacher', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -40,7 +40,7 @@ const TeacherMockTests = () => {
   const fetchResults = async (testId: string) => {
     try {
       setSelectedTestId(testId);
-      const res = await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/${testId}/results`, {
+      const res = await fetch('/api/mocktests/${testId}/results', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -69,7 +69,7 @@ const TeacherMockTests = () => {
     data.append('totalMarks', formData.totalMarks.toString());
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/mocktests/upload', {
+      const res = await fetch('/api/mocktests/upload', {
         method: 'POST',
         headers: { 'x-auth-token': localStorage.getItem('token') || '' },
         body: data
@@ -135,9 +135,9 @@ const TeacherMockTests = () => {
                   onChange={e => setFormData({...formData, targetProgram: e.target.value})}
                   className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
                 >
-                  <option value="Lakshya">Lakshya</option>
-                  <option value="Deekshya">Deekshya</option>
-                  <option value="DAFNE">DAFNE</option>
+                  <option value="IIT">IIT</option>
+                  <option value="NEET">NEET</option>
+                  <option value="UPSC">UPSC</option>
                   <option value="All">All Programs</option>
                 </select>
               </div>

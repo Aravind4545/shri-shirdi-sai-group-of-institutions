@@ -22,16 +22,16 @@ interface BehaviorRecord {
 }
 
 const allRecords: BehaviorRecord[] = [
-  { id: 'BHV-001', studentName: 'Rahul Gupta',      class: 'Class 12', program: 'Lakshya',  type: 'Positive',     category: 'Academic Excellence',   reportedBy: 'Dr. Anand Kumar',   date: '2026-06-08', status: 'Resolved' },
-  { id: 'BHV-002', studentName: 'Simran Kaur',       class: 'Class 11', program: 'Deekshya', type: 'Disciplinary', category: 'Unauthorised Absence',   reportedBy: 'Ms. Priya Sharma',  date: '2026-06-07', status: 'Under Review' },
-  { id: 'BHV-003', studentName: 'Nikhil Joshi',      class: 'Class 10', program: 'Lakshya',  type: 'Concern',      category: 'Declining Performance',  reportedBy: 'Mr. Ravi Tiwari',   date: '2026-06-06', status: 'Pending' },
-  { id: 'BHV-004', studentName: 'Pooja Agarwal',     class: 'Class 12', program: 'DAFNE',    type: 'Positive',     category: 'Leadership Award',       reportedBy: 'Dr. Sunita Rao',    date: '2026-06-05', status: 'Resolved' },
-  { id: 'BHV-005', studentName: 'Siddharth Mishra',  class: 'Class 9',  program: 'Deekshya', type: 'Disciplinary', category: 'Mobile Phone Violation',  reportedBy: 'Mr. Alok Verma',    date: '2026-06-04', status: 'Resolved' },
-  { id: 'BHV-006', studentName: 'Kavya Pillai',      class: 'Class 11', program: 'Lakshya',  type: 'Concern',      category: 'Peer Conflict',          reportedBy: 'Ms. Deepa Nair',    date: '2026-06-03', status: 'Under Review' },
-  { id: 'BHV-007', studentName: 'Arnav Kapoor',      class: 'Class 8',  program: 'Deekshya', type: 'Positive',     category: 'Best Attendance Award',  reportedBy: 'Mr. Suresh Babu',   date: '2026-06-02', status: 'Resolved' },
-  { id: 'BHV-008', studentName: 'Tanvi Desai',       class: 'Class 10', program: 'DAFNE',    type: 'Disciplinary', category: 'Academic Misconduct',    reportedBy: 'Dr. Meera Singh',   date: '2026-06-01', status: 'Under Review' },
-  { id: 'BHV-009', studentName: 'Harsh Pandey',      class: 'Class 9',  program: 'Lakshya',  type: 'Concern',      category: 'Mental Health Flag',     reportedBy: 'Counsellor Ritu',   date: '2026-05-30', status: 'Pending' },
-  { id: 'BHV-010', studentName: 'Ishita Bhatt',      class: 'Class 12', program: 'Deekshya', type: 'Positive',     category: 'Helping Peers',          reportedBy: 'Mr. Anil Joshi',    date: '2026-05-29', status: 'Resolved' },
+  { id: 'BHV-001', studentName: 'Rahul Gupta',      class: 'Class 12', program: 'IIT',  type: 'Positive',     category: 'Academic Excellence',   reportedBy: 'Dr. Anand Kumar',   date: '2026-06-08', status: 'Resolved' },
+  { id: 'BHV-002', studentName: 'Simran Kaur',       class: 'Class 11', program: 'NEET', type: 'Disciplinary', category: 'Unauthorised Absence',   reportedBy: 'Ms. Priya Sharma',  date: '2026-06-07', status: 'Under Review' },
+  { id: 'BHV-003', studentName: 'Nikhil Joshi',      class: 'Class 10', program: 'IIT',  type: 'Concern',      category: 'Declining Performance',  reportedBy: 'Mr. Ravi Tiwari',   date: '2026-06-06', status: 'Pending' },
+  { id: 'BHV-004', studentName: 'Pooja Agarwal',     class: 'Class 12', program: 'UPSC',    type: 'Positive',     category: 'Leadership Award',       reportedBy: 'Dr. Sunita Rao',    date: '2026-06-05', status: 'Resolved' },
+  { id: 'BHV-005', studentName: 'Siddharth Mishra',  class: 'Class 9',  program: 'NEET', type: 'Disciplinary', category: 'Mobile Phone Violation',  reportedBy: 'Mr. Alok Verma',    date: '2026-06-04', status: 'Resolved' },
+  { id: 'BHV-006', studentName: 'Kavya Pillai',      class: 'Class 11', program: 'IIT',  type: 'Concern',      category: 'Peer Conflict',          reportedBy: 'Ms. Deepa Nair',    date: '2026-06-03', status: 'Under Review' },
+  { id: 'BHV-007', studentName: 'Arnav Kapoor',      class: 'Class 8',  program: 'NEET', type: 'Positive',     category: 'Best Attendance Award',  reportedBy: 'Mr. Suresh Babu',   date: '2026-06-02', status: 'Resolved' },
+  { id: 'BHV-008', studentName: 'Tanvi Desai',       class: 'Class 10', program: 'UPSC',    type: 'Disciplinary', category: 'Academic Misconduct',    reportedBy: 'Dr. Meera Singh',   date: '2026-06-01', status: 'Under Review' },
+  { id: 'BHV-009', studentName: 'Harsh Pandey',      class: 'Class 9',  program: 'IIT',  type: 'Concern',      category: 'Mental Health Flag',     reportedBy: 'Counsellor Ritu',   date: '2026-05-30', status: 'Pending' },
+  { id: 'BHV-010', studentName: 'Ishita Bhatt',      class: 'Class 12', program: 'NEET', type: 'Positive',     category: 'Helping Peers',          reportedBy: 'Mr. Anil Joshi',    date: '2026-05-29', status: 'Resolved' },
 ];
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -83,9 +83,9 @@ const statusBadge = (status: BehaviorStatus) => {
 
 const programBadge = (program: string) => {
   const map: Record<string, string> = {
-    Lakshya:  'bg-violet-50 text-violet-600',
-    Deekshya: 'bg-teal-50 text-teal-600',
-    DAFNE:    'bg-orange-50 text-orange-600',
+    IIT:  'bg-violet-50 text-violet-600',
+    NEET: 'bg-teal-50 text-teal-600',
+    UPSC:    'bg-orange-50 text-orange-600',
   };
   return (
     <span className={`text-xs font-medium px-2 py-0.5 rounded ${map[program] ?? 'bg-slate-100 text-slate-500'}`}>
@@ -119,7 +119,7 @@ export default function AdminBehaviorTracking() {
             Behaviour Tracking
           </h1>
           <p className="text-sm text-slate-500 mt-1">
-            Monitor student behaviour across Lakshya, Deekshya & DAFNE programs
+            Monitor student behaviour across IIT, NEET & UPSC programs
           </p>
         </div>
         <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-600 shadow-sm cursor-pointer hover:bg-slate-50 transition">

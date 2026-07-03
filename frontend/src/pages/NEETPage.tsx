@@ -5,7 +5,7 @@ import { CheckCircle, Activity, HeartPulse, ShieldPlus, Users, Award } from 'luc
 import Navbar from '../components/Navbar';
 
 
-const DeekshyaPage = () => {
+const NEETPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-emerald-50/30">
       <Navbar />
@@ -23,7 +23,7 @@ const DeekshyaPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6"
             >
-              Deekshya <span className="text-emerald-400">Program</span>
+              NEET <span className="text-emerald-400">Program</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,10 @@ const DeekshyaPage = () => {
               transition={{ delay: 0.4 }}
               className="flex justify-center gap-6"
             >
-              <Link to="/deekshya/register" className="px-8 py-4 font-bold text-emerald-900 bg-emerald-400 rounded-xl hover:bg-emerald-300 transition-colors shadow-lg">
+              <Link to="/neet/register" className="px-8 py-4 font-bold text-emerald-900 bg-emerald-400 rounded-xl hover:bg-emerald-300 transition-colors shadow-lg">
                 Register Now
               </Link>
-              <Link to="/deekshya/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
+              <Link to="/neet/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
                 Login
               </Link>
             </motion.div>
@@ -53,10 +53,10 @@ const DeekshyaPage = () => {
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">About Deekshya</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">About NEET</h2>
               <div className="w-24 h-1 bg-emerald-500 mx-auto rounded-full mb-8" />
               <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                Deekshya is our specialized medical entrance coaching program. Designed specifically for aspiring doctors, it provides an immersive, concept-driven learning environment tailored for NEET and State Medical Exams.
+                NEET is our specialized medical entrance coaching program. Designed specifically for aspiring doctors, it provides an immersive, concept-driven learning environment tailored for NEET and State Medical Exams.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -138,7 +138,7 @@ const DeekshyaPage = () => {
 );
 };
 
-export default DeekshyaPage;
+export default NEETPage;
 
 
 

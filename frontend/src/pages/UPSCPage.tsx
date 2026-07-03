@@ -5,7 +5,7 @@ import { CheckCircle, Landmark, Users, TrendingUp, Presentation, MessageSquare, 
 import Navbar from '../components/Navbar';
 
 
-const DafnePage = () => {
+const UPSCPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
@@ -23,7 +23,7 @@ const DafnePage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6"
             >
-              DAFNE <span className="text-amber-500">Program</span>
+              UPSC <span className="text-amber-500">Program</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,10 @@ const DafnePage = () => {
               transition={{ delay: 0.4 }}
               className="flex justify-center gap-6"
             >
-              <Link to="/dafne/register" className="px-8 py-4 font-bold text-slate-900 bg-amber-500 rounded-xl hover:bg-amber-400 transition-colors shadow-lg">
+              <Link to="/upsc/register" className="px-8 py-4 font-bold text-slate-900 bg-amber-500 rounded-xl hover:bg-amber-400 transition-colors shadow-lg">
                 Register Now
               </Link>
-              <Link to="/dafne/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
+              <Link to="/upsc/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
                 Login
               </Link>
             </motion.div>
@@ -53,10 +53,10 @@ const DafnePage = () => {
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">About DAFNE</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">About UPSC</h2>
               <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-8" />
               <p className="text-lg text-slate-600 max-w-4xl mx-auto">
-                DAFNE is meticulously designed for students aspiring to Civil Services, Government Jobs, Public Administration, Law, Economics, and Leadership Careers.
+                UPSC is meticulously designed for students aspiring to Civil Services, Government Jobs, Public Administration, Law, Economics, and Leadership Careers.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -159,7 +159,7 @@ const DafnePage = () => {
 );
 };
 
-export default DafnePage;
+export default UPSCPage;
 
 
 

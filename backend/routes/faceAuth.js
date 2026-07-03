@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const FaceAuditLog = require('../models/FaceAuditLog');
-const TeacherAttendance = require('../models/TeacherAttendance');
+const prisma = require('../prisma/client');
 const jwt = require('jsonwebtoken');
 const { cosineSimilarity } = require('../utils/math');
 
@@ -19,7 +17,7 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ msg: 'Email and image are required' });
     }
 
-    const user = await User.findOne({ email });
+    const user = await prisma.user.findFirst({ where: { email } });
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
@@ -43,7 +41,10 @@ router.post('/register', async (req, res) => {
     const { embedding } = aiData;
 
     // Check for duplicate face across all users
-    const allUsers = await User.find({ faceLoginEnabled: true, faceEmbedding: { $exists: true, $not: {$size: 0} } }).select('+faceEmbedding fullName email');
+    const allUsers = await prisma.user.findMany({ 
+      where: { faceLoginEnabled: true, faceEmbedding: { not: null } },
+      select: { faceEmbedding: true, fullName: true, email: true }
+    });
     
     for (const u of allUsers) {
       if (u.email === email) continue; // Skip checking against themselves if they are updating their face
@@ -56,7 +57,10 @@ router.post('/register', async (req, res) => {
 
     user.faceEmbedding = embedding;
     user.faceLoginEnabled = true;
-    await user.save();
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { faceEmbedding: embedding, faceLoginEnabled: true }
+    });
 
     res.json({ msg: 'Face registered successfully' });
   } catch (err) {
@@ -108,13 +112,13 @@ router.post('/login', async (req, res) => {
     // 3. Find Best Match
     // In production with millions of users, use a vector DB like Milvus/Pinecone.
     // For this prototype, fetch all users with faceLoginEnabled and calculate in-memory.
-    let usersQuery = { faceLoginEnabled: true, faceEmbedding: { $exists: true, $not: {$size: 0} } };
+    let usersQuery = { faceLoginEnabled: true, faceEmbedding: { not: null } };
     if (email) {
       usersQuery.email = email;
     }
     
     // Need to explicitly select faceEmbedding since it's select:false
-    const users = await User.find(usersQuery).select('+faceEmbedding');
+    const users = await prisma.user.findMany({ where: usersQuery });
 
     if (users.length === 0) {
       await createLog(null, email || 'unknown', clientIp, 0, liveness_score, 'Failed - User Not Found');
@@ -136,28 +140,32 @@ router.post('/login', async (req, res) => {
 
     if (highestScore >= MATCH_THRESHOLD && bestMatchUser) {
       if (bestMatchUser.status === 'Inactive') {
-        await createLog(bestMatchUser._id, bestMatchUser.email, clientIp, highestScore, liveness_score, 'Failed - Account Suspended');
+        await createLog(bestMatchUser.id, bestMatchUser.email, clientIp, highestScore, liveness_score, 'Failed - Account Suspended');
         return res.status(403).json({ msg: 'Account is suspended. Please contact administrator.' });
       }
 
       // 4. Success Login
-      await createLog(bestMatchUser._id, bestMatchUser.email, clientIp, highestScore, liveness_score, 'Success');
+      await createLog(bestMatchUser.id, bestMatchUser.email, clientIp, highestScore, liveness_score, 'Success');
 
       // 5. Teacher Attendance Logic
       if (bestMatchUser.role === 'Teacher') {
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Start of day
 
-        const existingAttendance = await TeacherAttendance.findOne({
-          teacherId: bestMatchUser._id,
-          date: { $gte: today, $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) }
+        const existingAttendance = await prisma.teacherAttendance.findFirst({
+          where: {
+            teacherId: bestMatchUser.id,
+            date: { gte: today, lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) }
+          }
         });
 
         if (!existingAttendance) {
-          await TeacherAttendance.create({
-            teacherId: bestMatchUser._id,
-            date: new Date(),
-            status: 'Present'
+          await prisma.teacherAttendance.create({
+            data: {
+              teacherId: bestMatchUser.id,
+              date: new Date(),
+              status: 'Present'
+            }
           });
         }
       }
@@ -192,13 +200,15 @@ router.post('/login', async (req, res) => {
 
 async function createLog(userId, email, ip, matchScore, livenessScore, status) {
   try {
-    await FaceAuditLog.create({
-      userId,
-      emailAttempted: email,
-      ipAddress: ip,
-      matchScore,
-      livenessScore,
-      status
+    await prisma.faceAuditLog.create({
+      data: {
+        userId,
+        emailAttempted: email,
+        ipAddress: ip,
+        matchScore,
+        livenessScore,
+        status
+      }
     });
   } catch(e) {
     console.error('Audit log failed', e);
@@ -208,7 +218,13 @@ async function createLog(userId, email, ip, matchScore, livenessScore, status) {
 // Get Audit Logs (Admin)
 router.get('/logs', async (req, res) => {
   try {
-    const logs = await FaceAuditLog.find().sort({ attemptTime: -1 }).limit(100).populate('userId', 'fullName email');
+    const logs = await prisma.faceAuditLog.findMany({
+      orderBy: { attemptTime: 'desc' },
+      take: 100,
+      include: {
+        user: { select: { fullName: true, email: true } }
+      }
+    });
     res.json(logs);
   } catch (err) {
     res.status(500).json({ msg: 'Server error' });

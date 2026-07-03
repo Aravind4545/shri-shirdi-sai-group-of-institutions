@@ -1,11 +1,11 @@
 import GlobalFooter from '../components/GlobalFooter';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CheckCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 
-const DafneRegisterPage = () => {
+const UPSCRegisterPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
@@ -67,7 +67,7 @@ const DafneRegisterPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -79,7 +79,7 @@ const DafneRegisterPage = () => {
           dateOfBirth: formData.dateOfBirth,
           academicInfo: formData.academicInfo,
           programInfo: {
-            program: 'DAFNE',
+            program: 'UPSC',
             stream: formData.stream,
             exams: []
           }
@@ -99,7 +99,7 @@ const DafneRegisterPage = () => {
         gender: '',
         dateOfBirth: '',
         academicInfo: { intermediateYear: '', collegeName: '', state: '' },
-        exams: []
+        stream: ''
       });
     } catch (err: any) {
       setError(err.message);
@@ -114,11 +114,11 @@ const DafneRegisterPage = () => {
       <main className="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 flex justify-center">
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl w-full max-w-4xl border border-slate-200">
           <div className="mb-8">
-            <Link to="/dafne" className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium mb-6">
-              <ArrowLeft className="mr-2 w-5 h-5" /> Back to DAFNE Program
+            <Link to="/upsc" className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium mb-6">
+              <ArrowLeft className="mr-2 w-5 h-5" /> Back to UPSC Program
             </Link>
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Student Registration</h1>
-            <p className="text-slate-500">Program: <span className="font-bold text-amber-600">DAFNE</span></p>
+            <p className="text-slate-500">Program: <span className="font-bold text-amber-600">UPSC</span></p>
           </div>
 
           {error && (
@@ -230,7 +230,7 @@ const DafneRegisterPage = () => {
             </div>
 
             <div className="pt-6 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between">
-              <p className="text-slate-500 text-sm mb-4 md:mb-0">Already have an account? <Link to="/dafne/login" className="text-blue-600 font-bold hover:underline">Log in</Link></p>
+              <p className="text-slate-500 text-sm mb-4 md:mb-0">Already have an account? <Link to="/upsc/login" className="text-blue-600 font-bold hover:underline">Log in</Link></p>
               <button 
                 type="submit" 
                 disabled={loading}
@@ -247,7 +247,7 @@ const DafneRegisterPage = () => {
 );
 };
 
-export default DafneRegisterPage;
+export default UPSCRegisterPage;
 
 
 

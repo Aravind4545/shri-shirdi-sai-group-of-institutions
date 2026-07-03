@@ -6,7 +6,7 @@ import { CheckCircle, BookOpen, Target, PenTool, Users, Award } from 'lucide-rea
 import Navbar from '../components/Navbar';
 
 
-const LakshyaPage = () => {
+const IITPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-brand-light">
       <Navbar />
@@ -24,7 +24,7 @@ const LakshyaPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6"
             >
-              Lakshya <span className="text-brand-gold">Program</span>
+              IIT <span className="text-brand-gold">Program</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -40,10 +40,10 @@ const LakshyaPage = () => {
               transition={{ delay: 0.4 }}
               className="flex justify-center gap-6"
             >
-              <Link to="/lakshya/register" className="px-8 py-4 font-bold text-brand-dark bg-brand-gold rounded-xl hover:bg-yellow-500 transition-colors shadow-lg">
+              <Link to="/iit/register" className="px-8 py-4 font-bold text-brand-dark bg-brand-gold rounded-xl hover:bg-yellow-500 transition-colors shadow-lg">
                 Register Now
               </Link>
-              <Link to="/lakshya/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
+              <Link to="/iit/login" className="px-8 py-4 font-bold text-white bg-transparent border-2 border-white rounded-xl hover:bg-white/10 transition-colors shadow-lg">
                 Login
               </Link>
             </motion.div>
@@ -54,10 +54,10 @@ const LakshyaPage = () => {
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-brand-dark mb-4">About Lakshya</h2>
+              <h2 className="text-3xl font-bold text-brand-dark mb-4">About IIT</h2>
               <div className="w-24 h-1 bg-brand-blue mx-auto rounded-full mb-8" />
               <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                Lakshya is our flagship engineering program tailored for aspirants aiming to conquer JEE Main, JEE Advanced, and state-level engineering entrance exams. We provide a rigorous, meticulously planned academic ecosystem.
+                IIT is our flagship engineering program tailored for aspirants aiming to conquer JEE Main, JEE Advanced, and state-level engineering entrance exams. We provide a rigorous, meticulously planned academic ecosystem.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -138,7 +138,7 @@ const LakshyaPage = () => {
 );
 };
 
-export default LakshyaPage;
+export default IITPage;
 
 
 

@@ -18,7 +18,7 @@ import {
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Priority = "High" | "Medium" | "Low";
 type Status = "Active" | "Draft" | "Expired";
-type Target = "All" | "Lakshya" | "Deekshya" | "DAFNE" | "Teachers";
+type Target = "All" | "IIT" | "NEET" | "UPSC" | "Teachers";
 
 interface Announcement {
   id: number;
@@ -35,7 +35,7 @@ const initialAnnouncements: Announcement[] = [
   {
     id: 1,
     title: "JEE Main 2026 – Mock Test Series Schedule Released",
-    target: "Lakshya",
+    target: "IIT",
     priority: "High",
     createdDate: "2026-06-09",
     status: "Active",
@@ -43,8 +43,8 @@ const initialAnnouncements: Announcement[] = [
   },
   {
     id: 2,
-    title: "NEET PG Orientation Session – All Deekshya Students Mandatory",
-    target: "Deekshya",
+    title: "NEET PG Orientation Session – All NEET Students Mandatory",
+    target: "NEET",
     priority: "High",
     createdDate: "2026-06-08",
     status: "Active",
@@ -61,8 +61,8 @@ const initialAnnouncements: Announcement[] = [
   },
   {
     id: 4,
-    title: "UPSC Prelims Strategy Workshop – DAFNE Batch Only",
-    target: "DAFNE",
+    title: "UPSC Prelims Strategy Workshop – UPSC Batch Only",
+    target: "UPSC",
     priority: "High",
     createdDate: "2026-06-07",
     status: "Active",
@@ -98,7 +98,7 @@ const initialAnnouncements: Announcement[] = [
   {
     id: 8,
     title: "New Study Material Uploaded – Organic Chemistry Vol. 3",
-    target: "Deekshya",
+    target: "NEET",
     priority: "Medium",
     createdDate: "2026-06-03",
     status: "Draft",
@@ -107,7 +107,7 @@ const initialAnnouncements: Announcement[] = [
   {
     id: 9,
     title: "Motivational Webinar – 'Cracking UPSC in First Attempt'",
-    target: "DAFNE",
+    target: "UPSC",
     priority: "Low",
     createdDate: "2026-05-30",
     status: "Expired",
@@ -165,9 +165,9 @@ const StatusBadge = ({ status }: { status: Status }) => {
 const TargetTag = ({ target }: { target: Target }) => {
   const map: Record<Target, string> = {
     All: "bg-indigo-50 text-indigo-700 border border-indigo-100",
-    Lakshya: "bg-blue-50 text-blue-700 border border-blue-100",
-    Deekshya: "bg-purple-50 text-purple-700 border border-purple-100",
-    DAFNE: "bg-teal-50 text-teal-700 border border-teal-100",
+    IIT: "bg-blue-50 text-blue-700 border border-blue-100",
+    NEET: "bg-purple-50 text-purple-700 border border-purple-100",
+    UPSC: "bg-teal-50 text-teal-700 border border-teal-100",
     Teachers: "bg-orange-50 text-orange-700 border border-orange-100",
   };
   return (
@@ -301,7 +301,7 @@ const AddAnnouncementModal: React.FC<ModalProps> = ({ onClose, onAdd }) => {
                   value={form.target}
                   onChange={(e) => setForm({ ...form, target: e.target.value as Target })}
                 >
-                  {(["All", "Lakshya", "Deekshya", "DAFNE", "Teachers"] as Target[]).map(
+                  {(["All", "IIT", "NEET", "UPSC", "Teachers"] as Target[]).map(
                     (t) => <option key={t}>{t}</option>
                   )}
                 </select>

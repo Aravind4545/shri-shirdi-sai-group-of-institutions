@@ -19,7 +19,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-7xl font-extrabold text-brand-dark tracking-tight mb-6">
-            Sri Shirdi Sai <span className="text-brand-blue">Institutions</span>
+            Academic Companion
           </h1>
         </motion.div>
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const aiConversationSchema = new mongoose.Schema({
   studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  program: { type: String }, // Lakshya, Deekshya, DAFNE
+  program: { type: String }, // IIT, NEET, UPSC
   messages: [{
     role: { type: String, enum: ['user', 'assistant', 'system'] },
     content: { type: String },

@@ -5,7 +5,7 @@ import { ArrowLeft, LogIn } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 
-const LoginPage = () => {
+const IITLoginPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -24,7 +24,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -55,7 +55,7 @@ const LoginPage = () => {
               <LogIn className="w-8 h-8 text-brand-blue" />
             </div>
             <h1 className="text-3xl font-extrabold text-brand-dark mb-2">Welcome Back</h1>
-            <p className="text-gray-500">Sign in to your Lakshya Student Portal</p>
+            <p className="text-gray-500">Sign in to your IIT Student Portal</p>
           </div>
 
           {error && (
@@ -101,11 +101,11 @@ const LoginPage = () => {
 
           <div className="mt-8 text-center border-t border-gray-100 pt-6">
             <p className="text-gray-500 text-sm mb-4">Don't have an account?</p>
-            <Link to="/lakshya/register" className="text-brand-blue font-bold hover:underline">Register for Lakshya</Link>
+            <Link to="/iit/register" className="text-brand-blue font-bold hover:underline">Register for IIT</Link>
           </div>
           <div className="mt-4 text-center">
-            <Link to="/lakshya" className="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 transition-colors">
-              <ArrowLeft className="mr-1 w-4 h-4" /> Back to Lakshya Program
+            <Link to="/iit" className="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 transition-colors">
+              <ArrowLeft className="mr-1 w-4 h-4" /> Back to IIT Program
             </Link>
           </div>
         </div>
@@ -115,7 +115,7 @@ const LoginPage = () => {
 );
 };
 
-export default LoginPage;
+export default IITLoginPage;
 
 
 

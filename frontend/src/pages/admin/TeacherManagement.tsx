@@ -36,7 +36,7 @@ const TeacherManagement = () => {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers');
+      const res = await fetch('/api/teachers');
       const data = await res.json();
       setTeachers(data);
       setLoading(false);
@@ -74,7 +74,7 @@ const TeacherManagement = () => {
         mobileNumber: '',
         password: '',
         subject: '',
-        assignedProgram: 'Lakshya',
+        assignedProgram: 'IIT',
         status: 'Active'
       });
     }
@@ -86,7 +86,7 @@ const TeacherManagement = () => {
     setFormError('');
     try {
       const isEdit = !!selectedTeacher;
-      const url = isEdit ? `https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${selectedTeacher._id}` : `https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers`;
+      const url = isEdit ? '/api/teachers/${selectedTeacher._id}' : '/api/teachers';
       const method = isEdit ? 'PUT' : 'POST';
       
       const payload = { ...formData };
@@ -115,7 +115,7 @@ const TeacherManagement = () => {
   const handleDeleteTeacher = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this teacher?')) return;
     try {
-      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${id}`, { method: 'DELETE' });
+      await fetch('/api/teachers/${id}', { method: 'DELETE' });
       fetchTeachers();
     } catch (err) {
       console.error(err);
@@ -125,7 +125,7 @@ const TeacherManagement = () => {
   const toggleTeacherStatus = async (id: string, currentStatus: string) => {
     try {
       const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
-      await fetch(`https://shri-shirdi-sai-group-of-institutions.onrender.com/api/teachers/${id}`, {
+      await fetch('/api/teachers/${id}', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
@@ -154,7 +154,7 @@ const TeacherManagement = () => {
     setFaceError('');
     try {
       // Use the email specifically for face auth mapping
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/faceAuth/register', {
+      const res = await fetch('/api/faceAuth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -361,9 +361,9 @@ const TeacherManagement = () => {
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-1">Assigned Program</label>
                   <select value={formData.assignedProgram} onChange={e => setFormData({...formData, assignedProgram: e.target.value})} className="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue outline-none bg-white">
-                    <option value="Lakshya">Lakshya</option>
-                    <option value="Deekshya">Deekshya</option>
-                    <option value="DAFNE">DAFNE</option>
+                    <option value="IIT">IIT</option>
+                    <option value="NEET">NEET</option>
+                    <option value="UPSC">UPSC</option>
                     <option value="All">All Programs</option>
                   </select>
                 </div>

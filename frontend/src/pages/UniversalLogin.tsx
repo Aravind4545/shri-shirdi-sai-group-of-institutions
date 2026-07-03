@@ -44,7 +44,7 @@ const UniversalLogin = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -73,7 +73,7 @@ const UniversalLogin = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/faceAuth/login', {
+      const res = await fetch('/api/faceAuth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64 })
@@ -98,7 +98,7 @@ const UniversalLogin = () => {
         <Link to="/" className="inline-flex items-center space-x-2">
           <BookOpen className="h-10 w-10 text-brand-blue" />
           <span className="font-bold text-2xl tracking-tight text-slate-800">
-            Sri Shirdi Sai
+            Academic Companion
           </span>
         </Link>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 tracking-tight">

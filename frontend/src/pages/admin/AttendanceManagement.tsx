@@ -56,20 +56,20 @@ const pieData = [
 const PIE_COLORS = ["#10b981", "#ef4444", "#f59e0b"];
 
 const lowAttendanceStudents = [
-  { id: 1, name: "Arjun Sharma",     class: "12B", program: "Lakshya",  attendance: 68, daysAbsent: 22, status: "Critical" },
-  { id: 2, name: "Priya Nair",       class: "11A", program: "Deekshya", attendance: 71, daysAbsent: 20, status: "Critical" },
-  { id: 3, name: "Rohit Verma",      class: "10B", program: "Lakshya",  attendance: 72, daysAbsent: 19, status: "Warning"  },
-  { id: 4, name: "Sneha Pillai",     class: "9A",  program: "DAFNE",    attendance: 73, daysAbsent: 18, status: "Warning"  },
-  { id: 5, name: "Kiran Mehta",      class: "11B", program: "Deekshya", attendance: 69, daysAbsent: 21, status: "Critical" },
-  { id: 6, name: "Divya Krishnan",   class: "12A", program: "Lakshya",  attendance: 74, daysAbsent: 17, status: "Warning"  },
-  { id: 7, name: "Aditya Rao",       class: "10A", program: "DAFNE",    attendance: 70, daysAbsent: 21, status: "Critical" },
-  { id: 8, name: "Meena Joshi",      class: "12B", program: "Deekshya", attendance: 73, daysAbsent: 18, status: "Warning"  },
-  { id: 9, name: "Suresh Kumar",     class: "11A", program: "Lakshya",  attendance: 67, daysAbsent: 23, status: "Critical" },
-  { id: 10, name: "Lakshmi Devi",    class: "9A",  program: "DAFNE",    attendance: 74, daysAbsent: 17, status: "Warning"  },
+  { id: 1, name: "Arjun Sharma",     class: "12B", program: "IIT",  attendance: 68, daysAbsent: 22, status: "Critical" },
+  { id: 2, name: "Priya Nair",       class: "11A", program: "NEET", attendance: 71, daysAbsent: 20, status: "Critical" },
+  { id: 3, name: "Rohit Verma",      class: "10B", program: "IIT",  attendance: 72, daysAbsent: 19, status: "Warning"  },
+  { id: 4, name: "Sneha Pillai",     class: "9A",  program: "UPSC",    attendance: 73, daysAbsent: 18, status: "Warning"  },
+  { id: 5, name: "Kiran Mehta",      class: "11B", program: "NEET", attendance: 69, daysAbsent: 21, status: "Critical" },
+  { id: 6, name: "Divya Krishnan",   class: "12A", program: "IIT",  attendance: 74, daysAbsent: 17, status: "Warning"  },
+  { id: 7, name: "Aditya Rao",       class: "10A", program: "UPSC",    attendance: 70, daysAbsent: 21, status: "Critical" },
+  { id: 8, name: "Meena Joshi",      class: "12B", program: "NEET", attendance: 73, daysAbsent: 18, status: "Warning"  },
+  { id: 9, name: "Suresh Kumar",     class: "11A", program: "IIT",  attendance: 67, daysAbsent: 23, status: "Critical" },
+  { id: 10, name: "Lakshmi Devi",    class: "9A",  program: "UPSC",    attendance: 74, daysAbsent: 17, status: "Warning"  },
 ];
 
 const classes = ["All Classes", "12A", "12B", "11A", "11B", "10A", "10B", "9A"];
-const programs = ["All Programs", "Lakshya", "Deekshya", "DAFNE"];
+const programs = ["All Programs", "IIT", "NEET", "UPSC"];
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
 
@@ -299,9 +299,9 @@ const AttendanceManagement: React.FC = () => {
           <h2 className="text-base font-semibold text-slate-700 mb-4">Program-wise Summary</h2>
           <div className="space-y-4">
             {[
-              { program: "Lakshya", desc: "Engineering Prep", students: 520, attendance: 92.1, color: "bg-indigo-500" },
-              { program: "Deekshya", desc: "Medical Prep", students: 480, attendance: 90.8, color: "bg-emerald-500" },
-              { program: "DAFNE", desc: "Civil Services Prep", students: 250, attendance: 88.6, color: "bg-amber-500" },
+              { program: "IIT", desc: "Engineering Prep", students: 520, attendance: 92.1, color: "bg-indigo-500" },
+              { program: "NEET", desc: "Medical Prep", students: 480, attendance: 90.8, color: "bg-emerald-500" },
+              { program: "UPSC", desc: "Civil Services Prep", students: 250, attendance: 88.6, color: "bg-amber-500" },
             ].map((row) => (
               <div key={row.program}>
                 <div className="flex items-center justify-between mb-1.5">
@@ -376,9 +376,9 @@ const AttendanceManagement: React.FC = () => {
                   <td className="py-3 pr-4 text-slate-600">{s.class}</td>
                   <td className="py-3 pr-4">
                     <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                      s.program === "Lakshya"
+                      s.program === "IIT"
                         ? "bg-indigo-50 text-indigo-600"
-                        : s.program === "Deekshya"
+                        : s.program === "NEET"
                         ? "bg-emerald-50 text-emerald-600"
                         : "bg-amber-50 text-amber-600"
                     }`}>

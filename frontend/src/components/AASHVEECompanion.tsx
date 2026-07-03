@@ -27,7 +27,7 @@ const AASHVEECompanion = () => {
 
   const fetchCompanionConfig = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/companion/config', {
+      const res = await fetch('/api/companion/config', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) {
@@ -44,7 +44,7 @@ const AASHVEECompanion = () => {
 
   const handleSaveConfig = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/companion/config', {
+      const res = await fetch('/api/companion/config', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const ActiveCompanion = ({ settings }: { settings: any }) => {
 
   const fetchInteraction = async () => {
     try {
-      const res = await fetch('https://shri-shirdi-sai-group-of-institutions.onrender.com/api/companion/daily-interaction', {
+      const res = await fetch('/api/companion/daily-interaction', {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       if (res.ok) setDailyInteraction(await res.json());

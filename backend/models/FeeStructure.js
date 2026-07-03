@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const feeStructureSchema = new mongoose.Schema({
-  program: { type: String, required: true, unique: true }, // Lakshya, Deekshya, DAFNE
+  program: { type: String, required: true, unique: true }, // IIT, NEET, UPSC
   baseTuitionFee: { type: Number, required: true },
   studyMaterialFee: { type: Number, default: 0 },
   labResourceFee: { type: Number, default: 0 },
