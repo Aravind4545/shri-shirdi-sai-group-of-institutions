@@ -45,9 +45,13 @@ router.post('/register', [
         password: hashedPassword,
         mobileNumber,
         gender,
-        dateOfBirth,
-        academicInfo,
-        programInfo,
+        dateOfBirth: new Date(dateOfBirth),
+        academicInfo_intermediateYear: academicInfo?.intermediateYear,
+        academicInfo_collegeName: academicInfo?.collegeName,
+        academicInfo_state: academicInfo?.state,
+        programInfo_program: programInfo?.program,
+        programInfo_stream: programInfo?.stream,
+        programInfo_exams: programInfo?.exams || [],
         isApproved: false
       }
     });
