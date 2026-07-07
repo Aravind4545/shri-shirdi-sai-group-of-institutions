@@ -12,7 +12,7 @@ const ensureRanks = async () => {
       rank = await prisma.ranking.create({
         data: {
           studentId: student.id,
-          program: student.programInfo.program,
+          program: student.programInfo_program,
           globalRank: index + 1,
           programRank: index + 1,
           overallScore: Math.floor(Math.random() * 40) + 60, // 60-100
@@ -48,11 +48,24 @@ const ensureRanks = async () => {
 router.get('/global', auth, async (req, res) => {
   try {
     await ensureRanks();
-    const rankings = await prisma.ranking.findMany({
-      include: { student: { select: { fullName: true, profilePicture: true, programInfo_program: true, programInfo_stream: true } } },
+    let rankings = await prisma.ranking.findMany({
       orderBy: { overallScore: 'desc' },
       take: 50
     });
+    
+    // Manually fetch student data since schema doesn't have @relation
+    for (let i = 0; i < rankings.length; i++) {
+      const student = await prisma.user.findUnique({ 
+        where: { id: rankings[i].studentId },
+        select: { fullName: true, programInfo_program: true, programInfo_stream: true }
+      });
+      rankings[i].studentId = student || {}; // Frontend uses r.studentId?.fullName
+      // Wait, frontend uses r.studentId?.fullName or r.student?.fullName?
+      // In the frontend AdminLeaderboard.tsx it uses r.studentId?.fullName !
+      // In leaderboard.js the previous code was: include: { student: { ... } }
+      // but if the frontend expects studentId.fullName, I should assign it to studentId
+    }
+    
     res.json(rankings);
   } catch (err) {
     console.error(err.message);
@@ -65,12 +78,18 @@ router.get('/global', auth, async (req, res) => {
 router.get('/program/:program', auth, async (req, res) => {
   try {
     await ensureRanks();
-    const rankings = await prisma.ranking.findMany({
+    let rankings = await prisma.ranking.findMany({
       where: { program: req.params.program },
-      include: { student: { select: { fullName: true, profilePicture: true, programInfo_program: true, programInfo_stream: true } } },
       orderBy: { overallScore: 'desc' },
       take: 50
     });
+    for (let i = 0; i < rankings.length; i++) {
+      const student = await prisma.user.findUnique({ 
+        where: { id: rankings[i].studentId },
+        select: { fullName: true, programInfo_program: true, programInfo_stream: true }
+      });
+      rankings[i].studentId = student || {}; 
+    }
     res.json(rankings);
   } catch (err) {
     console.error(err.message);
@@ -84,9 +103,12 @@ router.get('/me', auth, async (req, res) => {
   try {
     await ensureRanks();
     const rank = await prisma.ranking.findFirst({
-      where: { studentId: req.user.id },
-      include: { student: { select: { fullName: true, programInfo_program: true, programInfo_stream: true } } }
+      where: { studentId: req.user.id }
     });
+    if (rank) {
+      const student = await prisma.user.findUnique({ where: { id: req.user.id }, select: { fullName: true, programInfo_program: true, programInfo_stream: true }});
+      rank.studentId = student || {};
+    }
     const achievements = await prisma.achievement.findMany({
       where: { studentId: req.user.id },
       orderBy: { earnedAt: 'desc' }
@@ -117,11 +139,17 @@ router.get('/me', auth, async (req, res) => {
 router.get('/teacher', auth, async (req, res) => {
   try {
     const teacher = await prisma.user.findUnique({ where: { id: req.user.id } });
-    const rankings = await prisma.ranking.findMany({
-      where: { program: teacher.programInfo.program },
-      include: { student: { select: { fullName: true, email: true } } },
+    let rankings = await prisma.ranking.findMany({
+      where: { program: teacher.programInfo_program },
       orderBy: { overallScore: 'desc' }
     });
+    for (let i = 0; i < rankings.length; i++) {
+      const student = await prisma.user.findUnique({ 
+        where: { id: rankings[i].studentId },
+        select: { fullName: true, email: true }
+      });
+      rankings[i].studentId = student || {}; 
+    }
     res.json(rankings);
   } catch (err) {
     console.error(err.message);
