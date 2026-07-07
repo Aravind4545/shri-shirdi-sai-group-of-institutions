@@ -20,10 +20,7 @@ const ensureRanks = async () => {
           assignmentScore: Math.floor(Math.random() * 30) + 70,
           testScore: Math.floor(Math.random() * 40) + 60,
           healthScore: Math.floor(Math.random() * 25) + 75,
-          subjectScores: [
-            { subject: 'Physics', score: Math.floor(Math.random() * 40) + 60, rank: index + 1 },
-            { subject: 'Chemistry', score: Math.floor(Math.random() * 40) + 60, rank: index + 1 }
-          ]
+          subjectScores: []
         }
       });
 
