@@ -34,7 +34,7 @@ const FeeManagement = () => {
         const data = await res.json();
         // Decorate with dummy fee data for tracking
         const decorated = data.map((s: any) => {
-          const total = s.programInfo?.program === 'IIT' ? 65000 : s.programInfo?.program === 'NEET' ? 75000 : 45000;
+          const total = s.programInfo_program === 'IIT' ? 65000 : s.programInfo_program === 'NEET' ? 75000 : 45000;
           const paid = Math.floor(Math.random() * total);
           const due = total - paid;
           const status = due === 0 ? 'Paid' : (paid > 0 ? 'Partial' : 'Unpaid');
@@ -73,7 +73,7 @@ const FeeManagement = () => {
     }
   };
 
-  const filteredStudents = filterProgram === 'All' ? students : students.filter(s => s.programInfo?.program === filterProgram);
+  const filteredStudents = filterProgram === 'All' ? students : students.filter(s => s.programInfo_program === filterProgram);
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(val);
 
@@ -204,7 +204,7 @@ const FeeManagement = () => {
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {filteredStudents.length > 0 ? filteredStudents.map((s) => (
-                  <tr key={s._id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={s.id || s._id} className="hover:bg-slate-50 transition-colors">
                     <td className="p-4 pl-6">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
@@ -217,8 +217,8 @@ const FeeManagement = () => {
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className="font-semibold text-slate-700">{s.programInfo?.program}</span>
-                      <p className="text-xs text-slate-500">{s.programInfo?.stream}</p>
+                      <span className="font-semibold text-slate-700">{s.programInfo_program}</span>
+                      <p className="text-xs text-slate-500">{s.programInfo_stream}</p>
                     </td>
                     <td className="p-4 text-right font-mono font-bold text-slate-700">
                       {formatCurrency(s.feeTotal)}

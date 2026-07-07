@@ -22,7 +22,7 @@ const StudentManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this student?')) return;
     try {
-      await fetch('/api/admin/students/${id}', {
+      await fetch(`/api/admin/students/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': localStorage.getItem('adminToken') || '' }
       });
@@ -63,22 +63,22 @@ const StudentManagement = () => {
           </thead>
           <tbody>
             {filtered.map((student: any) => (
-              <tr key={student._id} className="border-b border-slate-100 hover:bg-slate-50">
+              <tr key={student.id || student._id} className="border-b border-slate-100 hover:bg-slate-50">
                 <td className="p-4 font-semibold text-slate-800">{student.fullName}</td>
                 <td className="p-4 text-slate-600">{student.email}</td>
                 <td className="p-4">
                   <span className={`px-2 py-1 rounded text-xs font-bold ${
-                    student.programInfo.program === 'IIT' ? 'bg-blue-100 text-blue-700' :
-                    student.programInfo.program === 'NEET' ? 'bg-emerald-100 text-emerald-700' :
+                    student.programInfo_program === 'IIT' ? 'bg-blue-100 text-blue-700' :
+                    student.programInfo_program === 'NEET' ? 'bg-emerald-100 text-emerald-700' :
                     'bg-slate-200 text-slate-800'
                   }`}>
-                    {student.programInfo.program}
+                    {student.programInfo_program}
                   </span>
                 </td>
-                <td className="p-4 text-slate-600 font-medium">{student.programInfo.stream}</td>
+                <td className="p-4 text-slate-600 font-medium">{student.programInfo_stream}</td>
                 <td className="p-4 flex gap-2">
                   <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"><Edit className="w-4 h-4" /></button>
-                  <button onClick={() => handleDelete(student._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                  <button onClick={() => handleDelete(student.id || student._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
                 </td>
               </tr>
             ))}
