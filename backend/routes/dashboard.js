@@ -3,12 +3,6 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
-
-
-
-
-
-
 // Helper to get user's program
 const getUserProgramInfo = async (userId) => {
   const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -53,6 +47,57 @@ router.get('/stats', auth, async (req, res) => {
 
 // @route   GET /api/dashboard/materials
 // @desc    Get study materials for student's program
+router.get('/materials', auth, async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const materials = await prisma.material.findMany({
+      where: { program: user.programInfo_program }
+    });
+    res.json(materials);
+  } catch (err) {
+    console.error(err.message); res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/dashboard/announcements
+// @desc    Get announcements
+router.get('/announcements', auth, async (req, res) => {
+  try {
+    const announcements = await prisma.announcement.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+    res.json(announcements);
+  } catch (err) {
+    console.error(err.message); res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/dashboard/tests
+// @desc    Get mock tests for student's program
+router.get('/tests', auth, async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const tests = await prisma.mockTest.findMany({
+      where: { targetProgram: user.programInfo_program }
+    });
+    res.json(tests);
+  } catch (err) {
+    console.error(err.message); res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/dashboard/results
+// @desc    Get test results for student
+router.get('/results', auth, async (req, res) => {
+  try {
+    const results = await prisma.testResult.findMany({
+      where: { studentId: req.user.id }
+    });
+    res.json(results);
+  } catch (err) {
+    console.error(err.message); res.status(500).send('Server Error');
+  }
+});
 
 // @route   GET /api/dashboard/attendance
 // @desc    Get detailed attendance
