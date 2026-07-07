@@ -52,7 +52,6 @@ const AdminLayout = () => {
     { name: 'Attendance', path: '/admin/attendance', icon: <CalendarCheck className="w-5 h-5" /> },
     { name: 'Teacher Attendance', path: '/admin/teacher-attendance', icon: <UserCheck className="w-5 h-5" /> },
     { name: 'Teacher Feedback', path: '/admin/teacher-feedback', icon: <UserCheck className="w-5 h-5" /> },
-    { name: 'Admissions', path: '/admin/erp/admissions', icon: <FileText className="w-5 h-5" /> },
     { name: 'CMS', path: '/admin/cms', icon: <FileEdit className="w-5 h-5" /> }
   ];
 
