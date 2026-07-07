@@ -14,10 +14,21 @@ router.get('/student', auth, async (req, res) => {
       health = await prisma.academicHealth.create({ data: {
         studentId: req.user.id,
         healthScore: 85,
-        components: { attendanceScore: 90, testScore: 82, assignmentScore: 88, studyActivityScore: 75 },
+        components_attendanceScore: 90,
+        components_testScore: 82,
+        components_assignmentScore: 88,
+        components_studyActivityScore: 75,
         status: 'Good'
       } });
     }
+    
+    // Format health for the frontend expectation
+    health.components = {
+      attendanceScore: health.components_attendanceScore,
+      testScore: health.components_testScore,
+      assignmentScore: health.components_assignmentScore,
+      studyActivityScore: health.components_studyActivityScore
+    };
 
     let insight = await prisma.performanceInsight.findFirst({ where: { studentId: req.user.id } });
     if (!insight) {

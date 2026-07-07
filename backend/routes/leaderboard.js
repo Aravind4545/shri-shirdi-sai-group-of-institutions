@@ -46,21 +46,18 @@ router.get('/global', auth, async (req, res) => {
   try {
     await ensureRanks();
     let rankings = await prisma.ranking.findMany({
-      orderBy: { overallScore: 'desc' },
+      orderBy: { globalRank: 'asc' },
       take: 50
     });
     
-    // Manually fetch student data since schema doesn't have @relation
+    // Manually fetch student data to format it correctly for the frontend
+    // The frontend StudentLeaderboard.tsx expects `r.student.fullName`
     for (let i = 0; i < rankings.length; i++) {
       const student = await prisma.user.findUnique({ 
         where: { id: rankings[i].studentId },
-        select: { fullName: true, programInfo_program: true, programInfo_stream: true }
+        select: { fullName: true, programInfo_program: true, programInfo_stream: true, profileImage: true }
       });
-      rankings[i].studentId = student || {}; // Frontend uses r.studentId?.fullName
-      // Wait, frontend uses r.studentId?.fullName or r.student?.fullName?
-      // In the frontend AdminLeaderboard.tsx it uses r.studentId?.fullName !
-      // In leaderboard.js the previous code was: include: { student: { ... } }
-      // but if the frontend expects studentId.fullName, I should assign it to studentId
+      rankings[i].student = student || { fullName: 'Unknown Student' };
     }
     
     res.json(rankings);
