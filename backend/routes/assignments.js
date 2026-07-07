@@ -79,12 +79,18 @@ router.get('/student', auth, async (req, res) => {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     const assignments = await prisma.assignment.findMany({ 
       where: { 
-        program: user.programInfo.program,
+        program: user.programInfo_program || 'IIT', // Fallback to avoid crashes if missing
         status: 'Active' 
       },
-      include: { teacherId: { select: { fullName: true } } },
       orderBy: { dueDate: 'asc' }
     });
+
+    for (let i = 0; i < assignments.length; i++) {
+      if (assignments[i].teacherId) {
+        const teacher = await prisma.user.findUnique({ where: { id: assignments[i].teacherId }, select: { fullName: true }});
+        assignments[i].teacher = teacher || { fullName: 'Unknown Teacher' };
+      }
+    }
 
     const submissions = await prisma.assignmentSubmission.findMany({ where: { studentId: req.user.id } });
 
