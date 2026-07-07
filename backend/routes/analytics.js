@@ -87,11 +87,45 @@ router.get('/admin/institution', auth, async (req, res) => {
     });
     programPerformance = programPerformance.map(pp => ({
       _id: pp.program,
-      avgAccuracy: pp._avg.averageAccuracy
+      avgAccuracy: pp._avg.averageAccuracy || 0
     }));
 
+    const totalStudents = await prisma.user.count({ where: { role: 'Student' } });
+    const totalTeachers = await prisma.user.count({ where: { role: 'Teacher' } });
+    
+    const distributionRaw = await prisma.user.groupBy({
+      by: ['programInfo_program'],
+      where: { role: 'Student' },
+      _count: true
+    });
+    const studentDistribution = distributionRaw
+      .filter(d => d.programInfo_program)
+      .map(d => ({ name: d.programInfo_program, value: d._count }));
+
+    const activePrograms = studentDistribution.length;
+
+    let subjectPerformanceRaw = await prisma.subjectAnalytics.groupBy({
+      by: ['subject'],
+      _avg: { averageAccuracy: true }
+    });
+    const subjectPerformance = subjectPerformanceRaw.map(s => ({
+      subject: s.subject,
+      score: Math.round(s._avg.averageAccuracy || 0)
+    }));
+
+    const avgScore = subjectPerformance.length > 0 
+      ? subjectPerformance.reduce((acc, curr) => acc + curr.score, 0) / subjectPerformance.length 
+      : 0;
+    const overallPassPercentage = Math.round(avgScore);
+
     res.json({
-      programPerformance
+      programPerformance,
+      totalStudents,
+      totalTeachers,
+      studentDistribution,
+      activePrograms,
+      subjectPerformance,
+      overallPassPercentage
     });
   } catch (err) {
     console.error(err.message);
