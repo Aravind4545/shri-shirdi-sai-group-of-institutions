@@ -36,10 +36,12 @@ router.get('/teacher/batch', auth, async (req, res) => {
   try {
     const teacher = await prisma.user.findUnique({ where: { id: req.user.id } });
     
+    const program = teacher.assignedProgram || teacher.programInfo_program || 'NEET';
+    
     // Aggregate analytics across all students in the teacher's program
     let batchTopics = await prisma.topicAnalytics.groupBy({
       by: ['topic', 'subject', 'chapter'],
-      where: { program: teacher.programInfo.program },
+      where: { program: program },
       _avg: { accuracy: true },
       _sum: { totalAttempts: true },
       orderBy: { _avg: { accuracy: 'asc' } }
@@ -54,7 +56,7 @@ router.get('/teacher/batch', auth, async (req, res) => {
 
     let batchSubjects = await prisma.subjectAnalytics.groupBy({
       by: ['subject'],
-      where: { program: teacher.programInfo.program },
+      where: { program: program },
       _avg: { averageAccuracy: true }
     });
     batchSubjects = batchSubjects.map(bs => ({

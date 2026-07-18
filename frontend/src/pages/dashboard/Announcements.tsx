@@ -34,7 +34,7 @@ const Announcements = () => {
       ) : (
         <div className="space-y-4">
           {announcements.map((ann: any) => (
-            <div key={ann._id} className={`bg-white p-6 rounded-2xl shadow-sm border-l-4 ${ann.priority === 'High' ? 'border-red-500' : `border-${themeColor.split('-')[1]}-500`}`}>
+            <div key={ann.id} className={`bg-white p-6 rounded-2xl shadow-sm border-l-4 ${ann.priority === 'High' ? 'border-red-500' : `border-${themeColor.split('-')[1]}-500`}`}>
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-bold text-lg text-gray-900 flex items-center">
                   {ann.priority === 'High' && <AlertCircle className="w-5 h-5 text-red-500 mr-2" />}

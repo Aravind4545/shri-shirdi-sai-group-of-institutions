@@ -81,8 +81,8 @@ router.get('/attendance', auth, teacher, async (req, res) => {
     queryDate.setHours(0, 0, 0, 0);
 
     const filter = (!req.user.assignedProgram || req.user.assignedProgram === 'All') ? { role: 'Student' } : { role: 'Student', programInfo_program: req.user.assignedProgram };
-    const students = await prisma.user.findMany({ where: filter, select: { id: true, _id: true } });
-    const studentIds = students.map(s => s.id || s._id);
+    const students = await prisma.user.findMany({ where: filter, select: { id: true } });
+    const studentIds = students.map(s => s.id);
 
     const attendanceRecords = await prisma.attendance.findMany({ where: {
       studentId: { in: studentIds },
@@ -90,7 +90,7 @@ router.get('/attendance', auth, teacher, async (req, res) => {
     } });
 
     res.json(attendanceRecords);
-  } catch (err) { res.status(500).send('Server Error'); }
+  } catch (err) { console.error(err); res.status(500).send(err.message || 'Server Error'); }
 });
 
 // @route   POST api/teacher/attendance
@@ -116,7 +116,7 @@ router.post('/attendance', auth, teacher, async (req, res) => {
 
       if (existingRecord) {
         await prisma.attendance.update({
-          where: { id: existingRecord.id || existingRecord._id },
+          where: { id: existingRecord.id },
           data: { status }
         });
       } else {

@@ -7,27 +7,24 @@ const DashboardHome = () => {
   const { user, themeColor, textColor } = useOutletContext<any>();
   const [stats, setStats] = useState({ testsCompleted: 0, averageScore: 0, attendancePercentage: 100, studyHours: 0 });
   const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/dashboard/stats', {
-      headers: { 'x-auth-token': localStorage.getItem('token') || '' }
-    })
-      .then(res => res.json())
-      .then(data => setStats(data))
-      .catch(err => console.error(err));
+    const fallback = [
+      { _id: 'a1', title: 'Upcoming Parent-Teacher Meeting', content: 'PTM is scheduled for next Saturday.', date: new Date().toISOString(), priority: 'Medium' },
+      { _id: 'a2', title: 'Holiday Notice', content: 'School will remain closed on Monday due to public holiday.', date: new Date().toISOString(), priority: 'High' }
+    ];
 
-    fetch('/api/dashboard/announcements', {
-      headers: { 'x-auth-token': localStorage.getItem('token') || '' }
-    })
-      .then(res => res.json())
-      .then(data => {
-        const fallback = [
-          { _id: 'a1', title: 'Upcoming Parent-Teacher Meeting', content: 'PTM is scheduled for next Saturday.', date: new Date().toISOString(), priority: 'Medium' },
-          { _id: 'a2', title: 'Holiday Notice', content: 'School will remain closed on Monday due to public holiday.', date: new Date().toISOString(), priority: 'High' }
-        ];
-        setAnnouncements(data && data.length > 0 ? data : fallback);
+    Promise.all([
+      fetch('/api/dashboard/stats', { headers: { 'x-auth-token': localStorage.getItem('token') || '' } }).then(res => res.ok ? res.json() : {}),
+      fetch('/api/dashboard/announcements', { headers: { 'x-auth-token': localStorage.getItem('token') || '' } }).then(res => res.ok ? res.json() : [])
+    ])
+      .then(([statsData, annData]) => {
+        if (statsData) setStats(statsData);
+        setAnnouncements(annData && annData.length > 0 ? annData : fallback);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   const renderProgramSpecificSection = () => {
@@ -127,7 +124,7 @@ const DashboardHome = () => {
                   }
 
                   return (
-                    <div key={ann._id} className={`px-5 py-4 rounded-2xl border text-left ${priorityColor}`}>
+                    <div key={ann.id} className={`px-5 py-4 rounded-2xl border text-left ${priorityColor}`}>
                       <div className="flex items-center gap-2 mb-1">
                         <div className={`w-2 h-2 rounded-full ${priorityDot}`}></div>
                         <h4 className="font-bold text-sm md:text-base">{ann.title}</h4>

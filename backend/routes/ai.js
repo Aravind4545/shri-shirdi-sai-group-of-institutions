@@ -171,43 +171,82 @@ router.get('/risk-predictions', auth, async (req, res) => {
     let query = {};
     
     if (user.role === 'Teacher') {
-      query.program = user.programInfo?.program;
+      query.program = user.assignedProgram || user.programInfo_program || 'NEET';
     } else if (!['Admin', 'SuperAdmin'].includes(user.role)) {
       return res.status(403).json({ msg: 'Unauthorized' });
     }
 
     let risks = await prisma.riskPrediction.findMany({
-      where: query,
-      include: { student: { select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true } } }
+      where: query
     });
     
     // Seed some mock data if empty for demo purposes
     if (risks.length === 0) {
+        const programToUse = query.program || 'NEET';
         const students = await prisma.user.findMany({
-          where: query.program ? { role: 'Student', 'programInfo': { is: { program: query.program } } } : { role: 'Student' },
+          where: { role: 'Student', programInfo_program: programToUse },
           take: 2
         });
+        
         for (let st of students) {
             await prisma.riskPrediction.create({
               data: {
                 studentId: st.id,
-                program: st.programInfo?.program,
+                program: programToUse,
                 riskLevel: 'High',
-                factors: [{ category: 'Attendance', description: 'Missed 4 consecutive classes', severity: 'High' }],
+                factors: [JSON.stringify({ category: 'Attendance', description: 'Missed 4 consecutive classes', severity: 'High' })],
                 interventionSuggestions: ['Call parent to discuss attendance.', 'Provide makeup assignments.']
               }
             });
         }
         risks = await prisma.riskPrediction.findMany({
-          where: query,
-          include: { student: { select: { fullName: true, email: true, programInfo_program: true, programInfo_stream: true } } }
+          where: query
         });
     }
 
-    res.json(risks);
+    // Perform manual join for student info
+    const studentIds = risks.map(r => r.studentId).filter(Boolean);
+    const students = await prisma.user.findMany({
+      where: { id: { in: studentIds } },
+      select: { id: true, fullName: true, email: true, programInfo_program: true, programInfo_stream: true }
+    });
+
+    const studentMap = {};
+    students.forEach(s => {
+      studentMap[s.id] = {
+        id: s.id,
+        fullName: s.fullName,
+        email: s.email,
+        programInfo: {
+          program: s.programInfo_program,
+          stream: s.programInfo_stream
+        }
+      };
+    });
+
+    const formattedRisks = risks.map(r => {
+      const parsedFactors = r.factors.map(f => {
+        try {
+          return JSON.parse(f);
+        } catch (e) {
+          return { description: f };
+        }
+      });
+
+      const stObj = studentMap[r.studentId] || { fullName: 'Unknown Student', email: '', programInfo_program: '', programInfo_stream: '' };
+
+      return {
+        ...r,
+        studentId: stObj,
+        student: stObj,
+        factors: parsedFactors
+      };
+    });
+
+    res.json(formattedRisks);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error(err);
+    res.status(500).send(err.message || 'Server Error');
   }
 });
 

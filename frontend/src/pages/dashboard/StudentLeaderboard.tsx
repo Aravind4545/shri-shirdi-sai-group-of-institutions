@@ -16,13 +16,8 @@ const StudentLeaderboard = () => {
   const fetchLeaderboardData = async () => {
     try {
       const headers = { 'x-auth-token': localStorage.getItem('token') || '' };
-      
-      const [globalRes, programRes, meRes] = await Promise.all([
+      const [globalRes, meRes] = await Promise.all([
         fetch('/api/leaderboard/global', { headers }),
-        // Assuming we mock the program name or get it from `meRes`
-        // We'll fetch it after meRes to ensure we have the program if needed, 
-        // but let's just use a dummy URL for now and overwrite it later
-        fetch('/api/leaderboard/global', { headers }), // Placeholder
         fetch('/api/leaderboard/me', { headers })
       ]);
 

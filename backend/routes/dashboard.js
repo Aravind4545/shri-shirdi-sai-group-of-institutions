@@ -64,7 +64,7 @@ router.get('/materials', auth, async (req, res) => {
 router.get('/announcements', auth, async (req, res) => {
   try {
     const announcements = await prisma.announcement.findMany({
-      orderBy: { createdAt: 'desc' }
+      orderBy: { date: 'desc' }
     });
     res.json(announcements);
   } catch (err) {

@@ -43,34 +43,40 @@ router.get('/users', auth, async (req, res) => {
       });
     }
 
-    // Attach unread message counts and last message
-    const formattedUsers = await Promise.all(users.map(async (u) => {
-      const unreadCount = await prisma.message.count({ where: {
-        sender: u.id || u._id,
-        receiver: currentUser.id || currentUser._id,
-        read: false
-      } });
+    // Fetch all relevant messages in one go to avoid N+1 queries
+    const allMessages = await prisma.message.findMany({
+      where: {
+        OR: [
+          { sender: currentUser.id },
+          { receiver: currentUser.id }
+        ]
+      },
+      orderBy: { timestamp: 'desc' }
+    });
 
-      const lastMessage = await prisma.message.findFirst({
-        where: {
-          OR: [
-            { sender: u.id || u._id, receiver: currentUser.id || currentUser._id },
-            { sender: currentUser.id || currentUser._id, receiver: u.id || u._id }
-          ]
-        },
-        orderBy: { timestamp: 'desc' }
-      });
+    // Attach unread message counts and last message
+    const formattedUsers = users.map((u) => {
+      const uId = u.id;
+      
+      // Filter messages between currentUser and 'u'
+      const conversation = allMessages.filter(m => 
+        (m.sender === uId && m.receiver === currentUser.id) ||
+        (m.sender === currentUser.id && m.receiver === uId)
+      );
+
+      const unreadCount = conversation.filter(m => m.sender === uId && m.receiver === currentUser.id && !m.read).length;
+      const lastMessage = conversation.length > 0 ? conversation[0] : null;
 
       return {
-        _id: u.id || u._id,
-        id: u.id || u._id,
+        _id: uId,
+        id: uId,
         fullName: u.fullName,
         role: u.role,
         unreadCount,
         lastMessage: lastMessage ? lastMessage.content : null,
         lastMessageTime: lastMessage ? lastMessage.timestamp : null
       };
-    }));
+    });
 
     // Sort by most recent message
     formattedUsers.sort((a, b) => {

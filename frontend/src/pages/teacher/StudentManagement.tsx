@@ -51,7 +51,7 @@ const StudentManagement = () => {
               <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                 <td className="p-4">
                   <p className="font-bold text-slate-800">{student.fullName}</p>
-                  <p className="text-xs text-slate-500 font-mono mt-1">{student._id.substring(0, 8).toUpperCase()}</p>
+                  <p className="text-xs text-slate-500 font-mono mt-1">{student.id?.substring(0, 8).toUpperCase()}</p>
                 </td>
                 <td className="p-4">
                   <span className="px-3 py-1 bg-emerald-100 text-emerald-700 font-bold text-xs rounded-full">{student.programInfo?.program || 'N/A'}</span>

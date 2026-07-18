@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Clock, CheckCircle, AlertCircle, FileText, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const StudentAssignments = () => {
   const [assignments, setAssignments] = useState<any[]>([]);
@@ -23,9 +24,12 @@ const StudentAssignments = () => {
           { _id: 'as2', title: 'Physics Lab Report', subject: 'Physics', dueDate: new Date(Date.now() - 86400000).toISOString(), status: 'Completed', type: 'Lab' }
         ];
         setAssignments(data && data.length > 0 ? data : fallback);
+      } else {
+        toast.error('Failed to fetch assignments');
       }
     } catch (err) {
       console.error(err);
+      toast.error('An error occurred while fetching assignments');
     } finally {
       setLoading(false);
     }
@@ -53,10 +57,25 @@ const StudentAssignments = () => {
     }
   };
 
-  if (loading) return <div className="p-8">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="p-4 md:p-8 animate-fade-in space-y-6">
+        <div className="skeleton-loader h-10 w-1/4 mb-2"></div>
+        <div className="skeleton-loader h-6 w-1/3 mb-8"></div>
+        <div className="flex gap-2 mb-8">
+          {[1,2,3,4,5].map(i => <div key={i} className="skeleton-loader h-10 w-24 rounded-full"></div>)}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1,2,3,4,5,6].map(i => (
+            <div key={i} className="skeleton-loader h-64 rounded-3xl"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="p-4 md:p-8 animate-fade-in">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-slate-800">My Assignments</h1>
         <p className="text-slate-500">Track and submit your homework tasks</p>

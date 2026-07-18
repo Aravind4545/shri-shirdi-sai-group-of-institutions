@@ -37,7 +37,7 @@ const TeacherAttendance = () => {
       }
 
       // Fetch attendance for the specific date
-      const attRes = await fetch('/api/teacher/attendance?date=${selectedDate}', {
+      const attRes = await fetch(`/api/teacher/attendance?date=${selectedDate}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') || '' }
       });
       const attData = await attRes.json();

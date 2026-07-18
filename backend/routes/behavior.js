@@ -60,10 +60,9 @@ router.get('/students', auth, async (req, res) => {
       return res.status(403).json({ msg: 'Not authorized as teacher' });
     }
 
-    // If teacher is assigned to 'All', get all students. Else, filter by program.
     let query = { role: 'Student' };
     if (teacher.assignedProgram && teacher.assignedProgram !== 'All') {
-      query['programInfo.program'] = teacher.assignedProgram;
+      query.programInfo_program = teacher.assignedProgram;
     }
 
     const students = await prisma.user.findMany({

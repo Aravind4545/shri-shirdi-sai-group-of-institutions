@@ -3,61 +3,26 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const prisma = require('../prisma/client');
 
-// Utility to calculate or mock ranks dynamically for demo
-const ensureRanks = async () => {
-  const students = await prisma.user.findMany({ where: { role: 'Student' } });
-  for (let [index, student] of students.entries()) {
-    let rank = await prisma.ranking.findFirst({ where: { studentId: student.id } });
-    if (!rank) {
-      rank = await prisma.ranking.create({
-        data: {
-          studentId: student.id,
-          program: student.programInfo_program,
-          globalRank: index + 1,
-          programRank: index + 1,
-          overallScore: Math.floor(Math.random() * 40) + 60, // 60-100
-          attendanceScore: Math.floor(Math.random() * 20) + 80,
-          assignmentScore: Math.floor(Math.random() * 30) + 70,
-          testScore: Math.floor(Math.random() * 40) + 60,
-          healthScore: Math.floor(Math.random() * 25) + 75,
-          subjectScores: []
-        }
-      });
-
-      // Add a default achievement
-      if (index === 0) {
-        await prisma.achievement.create({
-          data: {
-            studentId: student.id,
-            badgeName: 'Top Performer',
-            description: 'Achieved top 1% in Global Rankings',
-            icon: 'Trophy',
-            category: 'Academic'
-          }
-        });
-      }
-    }
-  }
-};
-
 // @route   GET /api/leaderboard/global
 // @desc    Get Global Leaderboard
 router.get('/global', auth, async (req, res) => {
   try {
-    await ensureRanks();
     let rankings = await prisma.ranking.findMany({
       orderBy: { globalRank: 'asc' },
       take: 50
     });
     
-    // Manually fetch student data to format it correctly for the frontend
-    // The frontend StudentLeaderboard.tsx expects `r.student.fullName`
+    const studentIds = rankings.map(r => r.studentId).filter(Boolean);
+    const students = await prisma.user.findMany({
+      where: { id: { in: studentIds } },
+      select: { id: true, fullName: true, programInfo_program: true, programInfo_stream: true, profileImage: true }
+    });
+    
+    const studentMap = {};
+    students.forEach(s => studentMap[s.id] = s);
+
     for (let i = 0; i < rankings.length; i++) {
-      const student = await prisma.user.findUnique({ 
-        where: { id: rankings[i].studentId },
-        select: { fullName: true, programInfo_program: true, programInfo_stream: true, profileImage: true }
-      });
-      rankings[i].student = student || { fullName: 'Unknown Student' };
+      rankings[i].student = studentMap[rankings[i].studentId] || { fullName: 'Unknown Student' };
     }
     
     res.json(rankings);
@@ -71,18 +36,23 @@ router.get('/global', auth, async (req, res) => {
 // @desc    Get Program-wise Leaderboard
 router.get('/program/:program', auth, async (req, res) => {
   try {
-    await ensureRanks();
     let rankings = await prisma.ranking.findMany({
       where: { program: req.params.program },
       orderBy: { overallScore: 'desc' },
       take: 50
     });
+    
+    const studentIds = rankings.map(r => r.studentId).filter(Boolean);
+    const students = await prisma.user.findMany({
+      where: { id: { in: studentIds } },
+      select: { id: true, fullName: true, programInfo_program: true, programInfo_stream: true }
+    });
+    
+    const studentMap = {};
+    students.forEach(s => studentMap[s.id] = s);
+
     for (let i = 0; i < rankings.length; i++) {
-      const student = await prisma.user.findUnique({ 
-        where: { id: rankings[i].studentId },
-        select: { fullName: true, programInfo_program: true, programInfo_stream: true }
-      });
-      rankings[i].studentId = student || {}; 
+      rankings[i].studentId = studentMap[rankings[i].studentId] || {}; 
     }
     res.json(rankings);
   } catch (err) {
@@ -95,14 +65,35 @@ router.get('/program/:program', auth, async (req, res) => {
 // @desc    Get logged-in student rank, achievements, and history
 router.get('/me', auth, async (req, res) => {
   try {
-    await ensureRanks();
-    const rank = await prisma.ranking.findFirst({
+    let rank = await prisma.ranking.findFirst({
       where: { studentId: req.user.id }
     });
+    
+    // If the logged in user doesn't have a rank yet, create a mock one so the UI doesn't crash
+    if (!rank) {
+      const student = await prisma.user.findUnique({ where: { id: req.user.id } });
+      const globalCount = await prisma.ranking.count();
+      rank = await prisma.ranking.create({
+        data: {
+          studentId: req.user.id,
+          program: student.programInfo_program || 'IIT',
+          globalRank: globalCount + 1,
+          programRank: globalCount + 1,
+          overallScore: Math.floor(Math.random() * 40) + 60,
+          attendanceScore: Math.floor(Math.random() * 20) + 80,
+          assignmentScore: Math.floor(Math.random() * 30) + 70,
+          testScore: Math.floor(Math.random() * 40) + 60,
+          healthScore: Math.floor(Math.random() * 25) + 75,
+          subjectScores: []
+        }
+      });
+    }
+
     if (rank) {
       const student = await prisma.user.findUnique({ where: { id: req.user.id }, select: { fullName: true, programInfo_program: true, programInfo_stream: true }});
       rank.studentId = student || {};
     }
+    
     const achievements = await prisma.achievement.findMany({
       where: { studentId: req.user.id },
       orderBy: { earnedAt: 'desc' }
@@ -113,6 +104,7 @@ router.get('/me', auth, async (req, res) => {
       where: { studentId: req.user.id },
       orderBy: { timestamp: 'asc' }
     });
+    
     if (history.length === 0) {
         history = [
             { timestamp: new Date(Date.now() - 30*24*60*60*1000), globalRank: rank ? rank.globalRank + 5 : 10, overallScore: 75 },
@@ -133,16 +125,23 @@ router.get('/me', auth, async (req, res) => {
 router.get('/teacher', auth, async (req, res) => {
   try {
     const teacher = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const program = teacher.assignedProgram || teacher.programInfo_program || 'NEET';
     let rankings = await prisma.ranking.findMany({
-      where: { program: teacher.programInfo_program },
+      where: { program: program },
       orderBy: { overallScore: 'desc' }
     });
+    
+    const studentIds = rankings.map(r => r.studentId).filter(Boolean);
+    const students = await prisma.user.findMany({
+      where: { id: { in: studentIds } },
+      select: { id: true, fullName: true, email: true }
+    });
+    
+    const studentMap = {};
+    students.forEach(s => studentMap[s.id] = s);
+
     for (let i = 0; i < rankings.length; i++) {
-      const student = await prisma.user.findUnique({ 
-        where: { id: rankings[i].studentId },
-        select: { fullName: true, email: true }
-      });
-      rankings[i].studentId = student || {}; 
+      rankings[i].studentId = studentMap[rankings[i].studentId] || {}; 
     }
     res.json(rankings);
   } catch (err) {

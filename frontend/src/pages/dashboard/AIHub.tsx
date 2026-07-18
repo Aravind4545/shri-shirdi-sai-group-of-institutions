@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import toast from 'react-hot-toast';
 import { BrainCircuit, BookOpen, Target, Sparkles, AlertTriangle, Presentation } from 'lucide-react';
 
 const AIHub = () => {
@@ -8,11 +8,14 @@ const AIHub = () => {
   const [prediction, setPrediction] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<any>(null);
   const [loadingPlan, setLoadingPlan] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
-    fetchPrediction();
-    fetchPlan();
-    fetchRecommendations();
+    Promise.all([
+      fetchPrediction(),
+      fetchPlan(),
+      fetchRecommendations()
+    ]).finally(() => setInitialLoading(false));
   }, []);
 
   const fetchRecommendations = async () => {
@@ -44,6 +47,7 @@ const AIHub = () => {
 
   const generatePlan = async () => {
     setLoadingPlan(true);
+    const generationToast = toast.loading('AI is analyzing your profile and generating a personalized plan...');
     try {
       // Simulate program fetching and generating plan
       const res = await fetch('/api/ai/generate-plan', {
@@ -51,13 +55,34 @@ const AIHub = () => {
         headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('token') || '' },
         body: JSON.stringify({ program: 'IIT', planType: 'Daily' })
       });
-      if (res.ok) setStudyPlan(await res.json());
-    } catch (err) { console.error(err); }
+      if (res.ok) {
+        setStudyPlan(await res.json());
+        toast.success('Your personalized AI plan is ready!', { id: generationToast });
+      } else {
+        toast.error('Failed to generate plan', { id: generationToast });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('AI generation encountered an error', { id: generationToast });
+    }
     setLoadingPlan(false);
   };
 
+  if (initialLoading) {
+    return (
+      <div className="space-y-8 animate-fade-in">
+        <div className="skeleton-loader h-12 w-1/4 mb-4"></div>
+        <div className="skeleton-loader h-48 w-full rounded-3xl"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="skeleton-loader h-64 rounded-3xl"></div>
+          <div className="skeleton-loader h-64 rounded-3xl"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       {/* Header */}
       <div className="flex justify-between items-center bg-gradient-to-r from-indigo-900 to-indigo-700 p-8 rounded-3xl shadow-lg text-white">
         <div>
