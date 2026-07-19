@@ -28,8 +28,8 @@ const TeacherAttendance = () => {
       
       if (stdRes.ok) {
         const fallback = [
-          { _id: 's1', fullName: 'Rahul Verma', rollNumber: 'R001', gender: 'Male' },
-          { _id: 's2', fullName: 'Priya Sharma', rollNumber: 'R002', gender: 'Female' }
+          { id: 's1', fullName: 'Rahul Verma', rollNumber: 'R001', gender: 'Male' },
+          { id: 's2', fullName: 'Priya Sharma', rollNumber: 'R002', gender: 'Female' }
         ];
         setStudents(stdData && stdData.length > 0 ? stdData : fallback);
       } else {
@@ -169,9 +169,9 @@ const TeacherAttendance = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {students.map((student) => {
-              const status = attendanceRecords[student._id];
+              const status = attendanceRecords[student.id];
               return (
-                <div key={student._id} className={`p-4 rounded-xl border-2 transition-all ${status === 'Present' ? 'border-emerald-200 bg-emerald-50/30' : status === 'Absent' ? 'border-rose-200 bg-rose-50/30' : 'border-slate-100 bg-white'}`}>
+                <div key={student.id} className={`p-4 rounded-xl border-2 transition-all ${status === 'Present' ? 'border-emerald-200 bg-emerald-50/30' : status === 'Absent' ? 'border-rose-200 bg-rose-50/30' : 'border-slate-100 bg-white'}`}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-slate-800 line-clamp-1">{student.fullName}</h3>
                     <span className="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{student.programInfo?.program}</span>
@@ -179,7 +179,7 @@ const TeacherAttendance = () => {
                   
                   <div className="flex grid grid-cols-2 gap-2 mt-4">
                     <button 
-                      onClick={() => handleStatusChange(student._id, 'Present')}
+                      onClick={() => handleStatusChange(student.id, 'Present')}
                       className={`flex justify-center items-center gap-1.5 py-2 rounded-lg font-bold text-sm transition-colors ${
                         status === 'Present' 
                         ? 'bg-emerald-600 text-white shadow-sm' 
@@ -189,7 +189,7 @@ const TeacherAttendance = () => {
                       <CheckCircle2 className="w-4 h-4" /> Present
                     </button>
                     <button 
-                      onClick={() => handleStatusChange(student._id, 'Absent')}
+                      onClick={() => handleStatusChange(student.id, 'Absent')}
                       className={`flex justify-center items-center gap-1.5 py-2 rounded-lg font-bold text-sm transition-colors ${
                         status === 'Absent' 
                         ? 'bg-rose-500 text-white shadow-sm' 
