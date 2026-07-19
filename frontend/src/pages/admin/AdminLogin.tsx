@@ -65,7 +65,7 @@ const AdminLogin = () => {
               onChange={handleChange}
               required
               className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-              placeholder="admin@shirdisai.com"
+              placeholder="admin@sasi.com"
             />
           </div>
           <div>
