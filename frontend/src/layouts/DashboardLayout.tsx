@@ -113,7 +113,7 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Mobile Header & Sidebar */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex justify-between items-center p-4">
+      <div className="md:hidden fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-70 flex justify-between items-center p-4">
         <h2 className={`text-xl font-black ${textColor}`}>Academic Companion</h2>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-600">
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -121,7 +121,7 @@ const DashboardLayout = () => {
       </div>
 
       {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-white pt-16 flex flex-col">
+        <div className="md:hidden fixed inset-0 z-60 bg-white pt-16 flex flex-col">
           <nav className="space-y-1 px-4 py-6 flex-1 overflow-y-auto">
             {menuItems.map((item) => {
               if (item.name === 'Mock Tests' && user.programInfo.program === 'NEET') {
