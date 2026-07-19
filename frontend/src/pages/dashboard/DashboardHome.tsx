@@ -161,40 +161,40 @@ const DashboardHome = () => {
       <div>
         <h3 className="text-xl font-bold text-gray-800 mb-4">Progress Overview</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-            <div className={`p-4 rounded-xl ${themeColor} shadow-md mr-4`}>
-              <ClipboardList className="w-6 h-6 text-white" />
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center gap-3 md:gap-4 text-left">
+            <div className={`p-3 md:p-4 rounded-xl ${themeColor} shadow-md w-fit`}>
+              <ClipboardList className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div>
-              <p className="text-gray-500 text-sm font-semibold">Tests Completed</p>
-              <p className="text-2xl font-black text-gray-800">{stats.testsCompleted}</p>
+              <p className="text-gray-500 text-xs md:text-sm font-semibold">Tests Completed</p>
+              <p className="text-xl md:text-2xl font-black text-gray-800">{stats.testsCompleted}</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-            <div className={`p-4 rounded-xl ${themeColor} shadow-md mr-4`}>
-              <BookOpen className="w-6 h-6 text-white" />
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center gap-3 md:gap-4 text-left">
+            <div className={`p-3 md:p-4 rounded-xl ${themeColor} shadow-md w-fit`}>
+              <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div>
-              <p className="text-gray-500 text-sm font-semibold">Study Hours</p>
-              <p className="text-2xl font-black text-gray-800">{stats.studyHours}h</p>
+              <p className="text-gray-500 text-xs md:text-sm font-semibold">Study Hours</p>
+              <p className="text-xl md:text-2xl font-black text-gray-800">{stats.studyHours}h</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-            <div className={`p-4 rounded-xl ${themeColor} shadow-md mr-4`}>
-              <TrendingUp className="w-6 h-6 text-white" />
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center gap-3 md:gap-4 text-left">
+            <div className={`p-3 md:p-4 rounded-xl ${themeColor} shadow-md w-fit`}>
+              <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div>
-              <p className="text-gray-500 text-sm font-semibold">Average Score</p>
-              <p className="text-2xl font-black text-gray-800">{stats.averageScore}</p>
+              <p className="text-gray-500 text-xs md:text-sm font-semibold">Average Score</p>
+              <p className="text-xl md:text-2xl font-black text-gray-800">{stats.averageScore}</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-            <div className={`p-4 rounded-xl ${themeColor} shadow-md mr-4`}>
-              <CalendarCheck className="w-6 h-6 text-white" />
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center gap-3 md:gap-4 text-left">
+            <div className={`p-3 md:p-4 rounded-xl ${themeColor} shadow-md w-fit`}>
+              <CalendarCheck className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div>
-              <p className="text-gray-500 text-sm font-semibold">Attendance</p>
-              <p className="text-2xl font-black text-gray-800">{stats.attendancePercentage}%</p>
+              <p className="text-gray-500 text-xs md:text-sm font-semibold">Attendance</p>
+              <p className="text-xl md:text-2xl font-black text-gray-800">{stats.attendancePercentage}%</p>
             </div>
           </div>
         </div>

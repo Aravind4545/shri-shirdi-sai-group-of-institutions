@@ -92,7 +92,7 @@ const AdminLayout = () => {
       </aside>
 
       {/* Mobile Header & Sidebar */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-slate-900 border-b border-slate-800 z-20 flex justify-between items-center p-4">
+      <div className="md:hidden fixed top-0 left-0 w-full bg-slate-900 border-b border-slate-800 z-50 flex justify-between items-center p-4">
         <h2 className="text-xl font-black text-white flex items-center"><ShieldCheck className="w-6 h-6 text-blue-500 mr-2" /> Super Admin</h2>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-slate-300 hover:text-white">
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -100,7 +100,7 @@ const AdminLayout = () => {
       </div>
 
       {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 z-10 bg-slate-900 pt-16 flex flex-col">
+        <div className="md:hidden fixed inset-0 z-40 bg-slate-900 pt-16 flex flex-col">
           <nav className="space-y-1 px-4 py-6 flex-1 overflow-y-auto">
             {menuItems.map((item) => (
               <Link
