@@ -134,7 +134,7 @@ const Features = () => {
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-6 h-6 text-brand-gold mr-4 flex-shrink-0" />
-                  <p className="text-gray-300">admissions@srisasi.edu</p>
+                  <p className="text-gray-300">admissions@sasi.edu</p>
                 </div>
               </div>
             </div>
